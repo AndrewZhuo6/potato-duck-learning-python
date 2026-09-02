@@ -1,0 +1,55 @@
+<!DOCTYPE html5>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+    <a href="index.html"><img src="assets/images/logo.png" alt="Logo" class="logo-image"></a>
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="team.html">About Us</a></li>
+        <li><a href="story.html">Story</a></li> 
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+        <a href="login.html" class="login-text">Log In</a>
+        <a href="register.html" class="register-text">Sign Up</a>
+    </div>
+  </header>
+  <main>
+    <section>
+      <h1>Log In to Our Learning Platform</h1>
+
+      <div id="error-box" class="error-notice"></div>
+
+      <form id="login-form">
+        <div style="margin-bottom: 1rem;">
+          <label for="username" style="display: block; margin-bottom: 0.25rem; font-weight: 600;">Username:</label>
+          <input type="text" id="username" name="username" placeholder="Enter your handle" required autocomplete="username" />
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <label for="password" style="display: block; margin-bottom: 0.25rem; font-weight: 600;">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password" />
+        </div>
+
+        <button type="submit" class="btn">Log In</button>
+      </form>
+
+      <p style="margin-top: 1.25rem;">
+        Don't have an account yet? <a href="register.html">Create one here</a>.
+      </p>
+    </section>
+  </main>
+  <script src="js/db.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
