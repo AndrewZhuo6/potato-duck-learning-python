@@ -1,4 +1,4 @@
-<!DOCTYPE html5>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -31,25 +31,24 @@
       <div id="error-box" class="error-notice"></div>
 
       <form id="login-form">
-        <div style="margin-bottom: 1rem;">
-          <label for="username" style="display: block; margin-bottom: 0.25rem; font-weight: 600;">Username:</label>
-          <input type="text" id="username" name="username" placeholder="Enter your handle" required autocomplete="username" />
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
-          <label for="password" style="display: block; margin-bottom: 0.25rem; font-weight: 600;">Password:</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password" />
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
         </div>
 
         <button type="submit" class="btn">Log In</button>
       </form>
 
-      <p style="margin-top: 1.25rem;">
+      <p>
         Don't have an account yet? <a href="register.html">Create one here</a>.
       </p>
     </section>
   </main>
-  <script src="js/db.js"></script>
-  <script src="js/login.js"></script>
+  <script src="script/login.js"></script>
 </body>
 </html>
