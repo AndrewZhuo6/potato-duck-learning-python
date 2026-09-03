@@ -1,4 +1,4 @@
-<!DOCTYPE html5>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -23,7 +23,32 @@
         <a href="register.html" class="register-text">Sign Up</a>
     </div>
   </header>
-  <script src="js/db.js"></script>
-  <script src="js/login.js"></script>
+  <main>
+    <section>
+      <h1>Sign Up to Our Learning Platform</h1>
+
+      <div id="error-box" class="error-notice"></div>
+
+      <form id="register-form" action="register.html" method="POST">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="new-password">
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Re-enter Password:</label>
+          <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password" required autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="btn">Create Account</button>
+      </form>
+    </section>
+  </main>
+  <script src="script/register.js"></script>
 </body>
 </html>

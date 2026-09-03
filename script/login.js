@@ -1,58 +1,66 @@
-// Hash helper using native Web Crypto API
-async function hashPassword(plainTextPassword) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(plainTextPassword);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+let db;
+const errorBox = document.getElementById("error-box");
+const form = document.getElementById("login-form");
+
+const request = indexedDB.open("userDatabase", 1);
+
+request.onupgradeneeded = (event) => {
+	const localDb = event.target.result;
+	const userStore = localDb.createObjectStore("users", {keyPath: "id", autoIncrement: true});
+	userStore.createIndex("emailIndex", "email", { unique: true });
+};
+
+request.onsuccess = (event) => {
+	db = event.target.result;
+};
+
+request.onerror = (event) => {
+	showError("Failed to open local database.");
+	console.error("IndexedDB error:", event.target.error);
+};
+
+form.addEventListener("submit", (e) => {
+	e.preventDefault();
+	clearError();
+
+	if (!db) {
+    	showError("Database is still loading. Please try again.");
+    	return;
+  	}
+
+	const email = document.getElementById("email").value.trim().toLowerCase();
+	const password = document.getElementById("password").value;
+
+	const transaction = db.transaction(["users"], "readonly");
+	const store = transaction.objectStore("users");
+	const index = store.index("emailIndex");
+
+	const getRequest = index.get(email);
+
+	getRequest.onsuccess = () => {
+		const user = getRequest.result;
+
+		if (!user || user.password !== password) {
+			showError("Invalid email or password.");
+			return;
+		}
+
+    	sessionStorage.setItem("currentUser", JSON.stringify({ email: user.email, id: user.id }));
+
+    	window.location.href = "index.html";
+  	};
+
+	getRequest.onerror = () => {
+		showError("An error occurred while logging in. Please try again.");
+	};
+});
+
+function showError(message) {
+	errorBox.textContent = message;
+	errorBox.style.display = "block";
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  // If user is already authenticated, send them straight to the level map
-  if (sessionStorage.getItem("activeUser") || localStorage.getItem("activeUser")) {
-    window.location.href = "chapters.html";
-    return;
-  }
-
-  const form = document.getElementById("login-form");
-  const errorBox = document.getElementById("error-box");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    errorBox.style.display = "none";
-    errorBox.textContent = "";
-
-    const usernameInput = document.getElementById("username").value.trim();
-    const passwordInput = document.getElementById("password").value;
-
-    try {
-      const user = await getUser(usernameInput);
-
-      if (!user) {
-        errorBox.textContent = "User not found. Please verify your username or sign up.";
-        errorBox.style.display = "block";
-        return;
-      }
-
-      const inputPasswordHash = await hashPassword(passwordInput);
-
-      // Compare password hashes
-      if (user.password !== inputPasswordHash) {
-        errorBox.textContent = "Incorrect password. Please try again.";
-        errorBox.style.display = "block";
-        return;
-      }
-
-      // Set session (picked up by index.html header dynamic state)
-      sessionStorage.setItem("activeUser", user.username);
-
-      // Redirect to story progression map
-      window.location.href = "chapters.html";
-
-    } catch (err) {
-      console.error("Login transaction error:", err);
-      errorBox.textContent = "Storage read error. Please ensure cookies and site data are allowed.";
-      errorBox.style.display = "block";
-    }
-  });
-});
+function clearError() {
+	errorBox.textContent = "";
+	errorBox.style.display = "none";
+}
