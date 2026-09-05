@@ -37,7 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (startContainer) {
         if (currentUser) {
-            const currentLevel = localStorage.getItem("unlockedPreparation") || 1;
+            const userIdentifier = (currentUser.email || currentUser.username || (currentUser.id ? `id_${currentUser.id}` : "guest")).trim().toLowerCase();
+            const progressKey = `quackbit_progress_${userIdentifier}`;
+            const currentLevel = parseInt(localStorage.getItem(progressKey) || "1", 10);
             const targetPage = `preparation${currentLevel}.html`;
             const buttonText = currentLevel > 1 ? `Continue Chapter ${currentLevel} &rarr;` : `Start My Journey &rarr;`;
 

@@ -42,21 +42,56 @@ window.initPreparationChapter = function (config) {
             }
         }
 
-        const progressPills = document.querySelectorAll(".chapter-step-pill");
-        const unlockedMax = parseInt(localStorage.getItem("unlockedPreparation") || "1", 10);
-        progressPills.forEach((pill) => {
-            const pillChapter = parseInt(pill.getAttribute("data-chapter") || "0", 10);
-            if (pillChapter < chapterNumber || (pillChapter <= unlockedMax && pillChapter < chapterNumber)) {
-                pill.classList.add("completed");
-                pill.title = `Chapter ${pillChapter} (Completed)`;
-            } else if (pillChapter === chapterNumber) {
-                pill.classList.add("active");
-                pill.title = `Chapter ${pillChapter} (Current)`;
-            } else if (pillChapter > unlockedMax) {
-                pill.classList.add("locked");
-                pill.title = `Chapter ${pillChapter} (Locked)`;
-            }
-        });
+        const userIdentifier = (currentUser.email || currentUser.username || (currentUser.id ? `id_${currentUser.id}` : "guest")).trim().toLowerCase();
+        const progressKey = `quackbit_progress_${userIdentifier}`;
+        const unlockedMax = parseInt(localStorage.getItem(progressKey) || "1", 10);
+
+        if (chapterNumber > unlockedMax) {
+            alert(`Chapter ${chapterNumber} is locked! You must complete Chapter ${unlockedMax} first.`);
+            window.location.href = `preparation${unlockedMax}.html`;
+            return;
+        }
+
+        function updateProgressPills(currentUnlockedLevel) {
+            const progressPills = document.querySelectorAll(".chapter-step-pill");
+            progressPills.forEach((pill) => {
+                const pillChapter = parseInt(pill.getAttribute("data-chapter") || "0", 10);
+                const rawText = pill.textContent.replace(/^([🔒✓⭐\s\d\.]+)/, "").trim();
+                const cleanName = rawText || `Chapter ${pillChapter}`;
+
+                pill.onclick = null;
+
+                if (pillChapter < chapterNumber) {
+                    pill.className = "chapter-step-pill completed";
+                    pill.innerHTML = `✓ ${pillChapter}. ${cleanName}`;
+                    pill.href = `preparation${pillChapter}.html`;
+                    pill.title = `Chapter ${pillChapter} (Completed - Click to review)`;
+                } else if (pillChapter === chapterNumber) {
+                    pill.className = "chapter-step-pill active";
+                    pill.innerHTML = `⭐ ${pillChapter}. ${cleanName}`;
+                    pill.href = `preparation${pillChapter}.html`;
+                    pill.title = `Chapter ${pillChapter} (Current Challenge)`;
+                } else if (pillChapter <= currentUnlockedLevel) {
+                    pill.className = "chapter-step-pill unlocked";
+                    pill.innerHTML = `${pillChapter}. ${cleanName}`;
+                    pill.href = `preparation${pillChapter}.html`;
+                    pill.title = `Chapter ${pillChapter} (Unlocked)`;
+                } else {
+                    pill.className = "chapter-step-pill locked";
+                    pill.innerHTML = `🔒 ${pillChapter}. ${cleanName}`;
+                    pill.removeAttribute("href");
+                    pill.title = `Chapter ${pillChapter} is locked. Complete Chapter ${currentUnlockedLevel} first.`;
+                    pill.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        alert(`Chapter ${pillChapter} is locked! You must complete Chapter ${currentUnlockedLevel} first.`);
+                        return false;
+                    };
+                }
+            });
+        }
+
+        updateProgressPills(unlockedMax);
 
         const video = document.getElementById("story-video");
         const skipBtn = document.getElementById("skip-video-btn");
@@ -184,10 +219,13 @@ window.initPreparationChapter = function (config) {
                         }
                         submitBtn.style.display = "none";
 
-                        const currentUnlocked = parseInt(localStorage.getItem("unlockedPreparation") || "1", 10);
-                        if (chapterNumber >= currentUnlocked) {
-                            localStorage.setItem("unlockedPreparation", (chapterNumber + 1).toString());
-                        }
+                        // Save unlocked progress specifically for this user account
+                        const currentUnlocked = parseInt(localStorage.getItem(progressKey) || "1", 10);
+                        const newUnlocked = Math.max(currentUnlocked, chapterNumber + 1);
+                        localStorage.setItem(progressKey, newUnlocked.toString());
+
+                        // Refresh navigation pills so the newly unlocked chapter is immediately accessible
+                        updateProgressPills(newUnlocked);
 
                         if (nextBtn) {
                             nextBtn.style.display = "inline-flex";
