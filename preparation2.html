@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Chapter 2: The Duck's Supply Bag</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/story.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">🦆 Quackbit</a>
+    </div>
+    <div class="chapter-badge-group">
+      <a href="preparation1.html" class="chapter-step-pill" data-chapter="1">1. Broken Gate</a>
+      <a href="preparation2.html" class="chapter-step-pill active" data-chapter="2">2. Supply Bag</a>
+      <a href="preparation3.html" class="chapter-step-pill" data-chapter="3">3. Secret Cipher</a>
+      <a href="preparation4.html" class="chapter-step-pill" data-chapter="4">4. Duck Energy</a>
+      <a href="preparation5.html" class="chapter-step-pill" data-chapter="5">5. Master Vault</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+
+  <main class="preparation-main">
+    <section id="cutscene-container">
+      <div class="cutscene-header">
+        <span class="cutscene-title-badge">Chapter 2 Story</span>
+        <h2 class="cutscene-heading">The Duck's Supply Bag</h2>
+      </div>
+      <div class="video-wrapper">
+        <video id="story-video" controls playsinline>
+          <source src="assets/videos/preparation2.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <div class="video-controls">
+        <p class="cutscene-narrative">
+          Potato Duck steps past the castle gate into the great storehouse. Before advancing, Potato Duck needs to count their rations!
+        </p>
+        <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
+      </div>
+    </section>
+
+    <div id="workspace-container">
+      <section class="problem-panel">
+        <span class="chapter-tag">Chapter 2 • Lists & Loops</span>
+        <h2>Ration Inventory Check</h2>
+        <div class="story-quote">
+          "Quack! A long voyage requires plenty of potatoes. Let's write a function to tally our supplies!"
+        </div>
+
+        <h3>Task</h3>
+        <p>Define a function <code>count_potatoes(bag, item_name)</code> that takes:</p>
+        <p>1. <code>bag</code>: a list of strings representing items in the duck's backpack.</p>
+        <p>2. <code>item_name</code>: a string representing the target item to count.</p>
+        <p>Your function should return the total number of times <code>item_name</code> appears in <code>bag</code>.</p>
+
+        <h3>Examples</h3>
+        <div class="code-example-box">count_potatoes(["potato", "apple", "potato"], "potato")  # Returns: 2
+count_potatoes(["carrot", "bread"], "potato")            # Returns: 0
+count_potatoes([], "potato")                            # Returns: 0</div>
+
+        <h3>Guidelines</h3>
+        <p>• You can iterate through the list with a <code>for</code> loop, or use Python's built-in <code>bag.count(item_name)</code>.</p>
+        <p>• Return an integer count.</p>
+      </section>
+
+      <section class="editor-panel">
+        <div class="editor-header">
+          <div class="editor-tab">
+            <span>📄</span> main.py
+          </div>
+          <div id="engine-pill" class="engine-status-pill">
+            <span>⏳</span> Loading Python Engine...
+          </div>
+        </div>
+
+        <textarea id="code-input"></textarea>
+
+        <div class="editor-footer">
+          <div class="editor-actions">
+            <div id="status-msg"></div>
+            <div class="action-buttons">
+              <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
+              <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
+              <a href="preparation3.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="script/story.js"></script>
+  <script src="script/preparation2.js"></script>
+</body>
+</html>

@@ -8,7 +8,6 @@ function openDatabase() {
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
       if (!db.objectStoreNames.contains("users")) {
-        // Create store with unique username as primary key
         const userStore = db.createObjectStore("users", { keyPath: "username" });
         userStore.createIndex("username", "username", { unique: true });
       }
@@ -20,7 +19,6 @@ function openDatabase() {
   });
 }
 
-// Find a user by username
 async function getUser(username) {
   const db = await openDatabase();
   return new Promise((resolve, reject) => {
