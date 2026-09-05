@@ -1,7 +1,3 @@
-/**
- * Preparation 5 Configuration: Chapter 5 - The Grand Quack Fortress Vault
- */
-
 window.initPreparationChapter({
     chapterNumber: 5,
     chapterTitle: "Chapter 5: The Grand Quack Fortress Vault",

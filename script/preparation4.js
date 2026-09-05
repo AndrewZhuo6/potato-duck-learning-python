@@ -1,7 +1,3 @@
-/**
- * Preparation 4 Configuration: Chapter 4 - Duck Energy
- */
-
 window.initPreparationChapter({
     chapterNumber: 4,
     chapterTitle: "Chapter 4: Duck Energy",
