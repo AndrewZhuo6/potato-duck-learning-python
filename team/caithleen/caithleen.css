@@ -1,0 +1,154 @@
+
+body {
+    font-family: Playfair Display, serif;
+    background-color: #bfdceb;
+    background-image: url('pictures/background 7.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: #4a3f45;
+}
+
+header {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+header h1 {
+    color: #4f5b79;
+    font-size: 40px;
+}
+
+.subtitle {
+    color: #6f6680;
+    font-size: 30px;
+    font-style: italic;
+}
+
+section {
+    max-width: 850px;
+    padding: 20px;
+    margin: 30px auto;
+}
+
+section h2 {
+    font-family: 'Playfair Display', serif;
+    border-bottom: 1px solid rgba(102, 109, 146, 0.8);
+    color: #9b6b82;
+    margin-bottom: 15px;
+}
+
+section p {
+    max-width: 750px;
+    line-height: 1.7;
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    width: 70%;
+    margin: auto;
+}
+
+.about-text {
+    width: 600px;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.88);
+    border: 2px solid rgba(117, 125, 167, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(150, 110, 130, 0.12);
+}
+
+.about-text h2 {
+    color: #9b6b82;
+    margin-top: 0;
+    border-bottom: 1px solid rgba(102, 109, 146, 0.8);
+    padding-bottom: 8px;
+}
+
+.about-text p {
+    font-family: 'Arial', serif;
+}
+
+.about-image {
+    width: 220px;
+    text-align: center;
+}
+
+.profile {
+    display: block;
+    margin: 20px auto;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #6e788f;
+    box-shadow: 0 4px 12px rgba(150, 110, 130, 0.08);
+}
+
+.role-interest {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 25px;
+    max-width: 850px;
+    margin: 40px auto;
+}
+
+.role {
+    flex: 1;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.88);
+    border: 2px solid rgba(117, 125, 167, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(150, 110, 130, 0.12);
+}
+
+.interest {
+    flex: 1;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.88);
+    border: 2px solid rgba(117, 125, 167, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(150, 110, 130, 0.12);
+}
+
+interest h2 {
+    color: #9b6b82;
+    margin-top: 0;
+    border-bottom: 1px solid rgba(102, 109, 146, 0.8);
+    padding-bottom: 8px;
+}
+
+.interest li {
+    padding: 9px 12px;
+    margin: 7px 0;
+    background-color: #f8edf3;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.interests li::before {
+    content: "☆";
+    color: #9b6b82;
+}
+
+.interests ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    max-width: 500px;
+}
+
+.goals {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: white;
+    border: 2px solid rgba(117, 125, 167, 0.8);
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+}
