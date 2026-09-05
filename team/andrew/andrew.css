@@ -1,0 +1,88 @@
+.profile-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.back-link a {
+  color: #555;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+}
+
+.profile-andrew {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0 3rem;
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #eee;
+}
+
+.andrew-text h1 {
+  margin: 0 0 0.3rem;
+  font-size: 2rem;
+}
+
+.role-tag {
+  color: #0066cc;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.bio {
+  color: #444;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.profile-section {
+  margin-bottom: 2.5rem;
+}
+
+.profile-section h2 {
+  font-size: 1.3rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.skill-card, .project-card {
+  background: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+}
+
+.project-card {
+  margin-bottom: 1rem;
+}
+
+.skill-card h3, .project-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+}
+
+.project-desc, .skill-card p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
