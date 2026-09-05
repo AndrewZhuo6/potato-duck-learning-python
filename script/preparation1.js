@@ -16,7 +16,7 @@ def run_tests():
     try:
         res1 = decide_based_on('shelter')
         if res1 != "keep going":
-            return {"passed": False, "msg": f"Failed: decide_based_on('shelter') returned '{res1}', expected 'UNLOCKED'"}
+            return {"passed": False, "msg": f"Failed: decide_based_on('shelter') returned '{res1}', expected 'keep going'"}
     except Exception as e:
         return {"passed": False, "msg": f"Runtime error on input 'shelter': {str(e)}"}
 

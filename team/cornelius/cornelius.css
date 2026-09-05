@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #2c3e50;
+    color: #ffffff;
+    text-align: center;
+    padding: 2.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+section:first-of-type {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.profile {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.profile img {
+    border-radius: 50%;
+    border: 4px solid #3498db;
+    object-fit: cover;
+    background-color: #ecf0f1;
+}
+
+.profile h4 {
+    margin-top: 1rem;
+    color: #7f8c8d;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.information h3 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 0.2rem;
+}
+
+.information h4 {
+    font-size: 1.2rem;
+    color: #3498db;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.information p {
+    color: #555;
+    font-size: 1.05rem;
+}
+
+h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.skill, .project {
+    margin-bottom: 1.5rem;
+}
+
+.skill:last-child, .project:last-child {
+    margin-bottom: 0;
+}
+
+.skill h3, .project h3 {
+    color: #34495e;
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.skill p, .project p, .interest p {
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    section:first-of-type {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .information h3 {
+        font-size: 1.8rem;
+    }
+}
