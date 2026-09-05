@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Chapter 5: The Grand Quack Fortress Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/story.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">🦆 Quackbit</a>
+    </div>
+    <div class="chapter-badge-group">
+      <a href="preparation1.html" class="chapter-step-pill" data-chapter="1">1. Broken Gate</a>
+      <a href="preparation2.html" class="chapter-step-pill" data-chapter="2">2. Supply Bag</a>
+      <a href="preparation3.html" class="chapter-step-pill" data-chapter="3">3. Secret Cipher</a>
+      <a href="preparation4.html" class="chapter-step-pill" data-chapter="4">4. Duck Energy</a>
+      <a href="preparation5.html" class="chapter-step-pill active" data-chapter="5">5. Master Vault</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+
+  <main class="preparation-main">
+    <section id="cutscene-container">
+      <div class="cutscene-header">
+        <span class="cutscene-title-badge">Final Chapter Story</span>
+        <h2 class="cutscene-heading">The Grand Quack Fortress Vault</h2>
+      </div>
+      <div class="video-wrapper">
+        <video id="story-video" controls playsinline>
+          <source src="assets/videos/preparation5.mp4" type="video/mp4">
+          <source src="assets/videos/preparation1.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <div class="video-controls">
+        <p class="cutscene-narrative">
+          The ultimate destination is here! Potato Duck and friends arrive before the Golden Vault of Quacktopia. Only the true master programmer can unlock the final seal.
+        </p>
+        <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
+      </div>
+    </section>
+
+    <div id="workspace-container">
+      <section class="problem-panel">
+        <span class="chapter-tag">Chapter 5 • Capstone Challenge</span>
+        <h2>The Master Seal</h2>
+        <div class="story-quote">
+          "Quack! The vault door monitors both team power and the royal cryptographic cipher key!"
+        </div>
+
+        <h3>Task</h3>
+        <p>Define a function <code>unlock_master_vault(team_powers, master_key)</code> where:</p>
+        <p>1. <code>team_powers</code> is a list of integers representing the power of each duck member.</p>
+        <p>2. <code>master_key</code> is a secret string.</p>
+        <p>The vault opens (returns <code>True</code>) if and only if:</p>
+        <p>• The <strong>sum of all numbers in <code>team_powers</code></strong> is at least <code>100</code> (<code>>= 100</code>), <strong>AND</strong></p>
+        <p>• The <code>master_key</code> string starts with <code>"QUACK"</code>.</p>
+        <p>Otherwise, return <code>False</code>.</p>
+
+        <h3>Examples</h3>
+        <div class="code-example-box">unlock_master_vault([30, 40, 35], "QUACK_MASTER_2026")  # Returns: True
+unlock_master_vault([10, 20, 30], "QUACK_PASS")          # Returns: False (sum=60 < 100)
+unlock_master_vault([50, 60], "WRONG_KEY")               # Returns: False (key prefix mismatch)</div>
+
+        <h3>Guidelines</h3>
+        <p>• You can use Python's <code>sum(team_powers)</code> and string method <code>master_key.startswith("QUACK")</code>.</p>
+        <p>• Return a boolean: <code>True</code> or <code>False</code>.</p>
+      </section>
+
+      <section class="editor-panel">
+        <div class="editor-header">
+          <div class="editor-tab">
+            <span>📄</span> main.py
+          </div>
+          <div id="engine-pill" class="engine-status-pill">
+            <span>⏳</span> Loading Python Engine...
+          </div>
+        </div>
+
+        <textarea id="code-input"></textarea>
+
+        <div class="editor-footer">
+          <div class="editor-actions">
+            <div id="status-msg"></div>
+            <div class="action-buttons">
+              <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
+              <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
+              <a href="index.html" id="next-chapter-btn" class="btn-next" style="display: none;">Complete Journey 🏆</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="script/story.js"></script>
+  <script src="script/preparation5.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Chapter 3: The Secret Quack Cipher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/story.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">🦆 Quackbit</a>
+    </div>
+    <div class="chapter-badge-group">
+      <a href="preparation1.html" class="chapter-step-pill" data-chapter="1">1. Broken Gate</a>
+      <a href="preparation2.html" class="chapter-step-pill" data-chapter="2">2. Supply Bag</a>
+      <a href="preparation3.html" class="chapter-step-pill active" data-chapter="3">3. Secret Cipher</a>
+      <a href="preparation4.html" class="chapter-step-pill" data-chapter="4">4. Duck Energy</a>
+      <a href="preparation5.html" class="chapter-step-pill" data-chapter="5">5. Master Vault</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+
+  <main class="preparation-main">
+    <section id="cutscene-container">
+      <div class="cutscene-header">
+        <span class="cutscene-title-badge">Chapter 3 Story</span>
+        <h2 class="cutscene-heading">The Secret Quack Cipher</h2>
+      </div>
+      <div class="video-wrapper">
+        <video id="story-video" controls playsinline>
+          <source src="assets/videos/preparation3.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <div class="video-controls">
+        <p class="cutscene-narrative">
+          A locked parchment chest blocks the hallway. An encrypted Morse-like duck transmission is etched on the surface!
+        </p>
+        <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
+      </div>
+    </section>
+
+    <div id="workspace-container">
+      <section class="problem-panel">
+        <span class="chapter-tag">Chapter 3 • String Manipulation</span>
+        <h2>Deciphering the Transmission</h2>
+        <div class="story-quote">
+          "Quack! The duck elders reversed the message and added erratic spaces to hide the secret password!"
+        </div>
+
+        <h3>Task</h3>
+        <p>Define a function <code>decode_signal(message)</code> that takes a string <code>message</code>.</p>
+        <p>Your function must:</p>
+        <p>1. Remove any leading and trailing whitespace from the string.</p>
+        <p>2. Convert the text completely to <strong>lowercase</strong>.</p>
+        <p>3. Return the <strong>reversed</strong> string.</p>
+
+        <h3>Examples</h3>
+        <div class="code-example-box">decode_signal("TIbkCAUQ")    # Returns: "quackbit"
+decode_signal("  NOHTYP  ")  # Returns: "python"
+decode_signal("   ")        # Returns: ""</div>
+
+        <h3>Guidelines</h3>
+        <p>• In Python, you can strip spaces with <code>.strip()</code> and convert to lowercase with <code>.lower()</code>.</p>
+        <p>• To reverse a string <code>s</code>, you can use slice notation <code>s[::-1]</code>.</p>
+      </section>
+
+      <section class="editor-panel">
+        <div class="editor-header">
+          <div class="editor-tab">
+            <span>📄</span> main.py
+          </div>
+          <div id="engine-pill" class="engine-status-pill">
+            <span>⏳</span> Loading Python Engine...
+          </div>
+        </div>
+
+        <textarea id="code-input"></textarea>
+
+        <div class="editor-footer">
+          <div class="editor-actions">
+            <div id="status-msg"></div>
+            <div class="action-buttons">
+              <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
+              <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
+              <a href="preparation4.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="script/story.js"></script>
+  <script src="script/preparation3.js"></script>
+</body>
+</html>
