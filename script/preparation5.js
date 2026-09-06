@@ -1,11 +1,10 @@
 window.initPreparationChapter({
     chapterNumber: 5,
-    chapterTitle: "Chapter 5: The Grand Quack Fortress Vault",
+    chapterTitle: "Chapter 5: Your Consideration",
     nextChapterUrl: "index.html",
     starterCode: `def unlock_master_vault(team_powers, master_key):
-    # Return True if total power >= 100 AND master_key starts with "QUACK", else False
-    pass
-`,
+
+    `,
     testHarness: (userCode) => `
 ${userCode}
 

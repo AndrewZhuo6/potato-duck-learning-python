@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quackbit | Chapter 4: Duck Energy</title>
+  <title>Quackbit | Chapter 4: Existing Spell</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -18,11 +18,11 @@
       <a href="index.html">🦆 Quackbit</a>
     </div>
     <div class="chapter-badge-group">
-      <a href="preparation1.html" class="chapter-step-pill" data-chapter="1">1. Broken Gate</a>
-      <a href="preparation2.html" class="chapter-step-pill" data-chapter="2">2. Supply Bag</a>
-      <a href="preparation3.html" class="chapter-step-pill" data-chapter="3">3. Secret Cipher</a>
-      <a href="preparation4.html" class="chapter-step-pill active" data-chapter="4">4. Duck Energy</a>
-      <a href="preparation5.html" class="chapter-step-pill" data-chapter="5">5. Master Vault</a>
+      <a href="preparation1.html" class="chapter-step-pill" data-chapter="1">1. The Decision</a>
+      <a href="preparation2.html" class="chapter-step-pill" data-chapter="2">2. Something Redundant</a>
+      <a href="preparation3.html" class="chapter-step-pill" data-chapter="3">3. Our Inventory</a>
+      <a href="preparation4.html" class="chapter-step-pill active" data-chapter="4">4. Existing Spell</a>
+      <a href="preparation5.html" class="chapter-step-pill" data-chapter="5">5. Your Consideration</a>
     </div>
     <div class="auth-buttons">
       <a href="login.html" class="login-text">Log In</a>
@@ -33,7 +33,7 @@
     <section id="cutscene-container">
       <div class="cutscene-header">
         <span class="cutscene-title-badge">Chapter 4 Story</span>
-        <h2 class="cutscene-heading">Energy for the River Leap</h2>
+        <h2 class="cutscene-heading">Existing Spell</h2>
       </div>
       <div class="video-wrapper">
         <video id="story-video" controls playsinline>
@@ -44,7 +44,8 @@
       </div>
       <div class="video-controls">
         <p class="cutscene-narrative">
-          Ahead lies the Chasm of Syntax Errors! Potato Duck must consume enough nutritious snacks to gain leap energy.
+          During this journey, you might encounter forgotten spells written by other coders that are not written in this book. you can interact with them and see what the spell is doing. It's often useful to use spell written by other coders, so you can save your effort for what really matters in your case and not focusing on general problems.
+          Some of the spell can be used directly, while the others need you to have some pre-requisite knowledge about it. You don't have to worry, you just need to use `import` statement to get the knowledge before using the spell. Here, I have some spells written by other coders that I found when I was still actively protecting this village. I'll leave the discovery of other coders' spells to you.
         </p>
         <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
       </div>
@@ -52,24 +53,22 @@
 
     <div id="workspace-container">
       <section class="problem-panel">
-        <span class="chapter-tag">Chapter 4 • Dictionaries</span>
-        <h2>Calorie Calculator</h2>
+        <span class="chapter-tag">Chapter 4 • Function</span>
+        <h2>Existing Spell</h2>
         <div class="story-quote">
-          "Quack! Calculate the total calories in Potato Duck's snack stash so we know if we have enough stamina to jump!"
+          After you have a long journey, your inventory got a bit messy, the item just spreads across the whole inventory without any grouping or section. You want to make it tidy  ordered from the highest value item to the lowest value item but you’re just too lazy to do it manually. You’re wondering if there is any spell that you can use to instantly sort them.
         </div>
 
         <h3>Task</h3>
-        <p>Define a function <code>calculate_energy(food_dict)</code> where <code>food_dict</code> is a Python dictionary with food names as keys and integer calories as values.</p>
-        <p>Your function should calculate and return the <strong>sum of all calorie values</strong>. If the dictionary is empty, return <code>0</code>.</p>
+        <p>Define a function <code>tidy_up(inventory)</code> where <code>inventory</code> is a Python dictionary with item names as keys and integer values as the value of the item.</p>
+        <p>Your function should order the item from the highest to the lowest value and return the dictionary. If the dictionary is empty, return <code>0</code>.</p>
 
         <h3>Examples</h3>
-        <div class="code-example-box">calculate_energy({"potato": 150, "corn": 100, "berries": 50})  # Returns: 300
-calculate_energy({})                                           # Returns: 0
-calculate_energy({"super_potato": 500})                        # Returns: 500</div>
+        <div class="code-example-box">tidy_up({"corn": 100, "potato": 150, "berries": 50})
+# Returns: {"potato": 150, "corn": 100, "berries": 50}</div>
 
         <h3>Guidelines</h3>
-        <p>• You can retrieve all values in a dictionary using <code>food_dict.values()</code>.</p>
-        <p>• Use Python's built-in <code>sum()</code> function or a <code>for</code> loop to aggregate.</p>
+        <p>Besides spells by other coders, you can also create your own, who knows your spell might help the future protector of this village. It's very simple, you just need to enveloped the block of code inside a <code>def function_name(parameter):</code>, then you just need to write <code>function_name(parameter)</code> to use the spell.</p>
       </section>
 
       <section class="editor-panel">
