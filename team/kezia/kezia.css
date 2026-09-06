@@ -32,6 +32,10 @@ font-size: 9px;
 letter-spacing: 2px;
 }
 
+ul{
+  padding-left:40px;
+}
+
 .logo {
 font: 25px "Jaro", sans-serif;
 color: #171717;
