@@ -68,9 +68,6 @@ section p {
     padding-bottom: 8px;
 }
 
-.about-text p {
-    font-family: 'Arial', serif;
-}
 
 .about-image {
     width: 220px;
@@ -127,7 +124,6 @@ interest h2 {
     margin: 7px 0;
     background-color: #f8edf3;
     border-radius: 10px;
-    font-family: Arial, sans-serif;
 }
 
 .interests li::before {
@@ -151,4 +147,29 @@ interest h2 {
     background-size: cover;
     background-position: center;
     border-radius: 20px;
+}
+
+.back-container {
+    max-width: 850px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 8px 18px;
+    background-color: rgba(255, 255, 255, 0.88);
+    color: #4a3f45;
+    text-decoration: none;
+    border: 2px solid rgba(117, 125, 167, 0.8);
+    border-radius: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: white;
+    transform: translateX(-4px);
 }
