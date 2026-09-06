@@ -189,6 +189,158 @@ window.initPreparationChapter = function (config) {
             }
         }
 
+        function showOutcomeCutscene(passed, message) {
+            let outcomeContainer = document.getElementById("outcome-cutscene-container");
+            if (!outcomeContainer) {
+                outcomeContainer = document.createElement("section");
+                outcomeContainer.id = "outcome-cutscene-container";
+                const main = document.querySelector("main.preparation-main") || document.querySelector(".preparation-main") || document.body;
+                main.appendChild(outcomeContainer);
+            }
+
+            const videoSrc = `assets/videos/preparation${chapterNumber}_${passed ? "pass" : "fail"}.mp4`;
+            const nextTarget = nextChapterUrl || (nextBtn ? nextBtn.getAttribute("href") : (chapterNumber === 5 ? "index.html" : `preparation${chapterNumber + 1}.html`));
+            const nextText = nextBtn ? nextBtn.textContent.trim() : (chapterNumber === 5 ? "Complete Journey 🏆" : "Next Story &rarr;");
+
+            outcomeContainer.innerHTML = `
+                <div class="outcome-header">
+                    <span class="outcome-title-badge ${passed ? 'badge-pass' : 'badge-fail'}">
+                        ${passed ? '🎉 Victory' : '💥 Attempt Failed'}
+                    </span>
+                    <h2 class="outcome-heading">
+                        ${passed ? `${chapterTitle || `Chapter ${chapterNumber}`} Conquered!` : `${chapterTitle || `Chapter ${chapterNumber}`} - Try Again!`}
+                    </h2>
+                </div>
+                <div class="outcome-video-wrapper">
+                    <video id="outcome-video" playsinline controls autoplay>
+                        <source src="${videoSrc}" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+                    <div id="outcome-fallback" class="outcome-fallback-card" style="display: none;">
+                        <div class="outcome-fallback-icon">${passed ? '🦆✨' : '🦆💭'}</div>
+                        <div class="outcome-fallback-title">${passed ? 'Chapter Challenge Completed!' : 'Keep Going, Coder!'}</div>
+                        <p class="outcome-fallback-desc">
+                            ${passed 
+                                ? 'Great job! The cutscene animation for this milestone is currently in production.' 
+                                : 'Your code did not pass all tests yet. Review the test feedback below and try again.'}
+                        </p>
+                        <span class="outcome-fallback-tag">Asset: preparation${chapterNumber}_${passed ? 'pass' : 'fail'}.mp4</span>
+                    </div>
+                </div>
+                <div class="outcome-footer">
+                    <div class="outcome-narrative ${passed ? 'pass-narrative' : 'fail-narrative'}">
+                        ${passed 
+                            ? `<strong>Success!</strong> ${message || 'All test cases passed.'}`
+                            : `<strong>Feedback:</strong> ${message || 'Some test cases failed.'}`}
+                    </div>
+                    <div class="outcome-actions">
+                        <button type="button" id="outcome-skip-btn" class="btn-outcome-skip">Skip Cutscene ⏭</button>
+                        <div id="outcome-final-actions" style="display: none; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                            ${passed ? `
+                                <a href="${nextTarget}" class="btn-outcome-next">${nextText} &rarr;</a>
+                                <button type="button" id="outcome-review-btn" class="btn-outcome-review">Review Code ↩</button>
+                            ` : `
+                                <button type="button" id="outcome-retry-btn" class="btn-outcome-retry">Back to Editor & Try Again ↩</button>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            if (workspaceContainer) workspaceContainer.style.display = "none";
+            outcomeContainer.style.display = "block";
+
+            const outcomeVideo = document.getElementById("outcome-video");
+            const outcomeFallback = document.getElementById("outcome-fallback");
+            const outcomeSkipBtn = document.getElementById("outcome-skip-btn");
+            const outcomeFinalActions = document.getElementById("outcome-final-actions");
+            const outcomeReviewBtn = document.getElementById("outcome-review-btn");
+            const outcomeRetryBtn = document.getElementById("outcome-retry-btn");
+
+            let actionsRevealed = false;
+            function revealOutcomeActions() {
+                if (actionsRevealed) return;
+                actionsRevealed = true;
+                if (outcomeSkipBtn) outcomeSkipBtn.style.display = "none";
+                if (outcomeFinalActions) {
+                    outcomeFinalActions.style.display = "inline-flex";
+                }
+            }
+
+            function handleVideoFallback() {
+                if (outcomeVideo) {
+                    outcomeVideo.style.display = "none";
+                }
+                if (outcomeFallback) {
+                    outcomeFallback.style.display = "flex";
+                }
+                revealOutcomeActions();
+            }
+
+            function returnToEditor() {
+                if (outcomeVideo && !outcomeVideo.paused) {
+                    outcomeVideo.pause();
+                }
+                outcomeContainer.style.display = "none";
+                if (workspaceContainer) {
+                    workspaceContainer.style.display = "flex";
+                }
+                setTimeout(() => {
+                    editor.refresh();
+                    editor.focus();
+                }, 60);
+            }
+
+            if (outcomeVideo) {
+                outcomeVideo.addEventListener("ended", revealOutcomeActions);
+                outcomeVideo.addEventListener("error", handleVideoFallback);
+                const source = outcomeVideo.querySelector("source");
+                if (source) {
+                    source.addEventListener("error", handleVideoFallback);
+                }
+
+                const fallbackTimeout = setTimeout(() => {
+                    if (outcomeVideo.networkState === HTMLMediaElement.NETWORK_NO_SOURCE || outcomeVideo.error || outcomeVideo.readyState === 0) {
+                        handleVideoFallback();
+                    }
+                }, 1200);
+
+                outcomeVideo.addEventListener("loadeddata", () => {
+                    clearTimeout(fallbackTimeout);
+                });
+
+                const playPromise = outcomeVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch((err) => {
+                        console.warn("Outcome video playback interrupted or not allowed:", err);
+                        if (outcomeVideo.networkState === HTMLMediaElement.NETWORK_NO_SOURCE || outcomeVideo.error) {
+                            clearTimeout(fallbackTimeout);
+                            handleVideoFallback();
+                        }
+                    });
+                }
+            } else {
+                revealOutcomeActions();
+            }
+
+            if (outcomeSkipBtn) {
+                outcomeSkipBtn.addEventListener("click", () => {
+                    if (outcomeVideo && !outcomeVideo.paused) {
+                        outcomeVideo.pause();
+                    }
+                    revealOutcomeActions();
+                });
+            }
+
+            if (outcomeRetryBtn) {
+                outcomeRetryBtn.addEventListener("click", returnToEditor);
+            }
+
+            if (outcomeReviewBtn) {
+                outcomeReviewBtn.addEventListener("click", returnToEditor);
+            }
+        }
+
         if (submitBtn) {
             submitBtn.addEventListener("click", async () => {
                 if (!pyodide) return;
@@ -228,12 +380,15 @@ window.initPreparationChapter = function (config) {
                         if (nextBtn) {
                             nextBtn.style.display = "inline-flex";
                         }
+
+                        showOutcomeCutscene(true, message);
                     } else {
                         if (statusMsg) {
                             statusMsg.style.color = "#dc2626";
                             statusMsg.innerHTML = `<span>✗</span> ${message}`;
                         }
                         submitBtn.disabled = false;
+                        showOutcomeCutscene(false, message);
                     }
                 } catch (err) {
                     const lines = (err.message || "").trim().split("\n");
@@ -243,6 +398,7 @@ window.initPreparationChapter = function (config) {
                         statusMsg.innerHTML = `<span>✗</span> Error: ${cleanError}`;
                     }
                     submitBtn.disabled = false;
+                    showOutcomeCutscene(false, `Error: ${cleanError}`);
                 }
             });
         }
