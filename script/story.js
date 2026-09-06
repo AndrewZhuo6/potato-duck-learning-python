@@ -219,12 +219,10 @@ window.initPreparationChapter = function (config) {
                         }
                         submitBtn.style.display = "none";
 
-                        // Save unlocked progress specifically for this user account
                         const currentUnlocked = parseInt(localStorage.getItem(progressKey) || "1", 10);
                         const newUnlocked = Math.max(currentUnlocked, chapterNumber + 1);
                         localStorage.setItem(progressKey, newUnlocked.toString());
 
-                        // Refresh navigation pills so the newly unlocked chapter is immediately accessible
                         updateProgressPills(newUnlocked);
 
                         if (nextBtn) {

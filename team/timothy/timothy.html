@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timothy Pardin</title>
+    <link rel="stylesheet" href="timothy.css">
+</head>
+
+<body>
+    <header>
+        <p class="path">Team / Timothy Pardin - CEO</p>
+        <h1>Timothy Pardin</h1>
+        <p class="subtitle">Project Manager/CEO of Potato Duck &middot; Artificial Intelligence student at BIT</p>
+    </header>
+
+    <main>
+
+    <section class="about">
+        <div class="about-image">
+            <img src="images/timothy.jpeg" alt="Me playing keyboard on stage" class="profile" id="photo">
+            <p class="photo-hint">click my photo</p>
+        </div>
+
+        <div class="about-text">
+            <h2><span class="cm">//</span> About me</h2>
+            <p>
+                My name is Timothy Pardin, but my friends call me Tim. I'm an Indonesian student in my
+                second year of Artificial Intelligence at Beijing Institute of Technology.
+                I moved here in 2025 and I'm still not used to the winter.
+            </p>
+            <p>
+                My interests sits across software engineering, data management, and human-centric psychology. What connects them for me is behavioural research also studying how people actually think and work, then using that to shape how a system talks to them. That's what pulled me toward context engineering. I still have a lot to learn in all three, and that's mostly the point.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2><span class="cm">//</span> My role</h2>
+        <p>
+            In our team, Potato Duck, I'm the Project Manager/CEO. I decide what we build and when we build it.
+            I write down what each page should do, keep our task list on GitHub, and check that everyone
+            knows what they're working on this week. I also help and contribute to the code, but I mostly make sure the
+            code we write is the code we actually need.
+        </p>
+        <p>
+            I've done this before as a Scrum project manager during an internship in Jakarta, and as team
+            lead on a small game called <em>Aisling</em>.
+        </p>
+    </section>
+
+    <section class="skills">
+        <h2><span class="cm">//</span> Skills</h2>
+        <p class="hint-line">Click one and I'll tell you where I used it.</p>
+
+        <div class="skill-group">
+            <p class="group-label">Languages</p>
+            <ul class="chips">
+                <li><button class="chip c-blue"   data-note="First language I got comfortable in. Data work, scripting, and now the exercises for our duck.">Python</button></li>
+                <li><button class="chip c-blue"   data-note="Built a full 2D game with it using the Raylib framework. Pointers taught me patience.">C</button></li>
+                <li><button class="chip c-blue"   data-note="Coursework and small algorithm practice. Where I learned to think about memory.">C++</button></li>
+                <li><button class="chip c-blue"   data-note="Picked it up for a Unity side project. Easiest of the C family by far.">C#</button></li>
+                <li><button class="chip c-yellow" data-note="Everything interactive on this page is plain JavaScript. No frameworks, no libraries.">JavaScript</button></li>
+            </ul>
+        </div>
+
+        <div class="skill-group">
+            <p class="group-label">Web</p>
+            <ul class="chips">
+                <li><button class="chip c-orange" data-note="Wrote my first portfolio site in raw HTML during my internship in Tangerang.">HTML</button></li>
+                <li><button class="chip c-orange" data-note="Every colour, border and layout on this page. Flexbox is my friend now.">CSS</button></li>
+                <li><button class="chip c-teal"   data-note="Built responsive front-end components for the KOMPIT web app in Jakarta.">Flutter</button></li>
+                <li><button class="chip c-teal"   data-note="Local progress storage for our learning site. No server, everything stays in the browser.">IndexedDB</button></li>
+            </ul>
+        </div>
+
+        <div class="skill-group">
+            <p class="group-label">Tools &amp; ways of working</p>
+            <ul class="chips">
+                <li><button class="chip c-purple" data-note="Issues, branches and pull requests. I run our whole task board there.">Git &amp; GitHub</button></li>
+                <li><button class="chip c-purple" data-note="Where I live. Dark theme, obviously.">VS Code</button></li>
+                <li><button class="chip c-purple" data-note="Ran a full development cycle on it as project manager. Standups, backlog, the lot.">Scrum</button></li>
+                <li><button class="chip c-purple" data-note="Tested VR and AI products at UPH and wrote the reports on what broke.">QA testing</button></li>
+                <li><button class="chip c-purple" data-note="Specs, project logs, meeting notes, and a 13-chapter AI study guide for my classmates.">Technical writing</button></li>
+            </ul>
+        </div>
+
+        <p class="output"><span class="caret">&gt;</span> <span id="skill-out">Nothing selected yet.</span></p>
+    </section>
+
+    <section class="hobbies">
+        <h2><span class="cm">//</span> Outside of code</h2>
+        <ul class="hobby-list">
+            <li>
+                <h3>Music</h3>
+                <p>I arrange and direct for a group called DNA ZEAL. Keys, mostly.</p>
+            </li>
+            <li>
+                <h3>Tennis</h3>
+                <p>Six years competitive back home. Still the fastest way to clear my head.</p>
+            </li>
+            <li>
+                <h3>Mental math</h3>
+                <p>Five years of abacus training as a kid. I still picture the beads.</p>
+            </li>
+            <li>
+                <h3>Writing stories</h3>
+                <p>Mostly for games. The last one was a psychological thriller.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section class="facts">
+        <h2><span class="cm">//</span> Random facts</h2>
+        <p id="fact">Press the button.</p>
+        <button id="fact-btn">run randomFact()</button>
+    </section>
+
+    <section>
+        <h2><span class="cm">//</span> My goals</h2>
+        <p>
+            This semester my goal is simple: finish this website with my team and actually be proud of it.
+            I also want to get better at speaking Chinese, because right now I survive on HSK 4 and a lot
+            of guessing.
+        </p>
+        <p>
+            After that I want to keep working where technology and people meet. I've done research on how
+            students use AI to study, and it made me curious about building tools that help people learn
+            instead of doing the thinking for them. That's basically what our duck is for.
+        </p>
+    </section>
+
+    </main>
+
+    <footer>
+        <p>Thanks for reading. Come say hi if you see me around campus.</p>
+        <a href="../../team.html" class="back-btn">&larr; Back to team</a>
+    </footer>
+
+<script>
+    var chips = document.querySelectorAll(".chip");
+    var out = document.getElementById("skill-out");
+
+    for (var i = 0; i < chips.length; i++) {
+        chips[i].onclick = function () {
+            for (var j = 0; j < chips.length; j++) {
+                chips[j].classList.remove("active");
+            }
+            this.classList.add("active");
+            out.textContent = this.getAttribute("data-note");
+        };
+    }
+
+    var facts = [
+        "I've never lived through a winter as cold as Beijing's.",
+        "I wrote a 13-chapter study guide about AI for my classmates in my first semester.",
+        "I won first place in a humanities research award, which surprised everyone including me.",
+        "I represented Indonesia as a registered tennis player in the Asia region.",
+        "I still write my to-do list on paper even though I run a GitHub board.",
+        "My favourite part of any project is the very first planning meeting."
+    ];
+
+    document.getElementById("fact-btn").onclick = function () {
+        var pick = Math.floor(Math.random() * facts.length);
+        document.getElementById("fact").textContent = facts[pick];
+    };
+
+    var photo = document.getElementById("photo");
+    var hint = document.querySelector(".photo-hint");
+    var count = 0;
+
+    photo.onclick = function () {
+        count = count + 1;
+        hint.textContent = "quack x " + count;
+
+        for (var i = 0; i < 5; i++) {
+            var duck = document.createElement("span");
+            duck.className = "duck";
+            duck.textContent = "🦆";
+            duck.style.left = Math.random() * 90 + "vw";
+            document.body.appendChild(duck);
+            setTimeout(function () { duck.remove(); }, 3000);
+        }
+    };
+</script>
+</body>
+</html>

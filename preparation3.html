@@ -33,7 +33,7 @@
     <section id="cutscene-container">
       <div class="cutscene-header">
         <span class="cutscene-title-badge">Chapter 3 Story</span>
-        <h2 class="cutscene-heading">The Secret Quack Cipher</h2>
+        <h2 class="cutscene-heading">Our Inventory</h2>
       </div>
       <div class="video-wrapper">
         <video id="story-video" controls playsinline>
@@ -43,7 +43,7 @@
       </div>
       <div class="video-controls">
         <p class="cutscene-narrative">
-          A locked parchment chest blocks the hallway. An encrypted Morse-like duck transmission is etched on the surface!
+          Here, take this tools from me. It's a quick-swap tools, you can access any item in your inventory quickly with this, but you have to know their location in your inventory. Each item in your inventory is actually just an item placed on a box with index from 0 up to the size of your inventory - 1. Long ago, people used to call their inventory a list because they store everything in order from 0 up to their inventory size - 1.
         </p>
         <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
       </div>
@@ -51,27 +51,28 @@
 
     <div id="workspace-container">
       <section class="problem-panel">
-        <span class="chapter-tag">Chapter 3 • String Manipulation</span>
-        <h2>Deciphering the Transmission</h2>
+        <span class="chapter-tag">Chapter 3</span>
+        <h2>Our Inventory</h2>
         <div class="story-quote">
-          "Quack! The duck elders reversed the message and added erratic spaces to hide the secret password!"
+          Even a great coder can't remember every item's slot in a crowded backpack list, but we always know what weapon counters each monster. Hence, ancient coders created a powerful spell called a <strong>dictionary</strong> to store data in key-value pairs.
+          <br><br>
+          With a dictionary, you can instantly look up which counter-weapon is needed for a monster. Then, check your <code>inventory</code> list to find that weapon's slot index and quickly swap it out with your quick-swap tool!
         </div>
 
         <h3>Task</h3>
-        <p>Define a function <code>decode_signal(message)</code> that takes a string <code>message</code>.</p>
-        <p>Your function must:</p>
-        <p>1. Remove any leading and trailing whitespace from the string.</p>
-        <p>2. Convert the text completely to <strong>lowercase</strong>.</p>
-        <p>3. Return the <strong>reversed</strong> string.</p>
+        <p>Define a function <code>quick_look_swap(monster, weaknesses, inventory)</code> that takes a <code>monster</code> name, a dictionary of monster-to-weapon pairs <code>weaknesses</code>, and a list of items in your <code>inventory</code>.</p>
+        <p>• Use the <code>weaknesses</code> dictionary to look up the counter-weapon for the given monster.</p>
+        <p>• If the required weapon is inside your <code>inventory</code> list, return its index.</p>
+        <p>• If the weapon is not in your inventory (or the monster is not in the dictionary), return <code>-1</code>.</p>
 
         <h3>Examples</h3>
-        <div class="code-example-box">decode_signal("TIbkCAUQ")    # Returns: "quackbit"
-decode_signal("  NOHTYP  ")  # Returns: "python"
-decode_signal("   ")        # Returns: ""</div>
+        <div class="code-example-box">quick_look_swap('harpy', weaknesses, inventory)    # Returns: '2'
+quick_look_swap('bandits', weaknesses, inventory)  # Returns: '5'</div>
 
         <h3>Guidelines</h3>
-        <p>• In Python, you can strip spaces with <code>.strip()</code> and convert to lowercase with <code>.lower()</code>.</p>
-        <p>• To reverse a string <code>s</code>, you can use slice notation <code>s[::-1]</code>.</p>
+        <p>Create a dictionary with curly braces: <code>example_dictionary = {'fruit': 'banana', 'metal': 'iron', 'animal': 'dog'}</code>.</p>
+        <p>Access a dictionary value using brackets: <code>example_of_fruit = dictionary['fruit']</code>.</p>
+        <p>Get item position with <code>list_name.index(item)</code>.</p>
       </section>
 
       <section class="editor-panel">

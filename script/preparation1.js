@@ -1,41 +1,42 @@
 window.initPreparationChapter({
     chapterNumber: 1,
-    chapterTitle: "Chapter 1: The Broken Gate",
+    chapterTitle: "Chapter 1: The Decision",
     nextChapterUrl: "preparation2.html",
-    starterCode: `def solve_gate(passcode):
-`,
+    starterCode: `def decide_based_on(sign):
+    
+    `,
     testHarness: (userCode) => `
 ${userCode}
 
 def run_tests():
-    if "solve_gate" not in globals():
-        return {"passed": False, "msg": "Function 'solve_gate' is not defined."}
+    if "decide_based_on" not in globals():
+        return {"passed": False, "msg": "Function 'decide_based_on' is not defined."}
     
-    # Test Case 1: Passcode 1234
+    # Test Case 1: sign 'shelter'
     try:
-        res1 = solve_gate(1234)
-        if res1 != "UNLOCKED":
-            return {"passed": False, "msg": f"Failed: solve_gate(1234) returned '{res1}', expected 'UNLOCKED'"}
+        res1 = decide_based_on('shelter')
+        if res1 != "keep going":
+            return {"passed": False, "msg": f"Failed: decide_based_on('shelter') returned '{res1}', expected 'keep going'"}
     except Exception as e:
-        return {"passed": False, "msg": f"Runtime error on input 1234: {str(e)}"}
+        return {"passed": False, "msg": f"Runtime error on input 'shelter': {str(e)}"}
 
-    # Test Case 2: Incorrect Passcode
+    # Test Case 2: sign 'bandits'
     try:
-        res2 = solve_gate(9999)
-        if res2 != "LOCKED":
-            return {"passed": False, "msg": f"Failed: solve_gate(9999) returned '{res2}', expected 'LOCKED'"}
+        res2 = decide_based_on('bandits')
+        if res2 != "turn back":
+            return {"passed": False, "msg": f"Failed: decide_based_on('bandits') returned '{res2}', expected 'turn back'"}
     except Exception as e:
-        return {"passed": False, "msg": f"Runtime error on input 9999: {str(e)}"}
+        return {"passed": False, "msg": f"Runtime error on input 'bandits': {str(e)}"}
 
-    # Test Case 3: Edge Case 0
+    # Test Case 3: sign 'other'
     try:
-        res3 = solve_gate(0)
-        if res3 != "LOCKED":
-            return {"passed": False, "msg": f"Failed: solve_gate(0) returned '{res3}', expected 'LOCKED'"}
+        res3 = decide_based_on('other')
+        if res3 != "ask someone":
+            return {"passed": False, "msg": f"Failed: decide_based_on('other') returned '{res3}', expected 'ask someone'"}
     except Exception as e:
-        return {"passed": False, "msg": f"Runtime error on input 0: {str(e)}"}
+        return {"passed": False, "msg": f"Runtime error on input 'other': {str(e)}"}
 
-    return {"passed": True, "msg": "Gate Unlocked! All test cases passed."}
+    return {"passed": True, "msg": "Problem Solved! All test cases passed."}
 
 run_tests()
 `
