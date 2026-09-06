@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+background: #e8e3d9;
+color: #171717;
+font-family: "DM Mono", monospace;
+}
+
+span {
+color: #d94b32;
+}
+
+
+header {
+height: 70px;
+padding: 0 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+header p {
+font-size: 9px;
+letter-spacing: 2px;
+}
+
+.logo {
+font: 25px "Jaro", sans-serif;
+color: #171717;
+text-decoration: none;
+}
+
+main {
+height: calc(100vh - 70px);
+min-height: 600px;
+position: relative;
+overflow: hidden;
+}
+
+.background-word {
+position: absolute;
+bottom: -30px;
+left: -20px;
+font: 27vw "Jaro", sans-serif;
+color: transparent;
+-webkit-text-stroke: 1px #c9c5bc;
+}
+
+.hero {
+position: absolute;
+top: 50%;
+left: 8%;
+transform: translateY(-50%);
+}
+
+.intro {
+color: #77736c;
+font-size: 10px;
+letter-spacing: 3px;
+margin-bottom: 20px;
+}
+
+h1 {
+font: 17vw/.7 "Jaro", sans-serif;
+letter-spacing: -5px;
+}
+
+.role {
+font-size: 11px;
+letter-spacing: 3px;
+margin-top: 35px;
+}
+
+.description {
+max-width: 420px;
+margin-top: 30px;
+font: 18px/1.3 "Judson", serif;
+}
+
+.photo {
+position: absolute;
+width: 280px;
+height: 380px;
+right: 17%;
+top: 50%;
+transform: translateY(-50%) rotate(5deg);
+transition: .4s;
+}
+
+.photo img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+border: 2px solid #171717;
+filter: grayscale(100%);
+transition: .4s;
+}
+
+.photo:hover {
+transform: translateY(-50%) rotate(0);
+}
+
+.photo:hover img {
+filter: grayscale(0);
+transform: scale(1.03);
+}
+
+.photo-text {
+position: absolute;
+bottom: 0;
+width: 100%;
+padding: 18px;
+color: white;
+background: #171717aa;
+opacity: 0;
+transition: .4s;
+}
+
+.photo:hover .photo-text {
+opacity: 1;
+}
+
+
+.scroll {
+position: absolute;
+bottom: 30px;
+left: 8%;
+font-size: 8px;
+letter-spacing: 1px;
+}
+
+
+footer {
+height: 60px;
+padding: 0 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 8px;
+letter-spacing: 1px;
+}
