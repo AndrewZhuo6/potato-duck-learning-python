@@ -21,8 +21,8 @@
       <a href="preparation1.html" class="chapter-step-pill" data-chapter="1">1. The Decision</a>
       <a href="preparation2.html" class="chapter-step-pill" data-chapter="2">2. Something Redundant</a>
       <a href="preparation3.html" class="chapter-step-pill" data-chapter="3">3. Our Inventory</a>
-      <a href="preparation4.html" class="chapter-step-pill active" data-chapter="4">4. Existing Spell</a>
-      <a href="preparation5.html" class="chapter-step-pill" data-chapter="5">5. Your Consideration</a>
+      <a href="preparation4.html" class="chapter-step-pill" data-chapter="4">4. Existing Spell</a>
+      <a href="preparation5.html" class="chapter-step-pill active" data-chapter="5">5. Your Consideration</a>
     </div>
     <div class="auth-buttons">
       <a href="login.html" class="login-text">Log In</a>
@@ -44,7 +44,7 @@
       </div>
       <div class="video-controls">
         <p class="cutscene-narrative">
-          The ultimate destination is here! Potato Duck and friends arrive before the Golden Vault of Quacktopia. Only the true master programmer can unlock the final seal.
+          Two spells can deliver the same results, but they might give results in a completely different duration. One might be very fast and the other might be very slow. Also, you might not realize it because up until now because you only use lightweight and simple spells, but every spell consumes certain mana in your body. If you’re using more mana than your body can bear, something unexpected might happen
         </p>
         <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
       </div>
@@ -55,17 +55,32 @@
         <span class="chapter-tag">Chapter 5 • Time and Memory</span>
         <h2>Your Consideration</h2>
         <div class="story-quote">
-          "Quack! The vault door monitors both team power and the royal cryptographic cipher key!"
+          When you encounter a challenge, the right solution is not the only thing that matters. There are a lot of things you have to consider — from the duration your spell takes to the mana capacity of your body. A spell that runs forever or consumes infinite mana will cause you to collapse before the challenge is solved.
         </div>
 
         <h3>Task</h3>
-        <p>Define a function <code></code> where:</p>
+        <p>Define a function <code>fuse_mana_crystals(crystals, target_power)</code> that takes a list of integers <code>crystals</code> and an integer <code>target_power</code>.</p>
+        <p>Your function must determine if there are two <strong>distinct crystals</strong> in the list whose combined powers equal <code>target_power</code>. Return <code>True</code> if such a pair exists, or <code>False</code> otherwise.</p>
+        <p><strong>Spell Constraints:</strong></p>
+        <p>
+          <strong>Time Limit (Duration):</strong> Maximum <strong>0.50 seconds</strong>. A quadratic algorithm like nested loops or repeated linear searches inside a loop will take too long and trigger a Time Limit Exceeded error!
+        </p>
+        <p>
+          <strong>Mana Limit (Memory):</strong> Maximum <strong>3.5 MB</strong>. Do not allocate massive lists of all pair combinations or large matrices, or your duck body will suffer a Mana Overload!
+        </p>
 
         <h3>Examples</h3>
-        <div class="code-example-box"></div>
+        <div class="code-example-box"># Two distinct crystals (10 + 7 = 17)
+fuse_mana_crystals([10, 15, 3, 7], 17)  # Returns: True
+
+# No two crystals can form 20
+fuse_mana_crystals([10, 15, 3, 7], 20)  # Returns: False</div>
 
         <h3>Guidelines</h3>
-        <p></p>
+        <p>• <strong>Why Brute Force Fails:</strong> Checking every pair using two nested <code>for</code> loops takes O(n<sup>2</sup>) time. On thousands of crystals, this requires millions of operations and exceeds your time limit.</p>
+        <p>• <strong>Conserving Mana:</strong> Pre-generating every possible crystal combination takes excessive memory and drains all your mana.</p>
+        <p>• <strong>The Optimal Spell:</strong> As you inspect each crystal once, calculate what power you still need. If the needed crystal power is already in your checked set, you immediately found a valid pair! Otherwise, add the current crystal to checked set.</p>
+        <p>• In Python, looking up an element in a <code>set()</code> takes constant time O(1), which lets you solve the entire problem in a single pass $O(N)$ with minimal memory.</p>
       </section>
 
       <section class="editor-panel">
