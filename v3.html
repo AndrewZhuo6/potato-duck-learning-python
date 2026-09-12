@@ -18,11 +18,11 @@
       <a href="index.html">🦆 Quackbit</a>
     </div>
     <div class="chapter-badge-group">
-      <a href="preparation1.html" class="chapter-step-pill" data-chapter="1">1. The Decision</a>
-      <a href="preparation2.html" class="chapter-step-pill" data-chapter="2">2. Something Redundant</a>
-      <a href="preparation3.html" class="chapter-step-pill" data-chapter="3">3. Our Inventory</a>
-      <a href="preparation4.html" class="chapter-step-pill active" data-chapter="4">4. Existing Spell</a>
-      <a href="preparation5.html" class="chapter-step-pill" data-chapter="5">5. Your Consideration</a>
+      <a href="v1.html" class="chapter-step-pill" data-chapter="1">1. The Decision</a>
+      <a href="v2.html" class="chapter-step-pill" data-chapter="2">2. Something Redundant</a>
+      <a href="v3.html" class="chapter-step-pill active" data-chapter="3">3. Our Inventory</a>
+      <a href="v4.html" class="chapter-step-pill" data-chapter="4">4. Existing Spell</a>
+      <a href="v5.html" class="chapter-step-pill" data-chapter="5">5. Your Consideration</a>
     </div>
     <div class="auth-buttons">
       <a href="login.html" class="login-text">Log In</a>
@@ -37,13 +37,14 @@
       </div>
       <div class="video-wrapper">
         <video id="story-video" controls playsinline>
-          <source src="assets/videos/preparation3.mp4" type="video/mp4">
+          <source src="assets/videos/v3.mp4" type="video/mp4">
           Your browser does not support HTML video.
         </video>
       </div>
       <div class="video-controls">
         <p class="cutscene-narrative">
-          Here, take this tools from me. It's a quick-swap tools, you can access any item in your inventory quickly with this, but you have to know their location in your inventory. Each item in your inventory is actually just an item placed on a box with index from 0 up to the size of your inventory - 1. Long ago, people used to call their inventory a list because they store everything in order from 0 up to their inventory size - 1.
+          Here, take this tools from me. It's a quick-swap tools, you can access any item in your inventory quickly with this, but you have to know their location in your inventory. Long ago, people used to call their inventory a list because they store everything in order from 0 up to their inventory size - 1.
+          Even a great coder can't remember every location of their item in the list, but we always know what item we need to fight against something. Hence, the great coders created a unique technology in the past called dictionary, it can store anything in pairs. With this, you can store the location and item name of each item that you pick up along the journey.
         </p>
         <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
       </div>
@@ -54,9 +55,7 @@
         <span class="chapter-tag">Chapter 3 • List & Dictionary</span>
         <h2>Our Inventory</h2>
         <div class="story-quote">
-          Even a great coder can't remember every item's slot in a crowded backpack list, but we always know what weapon counters each monster. Hence, ancient coders created a powerful spell called a <strong>dictionary</strong> to store data in key-value pairs.
-          <br><br>
-          With a dictionary, you can instantly look up which counter-weapon is needed for a monster. Then, check your <code>inventory</code> list to find that weapon's slot index and quickly swap it out with your quick-swap tool!
+          Let's say you encounter various monsters during your journey and you have a dictionary of weaknesses of monsters, so you just need to swap to the right tool to fight them. How will you do this? You never know which monster will come next, so you can’t prepare the tool in advance.
         </div>
 
         <h3>Task</h3>
@@ -93,7 +92,7 @@ quick_look_swap('bandits', weaknesses, inventory)  # Returns: '5'</div>
             <div class="action-buttons">
               <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
               <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
-              <a href="preparation4.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
+              <a href="v4.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
             </div>
           </div>
         </div>
@@ -105,6 +104,6 @@ quick_look_swap('bandits', weaknesses, inventory)  # Returns: '5'</div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
   <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
   <script src="script/story.js"></script>
-  <script src="script/preparation3.js"></script>
+  <script src="script/v3.js"></script>
 </body>
 </html>
