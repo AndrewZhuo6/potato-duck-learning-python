@@ -1,7 +1,7 @@
 window.initPreparationChapter({
     chapterNumber: 5,
     chapterTitle: "Chapter 5: Your Consideration",
-    nextChapterUrl: "index.html",
+    nextChapterUrl: "g1.html",
     starterCode: `def fuse_mana_crystals(crystals, target_power):
     
     `,

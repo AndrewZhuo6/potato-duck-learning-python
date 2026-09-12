@@ -1,7 +1,7 @@
 window.initPreparationChapter({
     chapterNumber: 1,
     chapterTitle: "Chapter 1: The Decision",
-    nextChapterUrl: "preparation2.html",
+    nextChapterUrl: "v2.html",
     starterCode: `def decide_based_on(sign):
     
     `,

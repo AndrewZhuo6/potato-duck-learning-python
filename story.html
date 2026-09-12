@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Story Journey & Challenges</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/story-hub.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">🦆 Quackbit</a>
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="story.html" class="active">Story</a></li>
+        <li><a href="team.html">About Us</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+
+  <main class="story-hub-main">
+    <section class="story-hub-hero">
+      <div class="story-hero-badge">🦆 The Quackbit Chronicles</div>
+      <h1>Choose Your Story</h1>
+      <p>
+        Follow Quackbit's journey from peaceful Village training to the 10 perilous Guardian trials and the final clash against the great serpent PyThorn!
+      </p>
+
+      <div class="progress-tracker-card">
+        <div class="progress-info">
+          <span class="progress-label">🌟 Your Journey Progress</span>
+          <span id="progress-count" class="progress-count">1 / 16 Unlocked (6%)</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="progress-bar-fill" class="progress-bar-fill" style="width: 6%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="story-filter-nav" aria-label="Story categories">
+      <button type="button" class="filter-btn active" data-category="all">
+        🗺️ All Stories (16)
+      </button>
+      <button type="button" class="filter-btn" data-category="village">
+        🏡 Village Training (5)
+      </button>
+      <button type="button" class="filter-btn" data-category="guardian">
+        ⚔️ Guardian Trials (10)
+      </button>
+      <button type="button" class="filter-btn" data-category="boss">
+        🔥 Final Boss (1)
+      </button>
+    </nav>
+
+    <section id="story-grid" class="story-grid" aria-live="polite">
+    </section>
+
+    <!-- Dev / Testing control -->
+    <aside class="story-dev-controls">
+      <span class="story-dev-text">🛠️ <strong>Testing Controls:</strong> Easily switch unlock states to preview locked vs unlocked cards.</span>
+      <div class="story-dev-buttons">
+        <button type="button" id="dev-reset-progress" class="btn-dev">Reset to Story 1</button>
+        <button type="button" id="dev-unlock-all" class="btn-dev">Unlock All Stories</button>
+      </div>
+    </aside>
+  </main>
+
+  <script src="script/story-hub.js"></script>
+</body>
+</html>
