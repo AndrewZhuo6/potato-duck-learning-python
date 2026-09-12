@@ -6,6 +6,8 @@ window.initPreparationChapter({
 
     `,
     testHarness: (userCode) => `
+import time
+
 ${userCode}
 
 def run_tests():
@@ -61,6 +63,20 @@ def run_tests():
             return {"passed": False, "msg": f"Failed: findPair([], 10) returned {res6}, expected -1"}
     except Exception as e:
         return {"passed": False, "msg": f"Runtime error on empty list: {str(e)}"}
+
+    # Test Case 7: Time Limit & Scale Test (8,000 runes)
+    try:
+        large_runes = [i * 3 for i in range(1, 8001)]
+        target_large = 3 + 8000 * 3  # 24003 -> maximum difference pair is [24000, 3]
+        t0 = time.perf_counter()
+        res7 = findPair(large_runes, target_large)
+        elapsed = time.perf_counter() - t0
+        if res7 != [24000, 3]:
+            return {"passed": False, "msg": f"Failed on large rune list: expected [24000, 3], got {res7}"}
+        if elapsed > 1.0:
+            return {"passed": False, "msg": f"Time Limit Exceeded: findPair took {elapsed:.2f}s on 8,000 runes (Limit: 1.0s). Use an efficient lookup or two-pointer approach!"}
+    except Exception as e:
+        return {"passed": False, "msg": f"Runtime error on time limit test: {str(e)}"}
 
     return {"passed": True, "msg": "The massive iron door clicks open! Guardian 8 conquered."}
 

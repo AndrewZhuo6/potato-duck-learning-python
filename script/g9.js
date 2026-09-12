@@ -54,6 +54,19 @@ def run_tests():
     except Exception as e:
         return {"passed": False, "msg": f"Runtime error on test 5: {str(e)}"}
 
+    # Test Case 6: Large list (500 items) and large numbers (up to 9 digits)
+    try:
+        large_bottles = [
+            900000001, 100000009, 807060504, 500000000,
+            999999999, 123456789, 1000002, 7000000
+        ] + [i * 1234567 for i in range(1, 493)]
+        res6 = grabBottle(large_bottles, 25)
+        EXPECTED_LARGE = 24313976211
+        if res6 != EXPECTED_LARGE:
+            return {"passed": False, "msg": f"Failed on large dataset: grabBottle returned {res6}, expected {EXPECTED_LARGE}"}
+    except Exception as e:
+        return {"passed": False, "msg": f"Runtime error on large dataset test: {str(e)}"}
+
     return {"passed": True, "msg": "The Cobra is satisfied with the maximum energy feed! Guardian 9 conquered."}
 
 run_tests()
