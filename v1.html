@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quackbit | Chapter 4: Existing Spell</title>
+  <title>Quackbit | Chapter 1: The Decision</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -18,11 +18,11 @@
       <a href="index.html">🦆 Quackbit</a>
     </div>
     <div class="chapter-badge-group">
-      <a href="preparation1.html" class="chapter-step-pill" data-chapter="1">1. The Decision</a>
-      <a href="preparation2.html" class="chapter-step-pill" data-chapter="2">2. Something Redundant</a>
-      <a href="preparation3.html" class="chapter-step-pill" data-chapter="3">3. Our Inventory</a>
-      <a href="preparation4.html" class="chapter-step-pill active" data-chapter="4">4. Existing Spell</a>
-      <a href="preparation5.html" class="chapter-step-pill" data-chapter="5">5. Your Consideration</a>
+      <a href="v1.html" class="chapter-step-pill active" data-chapter="1">1. The Decision</a>
+      <a href="v2.html" class="chapter-step-pill" data-chapter="2">2. Something Redundant</a>
+      <a href="v3.html" class="chapter-step-pill" data-chapter="3">3. Our Inventory</a>
+      <a href="v4.html" class="chapter-step-pill" data-chapter="4">4. Existing Spell</a>
+      <a href="v5.html" class="chapter-step-pill" data-chapter="5">5. Your Consideration</a>
     </div>
     <div class="auth-buttons">
       <a href="login.html" class="login-text">Log In</a>
@@ -32,20 +32,18 @@
   <main class="preparation-main">
     <section id="cutscene-container">
       <div class="cutscene-header">
-        <span class="cutscene-title-badge">Chapter 4 Story</span>
-        <h2 class="cutscene-heading">Existing Spell</h2>
+        <span class="cutscene-title-badge">Chapter 1 Story</span>
+        <h2 class="cutscene-heading">The Decision</h2>
       </div>
       <div class="video-wrapper">
         <video id="story-video" controls playsinline>
-          <source src="assets/videos/preparation4.mp4" type="video/mp4">
-          <source src="assets/videos/preparation1.mp4" type="video/mp4">
+          <source src="assets/videos/v1.mp4" type="video/mp4">
           Your browser does not support HTML video.
         </video>
       </div>
       <div class="video-controls">
         <p class="cutscene-narrative">
-          During this journey, you might encounter new ancient spells written by other coders. It's often useful to use spells written by other coders, so you can save your effort for what really matters in your case and not focus on general problems.
-          Some of the spell can be used directly, while the others need you to have some pre-requisite knowledge about it. You don't have to worry, you just need to use the import statement to get the knowledge before using the spell.
+          The first and the most important part during your journey is decision making. Know your strength, know your weakness, know your limit. By knowing these things, you can  make a good decision, you have to learn to make decisions based on the conditions that you have.
         </p>
         <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
       </div>
@@ -53,22 +51,21 @@
 
     <div id="workspace-container">
       <section class="problem-panel">
-        <span class="chapter-tag">Chapter 4 • Function</span>
-        <h2>Existing Spell</h2>
+        <span class="chapter-tag">Chapter 1 • Conditionals</span>
+        <h2>The Decision</h2>
         <div class="story-quote">
-          After you have a long journey, your inventory gets a bit messy, the item just spreads across the whole inventory without any grouping or section. You want to make it tidy  ordered from the highest value item to the lowest value item but you're just too lazy to do it manually. You're wondering if there is any spell that you can use to instantly sort them.
+          Let's say you're walking straight and there is an wooden sign in the middle of the road. There are two signs, one is a road leading to a dead end occupied by bandits and the other is a road leading you to a safe shelter. After seeing the sign, how should you make your decision?
         </div>
 
         <h3>Task</h3>
-        <p>Define a function <code>tidy_up(inventory)</code> where <code>inventory</code> is a Python dictionary with item names as keys and integer values as the value of the item.</p>
-        <p>Your function should order the item from the highest to the lowest value and return the dictionary. If the dictionary is empty, return <code>0</code>.</p>
+        <p>Define a function <code>decide_based_on(sign)</code> that accepts a string <code>sign</code>.</p>
+        <p>Your function should return the string <code>'keep going'</code> if the <code>sign</code> equals <code>'shelter'</code>. Return <code>'turn back'</code> if <code>sign</code> equals <code>'bandits'</code>. Other than that, return <code>'ask someone'</code></p>
 
         <h3>Examples</h3>
-        <div class="code-example-box">tidy_up({"corn": 100, "potato": 150, "berries": 50})
-# Returns: {"potato": 150, "corn": 100, "berries": 50}</div>
+        <div class="code-example-box">decide_based_on('shelter')  # Returns: 'keep going'</div>
 
         <h3>Guidelines</h3>
-        <p>Besides spells by other coders, you can also create your own, who knows your spell might help the future protector of this village. It's very simple, you just need to enveloped the block of code inside a <code>def function_name(parameter):</code>, then you just need to write <code>function_name(parameter)</code> to use the spell.</p>
+        <p>You can <code>if</code>, <code>elif</code>, and <code>else</code> to determine where you are going. The conditional will looks like this <code>if condition:</code>. Remember that you can compare what you saw on the sign and the information you have about the sign meaning using <code>==</code>. There are more comparison signs you can use to do the decision making problem, you can see it in the handbook.</p>
       </section>
 
       <section class="editor-panel">
@@ -89,7 +86,7 @@
             <div class="action-buttons">
               <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
               <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
-              <a href="preparation5.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
+              <a href="v2.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
             </div>
           </div>
         </div>
@@ -101,6 +98,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
   <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
   <script src="script/story.js"></script>
-  <script src="script/preparation4.js"></script>
+  <script src="script/v1.js"></script>
 </body>
 </html>
