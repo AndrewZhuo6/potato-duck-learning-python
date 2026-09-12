@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Guardian 7: The Echoing Gate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/story.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">🦆 Quackbit</a>
+    </div>
+    <div class="chapter-badge-group">
+      <a href="v1.html" class="chapter-step-pill active" data-chapter="1">1. The Decision</a>
+      <a href="v2.html" class="chapter-step-pill" data-chapter="2">2. Something Redundant</a>
+      <a href="v3.html" class="chapter-step-pill" data-chapter="3">3. Our Inventory</a>
+      <a href="v4.html" class="chapter-step-pill" data-chapter="4">4. Existing Spell</a>
+      <a href="v5.html" class="chapter-step-pill" data-chapter="5">5. Your Consideration</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+
+  <main class="preparation-main">
+    <section id="cutscene-container">
+      <div class="cutscene-header">
+        <span class="cutscene-title-badge">Guardian 7 Story</span>
+        <h2 class="cutscene-heading">The Echoing Gate</h2>
+      </div>
+      <div class="video-wrapper">
+        <video id="story-video" controls playsinline>
+          <source src="assets/videos/g7.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <div class="video-controls">
+        <p class="cutscene-narrative">
+          Quackbit arrives at the iron gate of PyThorn’s ruin. The gate is guarded by ancient acoustic runes that echo magical spells into the air.
+        </p>
+        <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
+      </div>
+    </section>
+
+    <div id="workspace-container">
+      <section class="problem-panel">
+        <span class="chapter-tag">Guardian 7 • Loop & Function</span>
+        <h2>The Echoing Gate</h2>
+        <div class="story-quote">
+          To break PyThorn's seal, Quackbit must listen to an echoed spell string and find the FIRST non-repeating character (the single rune that speaks only once). If every single character in the spell repeats, or if the spell is empty, the door remains locked, and Quackbit must return "LOCKED".
+        </div>
+
+        <h3>Task</h3>
+        <p>Define a function <code>pullOne(word)</code> that accepts a string <code>word</code>.</p>
+        <p>Your function should return the first non-repeating letter in <code>word</code>. If there is no non-repeating letter or <code>word</code> is empty, return <code>'LOCKED'</code></p>
+
+        <h3>Examples</h3>
+        <div class="code-example-box">pullOne('waterbitwater')  # Returns: 'b'</div>
+      </section>
+
+      <section class="editor-panel">
+        <div class="editor-header">
+          <div class="editor-tab">
+            <span>📄</span> main.py
+          </div>
+          <div id="engine-pill" class="engine-status-pill">
+            <span>⏳</span> Loading Python Engine...
+          </div>
+        </div>
+
+        <textarea id="code-input"></textarea>
+
+        <div class="editor-footer">
+          <div class="editor-actions">
+            <div id="status-msg"></div>
+            <div class="action-buttons">
+              <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
+              <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
+              <a href="g8.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="script/story.js"></script>
+  <script src="script/g7.js"></script>
+</body>
+</html>
