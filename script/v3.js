@@ -1,7 +1,7 @@
 window.initPreparationChapter({
     chapterNumber: 3,
     chapterTitle: "Chapter 3: Our Inventory",
-    nextChapterUrl: "preparation4.html",
+    nextChapterUrl: "v4.html",
     starterCode: `def quick_look_swap(monster, weaknesses, inventory):
 
     `,

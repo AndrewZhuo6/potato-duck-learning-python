@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Guardian 9: The Hungry Cobra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/story.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">🦆 Quackbit</a>
+    </div>
+    <div class="chapter-back-nav">
+      <a href="story.html" class="btn-back-story">&larr; Back to Stories</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+
+  <main class="story-main">
+    <section id="cutscene-container">
+      <div class="cutscene-header">
+        <span class="cutscene-title-badge">Guardian 9 Story</span>
+        <h2 class="cutscene-heading">The Hungry Cobra</h2>
+      </div>
+      <div class="video-wrapper">
+        <video id="story-video" controls playsinline>
+          <source src="assets/videos/g9.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <div class="video-controls">
+        <p class="cutscene-narrative">
+          The iron door creaks open into a pitch black chamber. You step forward blindly, only to hear a sharp hiss right beside you. IT'S A COBRA! Before you can run, its massive tail coils tightly around you. It opens its jaws, ready to strike. The only way to survive is to feed it a continuous stream of energy bottles from your backpack.
+        </p>
+        <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
+      </div>
+    </section>
+
+    <div id="workspace-container">
+      <section class="problem-panel">
+        <span class="chapter-tag">Guardian 9 • Time Efficiency</span>
+        <h2>The Hungry Cobra</h2>
+        <div class="story-quote">
+          Because you are pinned, you can only reach in with one hand to grab max 3 continuous bottles at a time. Quick! gives the Cobra the maximum total energy before it eats you!
+        </div>
+
+        <h3>Task</h3>
+        <p>Define a function <code>grabBottle(inv_energyVal, nBottle)</code> that accepts a list <code>inv_energyVal</code> which contain list inverted energy, e.g. the energy of 97 is 79.</p>
+        <p>Your function should return the sum of value of <code>nBottle</code> integers that have the largest real energy value, not inverted energy value</p>
+
+        <h3>Examples</h3>
+        <div class="code-example-box">grabBottle([21, 90, 19, 46, 50, 1, 73], 3)  # Returns: '192'</div>
+
+        <h3>Guidelines</h3>
+        <p>Think how to eliminate non potential number to make the number of element to search become smaller, so you don't have to flip all numbers.</p>
+      </section>
+
+      <section class="editor-panel">
+        <div class="editor-header">
+          <div class="editor-tab">
+            <span>📄</span> main.py
+          </div>
+          <div id="engine-pill" class="engine-status-pill">
+            <span>⏳</span> Loading Python Engine...
+          </div>
+        </div>
+
+        <textarea id="code-input"></textarea>
+
+        <div class="editor-footer">
+          <div class="editor-actions">
+            <div id="status-msg"></div>
+            <div class="action-buttons">
+              <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
+              <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
+              <a href="g10.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="script/story.js"></script>
+  <script src="script/g9.js"></script>
+</body>
+</html>
