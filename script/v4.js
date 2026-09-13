@@ -1,6 +1,6 @@
 window.initPreparationChapter({
     chapterNumber: 4,
-    chapterTitle: "Chapter 4: Existing Spell",
+    chapterTitle: "Village 4: Existing Spell",
     nextChapterUrl: "v5.html",
     starterCode: `def tidy_up(inventory):
 

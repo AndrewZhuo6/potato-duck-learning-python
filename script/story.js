@@ -1,11 +1,45 @@
 window.initPreparationChapter = function (config) {
     const {
+        chapterId: explicitChapterId,
         chapterNumber,
         chapterTitle,
         nextChapterUrl,
         starterCode,
         testHarness
     } = config;
+
+    function resolveChapterId() {
+        if (explicitChapterId) return String(explicitChapterId).toLowerCase().trim();
+
+        // Derive from URL pathname (e.g., /v1.html -> v1, /g4.html -> g4, /boss.html -> boss)
+        try {
+            const pathParts = window.location.pathname.split("/");
+            const currentFileName = pathParts[pathParts.length - 1] || "";
+            const pageName = currentFileName.replace(/\.html$/i, "").toLowerCase();
+            if (/^(v[1-5]|g([1-9]|10)|boss)$/.test(pageName)) {
+                return pageName;
+            }
+        } catch {
+            // ignore
+        }
+
+        // Derive from QUACKBIT_STORIES catalog if loaded
+        if (Array.isArray(window.QUACKBIT_STORIES)) {
+            const found = window.QUACKBIT_STORIES.find((s) => s.level === chapterNumber);
+            if (found && found.id) return found.id.toLowerCase();
+        }
+
+        // Fallback map based on chapterNumber (1-5 -> v1-v5, 6-15 -> g1-g10, 16 -> boss)
+        if (typeof chapterNumber === "number") {
+            if (chapterNumber >= 1 && chapterNumber <= 5) return `v${chapterNumber}`;
+            if (chapterNumber >= 6 && chapterNumber <= 15) return `g${chapterNumber - 5}`;
+            if (chapterNumber === 16) return "boss";
+        }
+
+        return `v${chapterNumber || 1}`;
+    }
+
+    const chapterId = resolveChapterId();
 
     document.addEventListener("DOMContentLoaded", async () => {
         const sessionRaw = sessionStorage.getItem("currentUser") || 
@@ -61,6 +95,19 @@ window.initPreparationChapter = function (config) {
         const nextBtn = document.getElementById("next-chapter-btn");
         const statusMsg = document.getElementById("status-msg");
         const enginePill = document.getElementById("engine-pill");
+
+        if (video) {
+            let source = video.querySelector("source");
+            if (!source) {
+                source = document.createElement("source");
+                source.type = "video/mp4";
+                video.appendChild(source);
+            }
+            if (!source.getAttribute("src")) {
+                source.src = `assets/videos/${chapterId}.mp4`;
+                video.load();
+            }
+        }
 
         const textarea = document.getElementById("code-input");
         if (starterCode && !textarea.value.trim()) {
@@ -221,22 +268,23 @@ window.initPreparationChapter = function (config) {
                 enginePill.className = "engine-status-pill error";
                 enginePill.innerHTML = `<span>🔴</span> Python Engine Failed`;
             }
-            if (statusMsg) {
+            if (statusMsg){
                 statusMsg.style.color = "#dc2626";
                 statusMsg.textContent = "Failed to load Python environment. Please refresh the page.";
             }
         }
 
-        function showOutcomeCutscene(passed, message) {
+        function showOutcomeCutscene(passed, message){
             let outcomeContainer = document.getElementById("outcome-cutscene-container");
-            if (!outcomeContainer) {
+            if (!outcomeContainer){
                 outcomeContainer = document.createElement("section");
                 outcomeContainer.id = "outcome-cutscene-container";
                 const main = document.querySelector("main.story-main") || document.querySelector("main.preparation-main") || document.querySelector(".preparation-main") || document.body;
                 main.appendChild(outcomeContainer);
             }
 
-            const videoSrc = `assets/videos/preparation${chapterNumber}_${passed ? "pass" : "fail"}.mp4`;
+            const videoFilename = `${chapterId}_${passed ? "pass" : "fail"}.mp4`;
+            const videoSrc = `assets/videos/${videoFilename}`;
             const nextTarget = nextChapterUrl || (nextBtn ? nextBtn.getAttribute("href") : "story.html");
             const nextText = nextBtn ? nextBtn.textContent.trim() : "Next Story &rarr;";
 
@@ -262,7 +310,7 @@ window.initPreparationChapter = function (config) {
                                 ? 'Great job! The cutscene animation for this milestone is currently in production.' 
                                 : 'Your code did not pass all tests yet. Review the test feedback below and try again.'}
                         </p>
-                        <span class="outcome-fallback-tag">Asset: preparation${chapterNumber}_${passed ? 'pass' : 'fail'}.mp4</span>
+                        <span class="outcome-fallback-tag">Asset: ${videoFilename}</span>
                     </div>
                 </div>
                 <div class="outcome-footer">

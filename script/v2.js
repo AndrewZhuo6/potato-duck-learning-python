@@ -1,6 +1,6 @@
 window.initPreparationChapter({
     chapterNumber: 2,
-    chapterTitle: "Chapter 2: Something Redundant",
+    chapterTitle: "Village 2: Something Redundant",
     nextChapterUrl: "v3.html",
     starterCode: `def be_careful(distance):
     
