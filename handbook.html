@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Randy's Handbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/handbook.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">🦆 Quackbit</a>
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="story.html">Story</a></li>
+        <li><a href="history.html">My Code</a></li>
+        <li><a href="handbook.html" class="active">Randy's Handbook</a></li>
+        <li><a href="team.html">About Us</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+
+  <main class="handbook-main">
+
+    <section class="handbook-hero">
+      <div class="handbook-hero-badge">📖 Randy's Handbook</div>
+      <h1>The complete book of Python</h1>
+      <p class="handbook-hero-lead">
+        Written by Randy's students, the apprentice of the first almighty coder. Every word of the language
+        is in here, from your first <code>print</code> to the shape of an
+        algorithm. Nothing solves a Guardian for you, yet nothing is hidden
+        from you either. Read what you need, when you need it.
+      </p>
+      <a href="#" id="handbook-back-link" class="handbook-back-link" style="display: none;">
+        &larr; Back to my challenge
+      </a>
+    </section>
+
+    <div class="handbook-searchbar">
+      <div class="handbook-search-wrap">
+        <span class="handbook-search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          id="handbook-search"
+          class="handbook-search-input"
+          placeholder="Search anything"
+          autocomplete="off"
+          aria-label="Search Randy's Handbook">
+        <button type="button" id="handbook-search-clear" class="handbook-search-clear" style="display: none;" aria-label="Clear search">&times;</button>
+      </div>
+      <span id="handbook-result-count" class="handbook-result-count" aria-live="polite"></span>
+    </div>
+
+    <nav id="handbook-chips" class="handbook-chips" aria-label="Jump to a topic"></nav>
+
+    <div class="handbook-layout">
+
+      <button type="button" id="handbook-nav-toggle" class="handbook-nav-toggle">
+        ☰ Contents
+      </button>
+
+      <aside id="handbook-sidebar" class="handbook-sidebar">
+        <nav aria-label="Handbook contents">
+          <p class="handbook-nav-heading">Contents</p>
+          <ul id="handbook-nav-list" class="handbook-nav-list"></ul>
+        </nav>
+      </aside>
+
+      <div id="handbook-content" class="handbook-content"></div>
+
+      <div id="handbook-empty" class="handbook-empty" style="display: none;">
+        <p class="handbook-empty-title">Nothing in the handbook matches that.</p>
+        <p class="handbook-empty-hint">
+          Try a plain Python word instead — <em>loop</em>, <em>list</em>,
+          <em>function</em>, <em>class</em>, <em>remainder</em>, <em>reverse</em>,
+          <em>import</em>, <em>exception</em>.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <button type="button" id="handbook-top-btn" class="handbook-top-btn" aria-label="Back to top">↑</button>
+
+  <script src="script/handbook-01-basics.js"></script>
+  <script src="script/handbook-02-values.js"></script>
+  <script src="script/handbook-03-operators.js"></script>
+  <script src="script/handbook-04-strings.js"></script>
+  <script src="script/handbook-05-control-flow.js"></script>
+  <script src="script/handbook-06-data-structures.js"></script>
+  <script src="script/handbook-07-functions.js"></script>
+  <script src="script/handbook-08-builtins.js"></script>
+  <script src="script/handbook-09-classes.js"></script>
+  <script src="script/handbook-10-modules-errors.js"></script>
+  <script src="script/handbook-11-stdlib.js"></script>
+  <script src="script/handbook-12-efficiency.js"></script>
+  <script src="script/handbook.js"></script>
+  <script src="script/main.js"></script>
+</body>
+</html>

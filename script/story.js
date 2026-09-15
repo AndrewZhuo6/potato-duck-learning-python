@@ -133,19 +133,19 @@ window.initPreparationChapter = function (config) {
             }
         });
 
+        const drafts = window.QuackbitDrafts
+            ? window.QuackbitDrafts.attach(editor, userIdentifier, chapterId, starterCode)
+            : null;
+
         if (resetBtn) {
             resetBtn.addEventListener("click", () => {
                 if (confirm("Reset code to starter template?")) {
                     editor.setValue(starterCode || "");
+                    if (drafts) drafts.clear();
                 }
             });
         }
 
-        /* ============================================================
-           Solution Archive
-           Shows the previously accepted answer for this chapter and
-           keeps `savedSolution` in sync after every successful submit.
-           ============================================================ */
         let savedSolution = null;
 
         function renderSavedBanner() {
@@ -226,6 +226,9 @@ window.initPreparationChapter = function (config) {
             }
             if (cutsceneContainer) cutsceneContainer.style.display = "none";
             if (workspaceContainer) workspaceContainer.style.display = "flex";
+            try {
+                sessionStorage.setItem(`quackbit_seen_cutscene_${chapterId}`, "1");
+            } catch { }
             setTimeout(() => {
                 editor.refresh();
                 editor.focus();
@@ -243,7 +246,14 @@ window.initPreparationChapter = function (config) {
             skipBtn.addEventListener("click", transitionToChallenge);
         }
 
+              try {
+            if (sessionStorage.getItem(`quackbit_seen_cutscene_${chapterId}`) === "1") {
+                transitionToChallenge();
+            }
+        } catch { /* storage unavailable */ }
+
         let pyodide = null;
+        if (submitBtn) submitBtn.disabled = true;
         if (submitBtn) submitBtn.disabled = true;
 
         if (enginePill) {
