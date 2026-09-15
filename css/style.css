@@ -37,6 +37,9 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
 }
 
 /* --- Header & Navbar --- */
@@ -140,34 +143,36 @@ main {
 
 /* --- Hero Section --- */
 .hero-img {
-    min-height: 100dvh;
-    padding: 0 0;
-    margin: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
-    position: absolute;
     z-index: 10;
     pointer-events: none;
 }
 
 .hero-img-bg {
     width: 100%;
-    height: 100%;
     object-fit: cover;
+    object-position: bottom center;
 }
 
 .hero-inner {
-    top: 7rem;
-    position: sticky;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    top: 0;
     z-index: 1;
 }
 
 .hero-main {
-    min-height: 100dvh; 
+    width: 100%;
+    height: 100vh;
     position: relative;
-    text-align: center;
     background: linear-gradient(180deg, var(--main-bg) 0%, var(--card-bg) 100%);
 }
 
@@ -183,6 +188,51 @@ main {
     font-size: 1.5rem;
     color: var(--text-muted);
     margin-bottom: 1.5rem;
+}
+
+.hero-content {
+    position: fixed;
+    top: 8rem; 
+    right: 10%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 4;
+}
+
+.snake1 {
+    position: fixed;
+    top: 20%;
+    transform: translateY(-50%);
+    left: -15%; 
+    z-index: 2;
+    width: 50rem; 
+    animation: rotate-animation linear;
+    animation-timeline: scroll();
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.cool-section {
+    z-index: 7;
+    height: 13rem;
+    background-color: #1e1e1e;
+}
+
+.cool-pics {
+    z-index: 8;
+}
+
+.eyes {
+    height: 12rem;
+    z-index: 10;
+}
+
+.snake2 {
+    animation: slide-on-scroll linear;
+    animation-timeline: scroll();
+    z-index: 9;
 }
 
 /* --- Buttons --- */
@@ -219,13 +269,12 @@ main {
     padding: 4rem 2rem;
     text-align: center;
     background-color: var(--card-bg);
-    z-index: 2;
+    z-index: 11;
 }
 
 .section-title {
     font-size: 2.5rem;
     color: var(--text-main);
-    margin-bottom: 3rem;
 }
 
 .features-grid {
@@ -233,7 +282,9 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     max-width: 1100px;
-    margin: 0 auto;
+    margin-top: 3rem;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .feature-card {
@@ -283,6 +334,7 @@ div[data-label="Challenges"]:hover {
     background-color: var(--main-bg);
     display: flex;
     justify-content: center;
+    z-index: 11;
 }
 
 .story-content {
@@ -297,20 +349,26 @@ div[data-label="Challenges"]:hover {
 
 .story-card1 {
     display: flex;
-    justify-content: center; /* Centers items horizontally */
+    justify-content: center;
     align-items: center; 
     gap: 5rem;
+    width: 100%;
+    max-width: 70rem;
 }
 
 .story-card2 {
     display: flex;
-    justify-content: center; /* Centers items horizontally */
+    justify-content: center;
     align-items: center; 
     gap: 5rem;
+    width: 100%;
+    max-width: 70rem;
 }
 
 .story-text {
     flex: 1 1 450px;
+    width: 100%;
+    max-width: 600px;
 }
 
 .story-text h2 {
@@ -360,6 +418,11 @@ div[data-label="Challenges"]:hover {
     border: 3px solid var(--card-bg);
 }
 
+.story-img:hover {
+    border: 3px solid var(--primary);
+    transform: translateY(-2px);
+}
+
 .code-overlay {
     position: absolute;
     bottom: -20px;
@@ -382,6 +445,7 @@ div[data-label="Challenges"]:hover {
     padding: 5rem 2rem;
     text-align: center;
     background: var(--card-bg);
+    z-index: 11;
 }
 
 .cta-section h2 {
@@ -405,6 +469,7 @@ div[data-label="Challenges"]:hover {
     color: var(--text-muted);
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.9rem;
+    z-index: 11;
 }
 
 /* --- RESPONSIVE QUERIES --- */
@@ -469,4 +534,22 @@ div[data-label="Challenges"]:hover {
     .story-section {
         padding-bottom: 7rem;
     }
+}
+
+@keyframes rotate-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-on-scroll {
+  from {
+    transform: translateX(100px); 
+  }
+  to {
+    transform: translateX(-150px); 
+  }
 }
