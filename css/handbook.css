@@ -14,7 +14,7 @@
 
 .handbook-hero-badge {
   display: inline-block;
-  background: #fef3c7;
+  background: #4a4d51;
   color: var(--primary-dark);
   font-weight: 700;
   font-size: 0.85rem;
@@ -136,7 +136,7 @@
 .handbook-sidebar {
   position: sticky;
   top: 90px;
-  background: #ffffff;
+  background: #4a4d51;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 1.25rem 1rem;
@@ -195,7 +195,7 @@
 }
 
 .handbook-section {
-  background: #ffffff;
+  background: #4a4d51;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 1.75rem;
@@ -294,6 +294,7 @@
 .handbook-callout p {
   line-height: 1.7;
   margin: 0.35rem 0 0;
+  color: black;
 }
 
 .handbook-callout-label {
@@ -469,7 +470,7 @@
   font-weight: 600;
   text-decoration: none;
   color: var(--text-muted);
-  background: #ffffff;
+  background: #4a4d51;
   border: 1px solid var(--border-color);
   border-radius: 999px;
 }
@@ -616,13 +617,13 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--text-muted);
+  color: black;
 }
 
 .handbook-syntax code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
-  color: var(--text-main);
+  color: green;
 }
 
 /* code label */

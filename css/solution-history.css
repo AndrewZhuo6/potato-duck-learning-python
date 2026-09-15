@@ -51,7 +51,7 @@
 
 .btn-saved-view {
   background: #10b981;
-  color: #ffffff;
+  color: var(--main-bg);
 }
 
 .btn-saved-view:hover {
@@ -60,7 +60,7 @@
 }
 
 .btn-saved-load {
-  background: #ffffff;
+  background: var(--main-bg);
   color: #047857;
   border-color: #a7f3d0;
 }
@@ -107,7 +107,7 @@ body.solution-modal-open {
   max-height: 88vh;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: var(--main-bg);
   border-radius: var(--radius-lg, 16px);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
   overflow: hidden;
@@ -321,7 +321,7 @@ body.solution-modal-open {
   padding: 8px 18px;
   border-radius: 24px;
   border: 1px solid var(--border-color, #e2e8f0);
-  background: #ffffff;
+  background: var(--main-bg);
   color: var(--text-muted, #64748b);
   cursor: pointer;
   transition: all 0.15s ease;
@@ -502,7 +502,7 @@ body.solution-modal-open {
 .history-empty {
   text-align: center;
   padding: 3rem 1.5rem;
-  background: #ffffff;
+  background: var(--main-bg);
   border: 1px dashed var(--border-color, #e2e8f0);
   border-radius: var(--radius-lg, 16px);
 }

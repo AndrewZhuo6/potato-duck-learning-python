@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p style="color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 500;">Ready for the adventure, <strong>${(currentUser.email || "Coder").split("@")[0]}</strong>?</p>
                 <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
                     <a href="${targetPage}" class="start-btn">${buttonText}</a>
-                    <a href="story.html" class="start-btn" style="background: #ffffff; color: var(--text-main); border: 2px solid var(--border-color); box-shadow: none;">View All Stories</a>
+                    <a href="story.html" class="start-btn" style="background: var(--main-bg); color: var(--text-main); border: 2px solid var(--border-color); box-shadow: none;">View All Stories</a>
                 </div>
             `;
         } else {
