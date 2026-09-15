@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/story.css">
   <link rel="stylesheet" href="css/solution-history.css">
+  <link rel="stylesheet" href="css/handbook.css">
 </head>
 <body>
   <header class="header">
@@ -20,13 +21,16 @@
     </div>
     <div class="chapter-back-nav">
       <a href="story.html" class="btn-back-story">&larr; Back to Stories</a>
+      <a href="handbook.html?from=boss.html" class="btn-handbook">
+        📖 Randy's Handbook
+      </a>
     </div>
     <div class="auth-buttons">
       <a href="login.html" class="login-text">Log In</a>
     </div>
   </header>
 
-  <main class="preparation-main">
+  <main class="story-main">
     <section id="cutscene-container">
       <div class="cutscene-header">
         <span class="cutscene-title-badge">Boss Story</span>
@@ -102,6 +106,7 @@ Stab on t = 4 (weakness = 0) and pull out on t = 6 (weakness = 3), damage = 3 - 
   <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
   <script src="script/solutions-db.js"></script>
   <script src="script/solution-viewer.js"></script>
+  <script src="script/draft-autosave.js"></script>
   <script src="script/story.js"></script>
   <script src="script/boss.js"></script>
 </body>
