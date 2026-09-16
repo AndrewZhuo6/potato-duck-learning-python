@@ -6,7 +6,7 @@
     --primary-dark: #b45309;
     --primary-second: #DA9B2B;
     --secondary: #4f5156;
-    --secondary-hover: #059669;
+    --header-color-1section: #283138;
     --dark: #0f172a;
     --dark-surface: #242424;
     --main-bg: #353535;
@@ -34,7 +34,12 @@
 }
 
 .header.header-alt {
-    background-color: #ff5722;
+    background-color: var(--header-color-1section);
+}
+
+#bg-music {
+    display: none !important;
+    visibility: hidden !important;
 }
 
 body {
@@ -290,6 +295,8 @@ div[data-label="Challenges"]:hover {
     display: flex;
     justify-content: center;
     z-index: 11;
+    view-timeline-name: --sectionTimeline;
+    view-timeline-axis: block;
 }
 
 .story-content {
@@ -326,12 +333,6 @@ div[data-label="Challenges"]:hover {
     max-width: 600px;
 }
 
-.story-text h2 {
-    font-size: 2.2rem;
-    color: var(--primary);
-    margin-bottom: 1rem;
-}
-
 .story-text .story-sub {
     margin-top: 2rem;
 }
@@ -355,7 +356,7 @@ div[data-label="Challenges"]:hover {
 .story-text h3 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
-    color: var(--primary);
+    color: var(--primary-second);
 }
 
 .story-visuals {
@@ -377,6 +378,30 @@ div[data-label="Challenges"]:hover {
     border: 3px solid var(--primary);
     box-shadow: var(--shadow-lg);
     transform: translateY(-2px);
+}
+
+.snake-left {
+    position: absolute;
+    margin-top: -4rem;
+    width: 25rem;
+    left: -8%;
+    transform: rotate(5deg);
+    z-index: 4;
+    pointer-events: none;
+    animation: rotate-fast linear both;
+    animation-timeline: --sectionTimeline;
+    animation-range: entry 40% entry 80%;
+}
+
+.snake-skin-story {
+    position: absolute;
+    margin-top: -4rem;
+    width: 40rem;
+    right: -30%;
+    z-index: 4;
+    animation: rotate-animation linear;
+    animation-timeline: scroll();
+    border-radius: 50%;
 }
 
 .code-overlay {
@@ -498,6 +523,15 @@ div[data-label="Challenges"]:hover {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-fast {
+  0% {
+    transform: scale(0.8) rotate(0deg) translateX(-50rem);
+  }
+  100% {
+    transform: scale(1) rotate(15deg) translateX(0);
   }
 }
 

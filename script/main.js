@@ -64,5 +64,36 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         }
     }
+
+    document.addEventListener('scroll', () => {
+        const audio = document.getElementById('bg-music');
+        if (audio && audio.paused) {
+            audio.play().catch(error => {
+                console.log("Browser blocks it:", error);
+            });
+        }
+    }, { once: true });
+
+    const header = document.querySelector('.header');
+    const targetSection = document.querySelector('.hero-main');
+    
+    if (header && targetSection) {
+        const options = {
+            rootMargin: "-50px 0px 0px 0px",
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    header.classList.add('header-alt');
+                } else {
+                    header.classList.remove('header-alt');
+                }
+            });
+        }, options);
+
+        observer.observe(targetSection);
+    }
 });
 
