@@ -10,6 +10,7 @@
     --dark: #0f172a;
     --dark-surface: #242424;
     --main-bg: #353535;
+    --dark-bg: #303030;
     --card-bg: #404040;
     --border-color: #e2e8f0;
     --text-main: #F3F3F3;
@@ -23,6 +24,7 @@
     --hover-icon-one: #7BB1FF;
     --hover-icon-two: #e1d5f2;
     --hover-icon-three: #fcd34d;
+    --green: #0fac4d;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -382,15 +384,19 @@ div[data-label="Challenges"]:hover {
 
 .snake-left {
     position: absolute;
-    margin-top: -4rem;
-    width: 25rem;
+    margin-top: -3rem;
+    width: 23rem;
     left: -8%;
     transform: rotate(5deg);
     z-index: 4;
-    pointer-events: none;
     animation: rotate-fast linear both;
     animation-timeline: --sectionTimeline;
     animation-range: entry 40% entry 80%;
+    transition: scale 0.3s ease-out;
+}
+
+.snake-left:hover {
+    scale: 1.02;
 }
 
 .snake-skin-story {
@@ -406,8 +412,17 @@ div[data-label="Challenges"]:hover {
 
 .image1-story-overlay {
     position: absolute;
-    bottom: -20px;
-    right: -10px;
+    bottom: 65%;
+    right: -30%;
+}
+
+.quack-overlay1 {
+    width: 15rem;
+    transition: scale 0.3s ease-out;
+}
+
+.quack-overlay1:hover {
+    scale: 1.02;
 }
 
 .code-overlay {
