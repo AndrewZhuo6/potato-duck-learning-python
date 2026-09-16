@@ -1,8 +1,5 @@
 @import "ultimate-header.css";
 
-/* =========================================================
-   stats.css — Stats page
-   ========================================================= */
 .stats-main {
     width: 100%;
     max-width: 1152px;
@@ -10,7 +7,6 @@
     padding: 2.5rem 1.5rem 5rem;
 }
 
-/* ---------- profile ---------- */
 .stats-profile {
     display: flex;
     flex-direction: column;
@@ -41,7 +37,6 @@
     display: block;
 }
 
-/* wings: 3 bars per side, right side mirrors the left */
 .wing {
     display: flex;
     flex-direction: column;
@@ -102,7 +97,6 @@
     font-weight: 600;
 }
 
-/* ---------- grid ---------- */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -148,7 +142,6 @@
     text-decoration: none;
 }
 
-/* ---------- on going ---------- */
 .ongoing-card {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -195,7 +188,6 @@
     font-weight: 600;
 }
 
-/* ---------- badges ---------- */
 .badge-list {
     list-style: none;
     display: flex;
@@ -234,7 +226,6 @@
     filter: grayscale(1);
 }
 
-/* ---------- accomplishments ---------- */
 .accomplishment-list {
     list-style: none;
     max-height: 180px;
@@ -266,7 +257,6 @@
     padding-top: 2.2rem;
 }
 
-/* ---------- username popup ---------- */
 .username-modal {
     position: fixed;
     inset: 0;
@@ -354,7 +344,6 @@
     cursor: wait;
 }
 
-/* ---------- responsive ---------- */
 @media (max-width: 900px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);

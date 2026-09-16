@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // Pull the latest username from the database (it may have changed in another tab).
     try {
         const fresh = await Account.getUserByEmail(user.email);
         if (fresh) {
@@ -39,7 +38,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         { icon: "🐍", name: "PyThorn Slayer",   need: 16, desc: "Defeat PyThorn" }
     ];
 
-    /* ---------- profile ---------- */
     function renderProfile() {
         document.getElementById("stats-username").textContent = Account.displayName(user);
         document.getElementById("stats-avatar").innerHTML = Account.AVATAR_SVG;
@@ -50,7 +48,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         Account.renderUserMenu(document.querySelector(".auth-buttons"), user);
     }
 
-    /* ---------- on going ---------- */
     function renderOngoing() {
         const percent = Math.round((completed / TOTAL) * 100);
         document.getElementById("python-progress").style.width = `${percent}%`;
@@ -71,14 +68,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.href = story ? story.url : "story.html";
     }
 
-    /* ---------- numbers ---------- */
     function renderNumbers() {
         const hours = Account.getFlySeconds(user) / 3600;
         document.getElementById("fly-hour").textContent = hours < 10 ? hours.toFixed(1) : Math.floor(hours);
         document.getElementById("challenges-done").textContent = completed;
     }
 
-    /* ---------- badges ---------- */
     function renderBadges() {
         document.getElementById("badge-list").innerHTML = BADGES.map((b) => {
             const earned = completed >= b.need;
@@ -90,7 +85,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }).join("");
     }
 
-    /* ---------- accomplishments (from the Solution Archive) ---------- */
     async function renderAccomplishments() {
         const list = document.getElementById("accomplishment-list");
         let rows = [];
@@ -119,7 +113,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }).join("");
     }
 
-    /* ---------- username popup ---------- */
     const modal = document.getElementById("username-modal");
     const input = document.getElementById("username-input");
     const errorEl = document.getElementById("username-error");
@@ -144,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     function closeModal() {
         modal.hidden = true;
         if (modalMode === "setup") {
-            history.replaceState(null, "", "stats.html"); // remove ?setup=1 from the URL
+            history.replaceState(null, "", "stats.html");
         }
     }
 
@@ -174,7 +167,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (e.target === modal) closeModal();
     });
 
-    /* ---------- go ---------- */
     renderProfile();
     renderOngoing();
     renderNumbers();

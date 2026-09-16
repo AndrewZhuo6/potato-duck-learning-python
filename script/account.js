@@ -2,10 +2,9 @@
     "use strict";
 
     const USER_DB = "userDatabase";
-    const USER_DB_VERSION = 1; // same version as login.js / register.js — do not bump
+    const USER_DB_VERSION = 1;
     let dbPromise = null;
 
-    /* ---------- database ---------- */
     function openUserDB() {
         if (dbPromise) return dbPromise;
 
@@ -39,7 +38,6 @@
         );
     }
 
-    /* ---------- session ---------- */
     function getSession() {
         const raw = sessionStorage.getItem("currentUser") ||
                     sessionStorage.getItem("activeUser") ||
@@ -66,8 +64,6 @@
         localStorage.removeItem("currentUser");
     }
 
-    // Progress, drafts and solutions are keyed by EMAIL, never by username,
-    // so renaming never loses anyone's progress.
     function ownerKey(user) {
         if (!user) return "guest";
         return (user.email || user.username || (user.id ? `id_${user.id}` : "guest")).trim().toLowerCase();
@@ -78,7 +74,6 @@
         return user.username || (user.email || "Duck Coder").split("@")[0];
     }
 
-    /* ---------- username ---------- */
     function normalizeUsername(name) {
         return String(name || "").trim().replace(/\s+/g, " ");
     }
@@ -98,7 +93,6 @@
         const db = await openUserDB();
 
         return new Promise((resolve, reject) => {
-            // Check + save in ONE transaction so two tabs can't grab the same name.
             const tx = db.transaction(["users"], "readwrite");
             const store = tx.objectStore("users");
             let failMessage = "Could not save your username. Please try again.";
@@ -137,7 +131,6 @@
         });
     }
 
-    /* ---------- fly hour (time spent on chapter pages) ---------- */
     const FLY_TICK_SECONDS = 15;
 
     function flyKey(user) {
@@ -157,7 +150,6 @@
         return parseInt(localStorage.getItem(flyKey(user)) || "0", 10);
     }
 
-    /* ---------- header user menu ---------- */
     function escapeHtml(value) {
         return String(value).replace(/[&<>"']/g, (c) => ({
             "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"
