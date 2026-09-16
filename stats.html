@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stats | Quackbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/stats.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img">
+      </a>
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="story.html">Story</a></li>
+        <li><a href="history.html">My Code</a></li>
+        <li><a href="handbook.html">Randy's Handbook</a></li>
+        <li><a href="team.html">About Us</a></li>
+      </ul>
+      <div class="auth-buttons"></div>
+    </nav>
+  </header>
+
+  <main class="stats-main">
+    <!-- Profile -->
+    <section class="stats-profile">
+      <div class="stats-avatar-row">
+        <div class="wing wing-left" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="stats-avatar" id="stats-avatar"></div>
+        <div class="wing wing-right" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+
+      <div class="stats-name-row">
+        <h1 id="stats-username">Duck Coder</h1>
+        <button type="button" id="rename-btn" class="rename-btn" title="Rename" aria-label="Rename username">✎</button>
+      </div>
+      <p id="stats-rank" class="stats-rank">Novice Duck</p>
+    </section>
+
+    <!-- Stats grid -->
+    <section class="stats-grid">
+      <div class="stats-block stats-ongoing">
+        <h2>On Going</h2>
+        <a href="story.html" id="ongoing-card" class="stats-card ongoing-card">
+          <div class="course-row">
+            <span class="course-name">Python</span>
+            <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="python-progress-track">
+              <div class="progress-fill" id="python-progress"></div>
+            </div>
+          </div>
+          <p class="course-chapter" id="python-chapter">Chapter 1</p>
+        </a>
+      </div>
+
+      <div class="stats-block stats-number">
+        <h2>Fly Hour</h2>
+        <p class="big-number" id="fly-hour">0</p>
+      </div>
+
+      <div class="stats-block stats-number">
+        <h2>Challenges Done</h2>
+        <p class="big-number" id="challenges-done">0</p>
+      </div>
+
+      <div class="stats-block stats-half">
+        <h2>Badge</h2>
+        <div class="stats-card">
+          <ul class="badge-list" id="badge-list"></ul>
+        </div>
+      </div>
+
+      <div class="stats-block stats-half">
+        <h2>Accomplishment</h2>
+        <div class="stats-card">
+          <ul class="accomplishment-list" id="accomplishment-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Username popup (first-time setup AND rename) -->
+  <div class="username-modal" id="username-modal" hidden>
+    <div class="username-dialog" role="dialog" aria-modal="true" aria-labelledby="username-title">
+      <h2 id="username-title">Rename Your Duck</h2>
+      <p class="username-sub" id="username-sub">Pick the name shown on your profile.</p>
+      <input type="text" id="username-input" maxlength="20" autocomplete="off" placeholder="e.g. Andrew Zhuo GOAT">
+      <p class="username-hint">3–20 characters. Letters, numbers, spaces, _ and - only.</p>
+      <p class="username-error" id="username-error" role="alert"></p>
+      <div class="username-actions">
+        <button type="button" id="username-cancel" class="username-btn ghost">Cancel</button>
+        <button type="button" id="username-save" class="username-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Copyrighted by Potato Duck</p>
+  </footer>
+
+  <script src="script/stories-data.js"></script>
+  <script src="script/solutions-db.js"></script>
+  <script src="script/account.js"></script>
+  <script src="script/stats.js"></script>
+</body>
+</html>
