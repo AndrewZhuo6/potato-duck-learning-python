@@ -404,6 +404,12 @@ div[data-label="Challenges"]:hover {
     border-radius: 50%;
 }
 
+.image1-story-overlay {
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+}
+
 .code-overlay {
     position: absolute;
     bottom: -20px;
