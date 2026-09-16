@@ -183,7 +183,7 @@
         container.innerHTML = `
             <div class="user-menu">
                 <button type="button" class="user-menu-toggle" aria-haspopup="true" aria-expanded="false">
-                    <span class="user-menu-name">${name}</span>
+                    ${isChapter ? `<span class="user-menu-name">${name}</span>` : ""}
                     <span class="user-avatar">${AVATAR_SVG}</span>
                 </button>
                 <div class="user-menu-dropdown" role="menu" hidden>

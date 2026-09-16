@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap");
 .header {
     display: flex;
     align-items: center;
@@ -219,5 +220,84 @@
 @media (max-width: 768px) {
     .header-left {
         gap: 1.5rem;
+    }
+}
+
+.header {
+    height: 57px;
+    padding: 0 10%;
+    font-family: "Winky Rough", sans-serif;
+}
+
+.logo-img {
+    height: 34px;
+}
+
+.navbar,
+.nav-links {
+    gap: 3.2rem;
+}
+
+.nav-links li a,
+.go-back-link {
+    color: #9A9A9A;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0;
+}
+
+.nav-links li a:hover,
+.go-back-link:hover {
+    color: var(--text-main);
+}
+
+.header-left {
+    gap: 4.2rem;
+}
+
+.login-text {
+    padding: 7px 20px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    box-shadow: none;
+}
+
+.user-menu-toggle {
+    gap: 2rem;
+    font-size: 0.95rem;
+    color: #9A9A9A;
+}
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+}
+
+.user-menu-dropdown {
+    top: calc(100% + 11px);
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    box-shadow: none;
+}
+
+@media (max-width: 992px) {
+    .navbar,
+    .nav-links {
+        gap: 1.8rem;
+    }
+
+    .header-left {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+    }
+
+    .navbar,
+    .nav-links {
+        gap: 1rem;
     }
 }
