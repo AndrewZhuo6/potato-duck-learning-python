@@ -6,27 +6,31 @@
   <title>Quackbit | Story Journey & Challenges</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel='stylesheet' href='https://flaticon.com'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="css/story-hub.css">
 </head>
 <body>
   <header class="header">
     <div class="logo">
-      <a href="index.html">🦆 Quackbit</a>
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img">
+      </a>
     </div>
-    <nav class="navbar">
+    <nav class="navbar" id="nav-logged-out">
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="story.html" class="active">Story</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="story.html">Story</a></li>
         <li><a href="history.html">My Code</a></li>
         <li><a href="handbook.html">Randy's Handbook</a></li>
         <li><a href="team.html">About Us</a></li>
       </ul>
+      <div class="auth-buttons">
+        <a href="login.html" class="login-text">Lock In!</a>
+      </div>
     </nav>
-    <div class="auth-buttons">
-      <a href="login.html" class="login-text">Log In</a>
-    </div>
   </header>
 
   <main class="story-hub-main">

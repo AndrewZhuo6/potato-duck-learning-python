@@ -1,0 +1,80 @@
+@import "ultimate-header.css";
+
+body {
+    margin: 0;
+    background-color: var(--main-bg);
+    color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4rem;
+    flex: 1; 
+    padding-bottom: 2rem;
+}
+
+.team-container h1 {
+    font-family: 'Winky Rough', sans-serif;
+    font-size: 2.8rem;
+    margin-bottom: 3.5rem;
+    letter-spacing: 1px;
+}
+
+.team-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 5rem;
+    max-width: 800px;
+    width: 100%;
+    justify-items: center;
+}
+
+.member-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: white;
+    width: 180px;
+    transition: transform 0.2s;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+}
+
+.member-photo {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    background-color: #f1f1f1; 
+}
+
+.member-name {
+    font-family: 'Acme', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.member-role {
+    font-size: 0.9rem;
+    color: #d1d5db;
+    font-weight: 500;
+}
+
+.team-container::after {
+    content: "Copyrighted by Potato Duck";
+    margin-top: auto; 
+    padding-top: 5rem;
+    font-size: 0.85rem;
+    color: #b0b0b0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}

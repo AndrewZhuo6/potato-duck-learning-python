@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
         } else {
-            authContainer.innerHTML = `<a href="login.html" class="login-text">Log In</a>`;
+            authContainer.innerHTML = `<a href="login.html" class="login-text">Lock In!</a>`;
         }
     }
 
