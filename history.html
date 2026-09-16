@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quackbit | My Saved Code</title>
@@ -23,17 +24,18 @@
     </div>
     <nav class="navbar" id="nav-logged-out">
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="story.html">Story</a></li>
-        <li><a href="history.html">My Code</a></li>
-        <li><a href="handbook.html">Randy's Handbook</a></li>
-        <li><a href="team.html">About Us</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="story.html">Courses</a></li>
+        <li class="nav-auth-only" hidden><a href="history.html">My Code</a></li>
+        <li><a href="team.html">About</a></li>
       </ul>
       <div class="auth-buttons">
         <a href="login.html" class="login-text">Lock In!</a>
       </div>
     </nav>
   </header>
+  <script src="script/account.js"></script>
+  <script>QuackbitAccount.renderHeader();</script>
 
   <main class="history-main">
     <section class="history-hero">
@@ -62,7 +64,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
   <script src="script/stories-data.js"></script>
   <script src="script/solutions-db.js"></script>
-  <script src="script/solution-viewer.js"></script>
-  <script src="script/history.js"></script>
+  <script src="script/solution-viewer.js"></script>\n  <script src="script/history.js"></script>
 </body>
 </html>

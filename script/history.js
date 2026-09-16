@@ -20,22 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     /* ---------- header ---------- */
     const authContainer = document.querySelector(".auth-buttons");
-    if (authContainer) {
-        const displayName = (currentUser.email || currentUser.username || "Duck Coder").split("@")[0];
-        authContainer.innerHTML = `
-            <span class="user-badge" title="${viewer.escapeHtml(currentUser.email || "")}">🦆 ${viewer.escapeHtml(displayName)}</span>
-            <button id="logout-btn" class="logout-text">Log Out</button>
-        `;
-        const logoutBtn = document.getElementById("logout-btn");
-        if (logoutBtn) {
-            logoutBtn.addEventListener("click", () => {
-                sessionStorage.removeItem("currentUser");
-                sessionStorage.removeItem("activeUser");
-                localStorage.removeItem("currentUser");
-                window.location.href = "login.html";
-            });
-        }
-    }
+    window.QuackbitAccount.renderUserMenu(authContainer, currentUser);
 
     const owner = (currentUser.email || currentUser.username ||
                   (currentUser.id ? `id_${currentUser.id}` : "guest")).trim().toLowerCase();

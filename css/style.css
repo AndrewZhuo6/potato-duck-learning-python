@@ -137,13 +137,13 @@ main {
     width: 50rem; 
     animation: rotate-animation linear;
     animation-timeline: scroll();
-    transition: width 0.3s ease-out; 
+    transition: scale 0.3s ease-out;
+    will-change: transform; 
     border-radius: 50%;
 }
 
 .snake1:hover {
-    transform: translateY(-50%);
-    width: 51rem; 
+    scale: 1.02;
 }
 
 .duckhero {
@@ -151,14 +151,14 @@ main {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    transition: width 0.3s ease-out; 
+    transition: scale 0.3s ease-out;
+    will-change: transform; 
     left: 7%;
     width: 22rem; 
 }
 
 .duckhero:hover {
-    transform: translateY(-50%);
-    width: 23rem; 
+    scale: 1.045;
 }
 
 .cool-section {

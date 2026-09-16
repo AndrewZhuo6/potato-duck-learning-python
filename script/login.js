@@ -45,7 +45,7 @@ form.addEventListener("submit", (e) => {
 			return;
 		}
 
-    	sessionStorage.setItem("currentUser", JSON.stringify({ email: user.email, id: user.id }));
+    	sessionStorage.setItem("currentUser", JSON.stringify({ email: user.email, id: user.id, username: user.username || "" }));
 
     	window.location.href = "index.html";
   	};

@@ -14,25 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (authContainer) {
-        if (currentUser) {
-            const displayName = (currentUser.email || currentUser.username || "Duck Coder").split("@")[0];
-            authContainer.innerHTML = `
-                <span class="user-badge" title="${currentUser.email || ''}">${displayName}</span>
-                <button id="logout-btn" class="logout-text">Log Out</button>
-            `;
-
-            const logoutBtn = document.getElementById("logout-btn");
-            if (logoutBtn) {
-                logoutBtn.addEventListener("click", () => {
-                    sessionStorage.removeItem("currentUser");
-                    sessionStorage.removeItem("activeUser");
-                    localStorage.removeItem("currentUser");
-                    window.location.href = "login.html";
-                });
-            }
-        } else {
-            authContainer.innerHTML = `<a href="login.html" class="login-text">Lock In!</a>`;
-        }
+        window.QuackbitAccount.renderUserMenu(authContainer, currentUser);
     }
 
     if (startContainer) {
@@ -51,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const buttonText = currentLevel > 1 ? `Continue Adventure &rarr;` : `Start My Journey &rarr;`;
 
             startContainer.innerHTML = `
-                <p style="color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 500;">Ready for the adventure, <strong>${(currentUser.email || "Coder").split("@")[0]}</strong>?</p>
+                <p style="color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 500;">Ready for the adventure, <strong>${window.QuackbitAccount.escapeHtml(window.QuackbitAccount.displayName(currentUser))}</strong>?</p>
                 <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
                     <a href="${targetPage}" class="start-btn">${buttonText}</a>
                     <a href="story.html" class="start-btn" style="background: var(--main-bg); color: var(--text-main); border: 2px solid var(--border-color); box-shadow: none;">View All Stories</a>

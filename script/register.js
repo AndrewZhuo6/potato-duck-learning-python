@@ -54,7 +54,9 @@ form.addEventListener("submit", (e) => {
     const addRequest = store.add(newUser);
 
     addRequest.onsuccess = () => {
-        window.location.href = "login.html";
+        // Log the new duck in right away, then let them pick a username.
+        sessionStorage.setItem("currentUser", JSON.stringify({ email: email, id: addRequest.result, username: "" }));
+        window.location.href = "stats.html?setup=1";
     };
 
     addRequest.onerror = (event) => {

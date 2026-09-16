@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap");
 .header {
     display: flex;
     align-items: center;
@@ -102,4 +103,221 @@
     font-size: 1rem;
     color: #BF512C;
     cursor: pointer;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+}
+
+.user-avatar {
+    display: block;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.user-avatar svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.user-menu-toggle:hover .user-avatar,
+.user-menu-toggle[aria-expanded="true"] .user-avatar {
+    border-color: var(--primary-second);
+}
+
+.user-menu-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 170px;
+    display: flex;
+    flex-direction: column;
+    background: var(--main-bg);
+    border: 3px solid var(--primary-second);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 0.4rem 0;
+    z-index: 150;
+}
+
+.user-menu-dropdown[hidden] {
+    display: none;
+}
+
+.user-menu-dropdown a,
+.user-menu-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    text-align: center;
+    background: none;
+    border: none;
+    font: inherit;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-muted-2);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.user-menu-dropdown a:hover,
+.user-menu-dropdown a.active,
+.user-menu-dropdown button:hover {
+    color: var(--primary-second);
+}
+
+@media (max-width: 768px) {
+    .user-menu-dropdown {
+        right: 50%;
+        transform: translateX(50%);
+    }
+}
+
+.nav-links li[hidden] {
+    display: none;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.go-back-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.go-back-link:hover {
+    color: var(--text-main);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .header-left {
+        gap: 1.5rem;
+    }
+}
+
+.header {
+    height: 57px;
+    padding: 0 10%;
+    font-family: "Winky Rough", sans-serif;
+}
+
+.logo-img {
+    height: 34px;
+}
+
+.navbar,
+.nav-links {
+    gap: 3.2rem;
+}
+
+.nav-links li a,
+.go-back-link {
+    color: #9A9A9A;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0;
+}
+
+.nav-links li a:hover,
+.go-back-link:hover {
+    color: var(--text-main);
+}
+
+.header-left {
+    gap: 4.2rem;
+}
+
+.login-text {
+    padding: 7px 20px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    box-shadow: none;
+}
+
+.user-menu-toggle {
+    gap: 2rem;
+    font-size: 0.95rem;
+    color: #9A9A9A;
+}
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+}
+
+.user-menu-dropdown {
+    top: calc(100% + 11px);
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    box-shadow: none;
+}
+
+@media (max-width: 992px) {
+    .navbar,
+    .nav-links {
+        gap: 1.8rem;
+    }
+
+    .header-left {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+    }
+
+    .navbar,
+    .nav-links {
+        gap: 1rem;
+    }
+}
+
+.nav-links li a:hover,
+.nav-links li a:active,
+.go-back-link:hover,
+.login-text:hover {
+    transform: none;
+}
+
+html.logged-in .nav-links li.nav-auth-only[hidden] {
+    display: list-item;
+}
+
+html.logged-in .auth-buttons .login-text {
+    visibility: hidden;
+}
+
+html.logged-in .auth-buttons {
+    min-width: 34px;
+    min-height: 34px;
 }

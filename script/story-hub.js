@@ -14,26 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const authContainer = document.querySelector(".auth-buttons");
-    if (authContainer) {
-        if (currentUser) {
-            const displayName = (currentUser.email || currentUser.username || "Duck Coder").split("@")[0];
-            authContainer.innerHTML = `
-                <span class="user-badge" title="${currentUser.email || ''}">🦆 ${displayName}</span>
-                <button id="logout-btn" class="logout-text">Log Out</button>
-            `;
-            const logoutBtn = document.getElementById("logout-btn");
-            if (logoutBtn) {
-                logoutBtn.addEventListener("click", () => {
-                    sessionStorage.removeItem("currentUser");
-                    sessionStorage.removeItem("activeUser");
-                    localStorage.removeItem("currentUser");
-                    window.location.href = "login.html";
-                });
-            }
-        } else {
-            authContainer.innerHTML = `<a href="login.html" class="login-text">Lock In!</a>`;
-        }
-    }
+    window.QuackbitAccount.renderUserMenu(authContainer, currentUser);
 
     const userIdentifier = currentUser ? (currentUser.email || currentUser.username || (currentUser.id ? `id_${currentUser.id}` : "guest")).trim().toLowerCase() : "guest";
     const progressKey = `quackbit_progress_${userIdentifier}`;
