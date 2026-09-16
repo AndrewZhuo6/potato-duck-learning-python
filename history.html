@@ -11,24 +11,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/solution-history.css">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='https://flaticon.com'>
 </head>
 <body>
   <header class="header">
     <div class="logo">
-      <a href="index.html">🦆 Quackbit</a>
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img">
+      </a>
     </div>
-    <nav class="navbar">
-            <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+    <nav class="navbar" id="nav-logged-out">
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="story.html">Story</a></li>
-        <li><a href="history.html" class="active">My Code</a></li>
+        <li><a href="history.html">My Code</a></li>
         <li><a href="handbook.html">Randy's Handbook</a></li>
         <li><a href="team.html">About Us</a></li>
       </ul>
+      <div class="auth-buttons">
+        <a href="login.html" class="login-text">Lock In!</a>
+      </div>
     </nav>
-    <div class="auth-buttons">
-      <a href="login.html" class="login-text">Log In</a>
-    </div>
   </header>
 
   <main class="history-main">

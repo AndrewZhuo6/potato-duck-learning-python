@@ -1,0 +1,85 @@
+@import "ultimate-header.css";
+
+body {
+    margin: 0;
+    background-color: var(--main-bg);
+    color: white;
+    font-family: 'Winky Rough', sans-serif;
+}
+
+main section {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 7rem;
+}
+
+main section h1 {
+    margin-bottom: 3rem;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+/* Target the specific register form ID */
+#register-form {
+    width: 100%;
+    max-width: 500px; /* Slightly wider than login to fit the "Re-enter Password" label */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0; 
+}
+
+/* Target the label directly without the .child class */
+.form-group label {
+    text-align: left;
+    font-size: 1.5rem;
+    flex: 0 0 220px; /* Increased width so the longer label text fits on one line */
+}
+
+/* Target the input directly without the .child class */
+.form-group input {
+    flex: 1;
+    padding: 12px;
+    background-color: #d1d5db; 
+    border: 3px solid #b9512c; 
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+}
+
+/* Button style matching the light gray/beige color in the register image */
+.btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #d1d5db; 
+    color: #1e293b; /* Dark slate text color for contrast */
+    border: none;
+    border-radius: 6px;
+    font-size: 1.3rem;
+    font-family: 'Winky Rough', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.error-notice {
+    display: none;
+    color: #dc2626;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
