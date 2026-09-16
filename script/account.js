@@ -170,6 +170,10 @@
 
         if (!container) return;
 
+        const renderKey = user ? `${ownerKey(user)}|${displayName(user)}` : "guest";
+        if (container.dataset.rendered === renderKey) return;
+        container.dataset.rendered = renderKey;
+
         if (!user) {
             container.innerHTML = `<a href="login.html" class="login-text">Lock In!</a>`;
             return;
@@ -226,9 +230,13 @@
         document.querySelectorAll(".user-menu-toggle").forEach((t) => t.setAttribute("aria-expanded", "false"));
     }
 
+    function renderHeader() {
+        renderUserMenu(document.querySelector(".auth-buttons"), getSession());
+    }
+
     global.QuackbitAccount = {
         getSession, saveSession, clearSession, ownerKey, displayName,
         getUserByEmail, setUsername, validateUsername, normalizeUsername,
-        startFlyTimer, getFlySeconds, renderUserMenu, escapeHtml, AVATAR_SVG
+        startFlyTimer, getFlySeconds, renderUserMenu, renderHeader, escapeHtml, AVATAR_SVG
     };
 })(window);

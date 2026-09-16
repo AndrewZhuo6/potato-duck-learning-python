@@ -113,10 +113,10 @@ window.initPreparationChapter = function (config) {
             }
         });
 
+        let resizeTimer = null;
         window.addEventListener("resize", () => {
-            if (editor) {
-                editor.refresh();
-            }
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => editor.refresh(), 150);
         });
 
         const drafts = window.QuackbitDrafts

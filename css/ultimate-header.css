@@ -301,3 +301,10 @@
         gap: 1rem;
     }
 }
+
+.nav-links li a:hover,
+.nav-links li a:active,
+.go-back-link:hover,
+.login-text:hover {
+    transform: none;
+}
