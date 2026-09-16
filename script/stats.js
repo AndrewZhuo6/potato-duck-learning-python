@@ -40,7 +40,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function renderProfile() {
         document.getElementById("stats-username").textContent = Account.displayName(user);
-        document.getElementById("stats-avatar").innerHTML = Account.AVATAR_SVG;
+        document.getElementById("stats-avatar").innerHTML = Account.avatarHtml(user);
+        document.getElementById("avatar-remove").hidden = !user.avatar;
 
         const rank = RANKS.filter((r) => completed >= r.min).pop();
         document.getElementById("stats-rank").textContent = rank.name;
@@ -156,6 +157,37 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    const avatarInput = document.getElementById("avatar-input");
+    const avatarError = document.getElementById("avatar-error");
+
+    document.getElementById("stats-avatar").addEventListener("click", () => avatarInput.click());
+
+    avatarInput.addEventListener("change", async () => {
+        const file = avatarInput.files[0];
+        avatarInput.value = "";
+        if (!file) return;
+        avatarError.textContent = "";
+        try {
+            const dataUrl = await Account.resizeImageFile(file);
+            await Account.setAvatar(user.email, dataUrl);
+            user = Account.getSession();
+            renderProfile();
+        } catch (err) {
+            avatarError.textContent = err.message;
+        }
+    });
+
+    document.getElementById("avatar-remove").addEventListener("click", async () => {
+        avatarError.textContent = "";
+        try {
+            await Account.setAvatar(user.email, "");
+            user = Account.getSession();
+            renderProfile();
+        } catch (err) {
+            avatarError.textContent = err.message;
+        }
+    });
+    
     document.getElementById("rename-btn").addEventListener("click", () => openModal("rename"));
     saveBtn.addEventListener("click", saveUsername);
     cancelBtn.addEventListener("click", closeModal);

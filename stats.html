@@ -7,8 +7,8 @@
   <title>Stats | Quackbit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=optional">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=optional" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/stats.css">
 </head>
@@ -24,7 +24,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="story.html">Courses</a></li>
         <li class="nav-auth-only" hidden><a href="history.html">My Code</a></li>
-        <li><a href="team.html">About</a></li>
+        <li><a href="team.html">About Us</a></li>
       </ul>
       <div class="auth-buttons"></div>
     </nav>
@@ -36,7 +36,8 @@
     <section class="stats-profile">
       <div class="stats-avatar-row">
         <div class="wing wing-left" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div class="stats-avatar" id="stats-avatar"></div>
+        <button type="button" class="stats-avatar" id="stats-avatar" title="Change profile picture" aria-label="Change profile picture"></button>
+        <input type="file" id="avatar-input" accept="image/*" hidden>
         <div class="wing wing-right" aria-hidden="true"><span></span><span></span><span></span></div>
       </div>
 
@@ -45,6 +46,8 @@
         <button type="button" id="rename-btn" class="rename-btn" title="Rename" aria-label="Rename username">✎</button>
       </div>
       <p id="stats-rank" class="stats-rank">Novice Duck</p>
+      <button type="button" id="avatar-remove" class="avatar-remove" hidden>Remove photo</button>
+      <p id="avatar-error" class="avatar-error" role="alert"></p>
     </section>
 
     <section class="stats-grid">
