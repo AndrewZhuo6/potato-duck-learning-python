@@ -55,6 +55,12 @@
 
     <div id="workspace-container">
       <section class="problem-panel">
+        <div class="video-scene">
+          <video id="story-video" controls playsinline>
+            <source src="assets/videos/v3.mp4" type="video/mp4">
+            Your browser does not support HTML video.
+          </video>
+        </div>
         <span class="chapter-tag">Village 3 • List & Dictionary</span>
         <h2>Our Inventory</h2>
         <div class="story-quote">
@@ -108,7 +114,9 @@ quick_look_swap('bandits', weaknesses, inventory)  # Returns: '5'</div>
   <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
   <script src="script/solutions-db.js"></script>
   <script src="script/solution-viewer.js"></script>
-  <script src="script/draft-autosave.js"></script>\n  <script src="script/story.js"></script>
+  <script src="script/draft-autosave.js"></script>
+  
+  <script src="script/story.js"></script>
   <script src="script/v3.js"></script>
 </body>
 </html>
