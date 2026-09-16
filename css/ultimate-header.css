@@ -308,3 +308,16 @@
 .login-text:hover {
     transform: none;
 }
+
+html.logged-in .nav-links li.nav-auth-only[hidden] {
+    display: list-item;
+}
+
+html.logged-in .auth-buttons .login-text {
+    visibility: hidden;
+}
+
+html.logged-in .auth-buttons {
+    min-width: 34px;
+    min-height: 34px;
+}
