@@ -174,6 +174,8 @@
     let outsideListenerAdded = false;
 
     function renderUserMenu(container, user) {
+        document.querySelectorAll(".nav-auth-only").forEach((item) => { item.hidden = !user; });
+
         if (!container) return;
 
         if (!user) {
@@ -183,6 +185,8 @@
 
         const page = location.pathname.split("/").pop() || "index.html";
         const name = escapeHtml(displayName(user));
+        const isChapter = /^(v\d+|g\d+|boss)\.html$/i.test(page);
+        const guidebookHref = isChapter ? `handbook.html?from=${page}` : "handbook.html";
 
         container.innerHTML = `
             <div class="user-menu">
@@ -192,7 +196,7 @@
                 </button>
                 <div class="user-menu-dropdown" role="menu" hidden>
                     <a href="stats.html" role="menuitem" class="${page === "stats.html" ? "active" : ""}">Stats</a>
-                    <a href="handbook.html" role="menuitem" class="${page === "handbook.html" ? "active" : ""}">Guidebook</a>
+                    <a href="${guidebookHref}" role="menuitem" class="${page === "handbook.html" ? "active" : ""}">Guidebook</a>
                     <button type="button" role="menuitem" class="user-menu-logout">Lock Out</button>
                 </div>
             </div>
