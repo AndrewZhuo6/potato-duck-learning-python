@@ -54,7 +54,8 @@
         sessionStorage.setItem("currentUser", JSON.stringify({
             email: user.email,
             id: user.id,
-            username: user.username || ""
+            username: user.username || "",
+            avatar: user.avatar || ""
         }));
     }
 
@@ -131,7 +132,71 @@
         });
     }
 
-    const FLY_TICK_SECONDS = 15;
+    async function setAvatar(email, dataUrl) {
+        const db = await openUserDB();
+
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(["users"], "readwrite");
+            const store = tx.objectStore("users");
+            let updated = null;
+
+            const req = store.index("emailIndex").get(String(email).toLowerCase());
+            req.onsuccess = () => {
+                const me = req.result;
+                if (!me) {
+                    tx.abort();
+                    return;
+                }
+                me.avatar = dataUrl || "";
+                store.put(me);
+                updated = me;
+            };
+
+            tx.oncomplete = () => {
+                saveSession(updated);
+                resolve(updated);
+            };
+            tx.onabort = () => reject(new Error("Could not save your picture. Please log in again."));
+        });
+    }
+
+    function resizeImageFile(file, size = 256) {
+        return new Promise((resolve, reject) => {
+            if (!file || !file.type.startsWith("image/")) {
+                reject(new Error("Please choose an image file."));
+                return;
+            }
+            if (file.size > 10 * 1024 * 1024) {
+                reject(new Error("That image is too big (max 10 MB)."));
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onerror = () => reject(new Error("Could not read that file."));
+            reader.onload = () => {
+                const img = new Image();
+                img.onerror = () => reject(new Error("Could not open that image."));
+                img.onload = () => {
+                    const side = Math.min(img.width, img.height);
+                    const canvas = document.createElement("canvas");
+                    canvas.width = size;
+                    canvas.height = size;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, size, size);
+                    resolve(canvas.toDataURL("image/jpeg", 0.85));
+                };
+                img.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function avatarHtml(user) {
+        if (user && user.avatar && user.avatar.startsWith("data:image/")) {
+            return `<img src="${user.avatar}" alt="">`;
+        }
+        return AVATAR_SVG;
+    }
 
     function flyKey(user) {
         return `quackbit_flytime_${ownerKey(user)}`;
@@ -170,7 +235,7 @@
 
         if (!container) return;
 
-        const renderKey = user ? `${ownerKey(user)}|${displayName(user)}` : "guest";
+        const renderKey = user ? `${ownerKey(user)}|${displayName(user)}|${(user.avatar || "").length}` : "guest";
         if (container.dataset.rendered === renderKey) return;
         container.dataset.rendered = renderKey;
 
@@ -187,8 +252,8 @@
         container.innerHTML = `
             <div class="user-menu">
                 <button type="button" class="user-menu-toggle" aria-haspopup="true" aria-expanded="false">
-                    ${isChapter ? `<span class="user-menu-name">${name}</span>` : ""}
-                    <span class="user-avatar">${AVATAR_SVG}</span>
+                    <span class="user-menu-name">${name}</span>
+                    <span class="user-avatar">${avatarHtml(user)}</span>
                 </button>
                 <div class="user-menu-dropdown" role="menu" hidden>
                     <a href="stats.html" role="menuitem" class="${page === "stats.html" ? "active" : ""}">Stats</a>
@@ -237,6 +302,7 @@
     global.QuackbitAccount = {
         getSession, saveSession, clearSession, ownerKey, displayName,
         getUserByEmail, setUsername, validateUsername, normalizeUsername,
-        startFlyTimer, getFlySeconds, renderUserMenu, renderHeader, escapeHtml, AVATAR_SVG
+        startFlyTimer, getFlySeconds, renderUserMenu, renderHeader, escapeHtml, AVATAR_SVG,
+        setAvatar, resizeImageFile, avatarHtml
     };
 })(window);
