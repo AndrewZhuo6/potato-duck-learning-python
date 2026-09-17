@@ -55,6 +55,7 @@ body {
 
 .member-card:hover {
     transform: translateY(-5px);
+    box-shadow: 1px 1px 10px var(--primary-second);
 }
 
 .member-photo {
