@@ -319,7 +319,7 @@ window.initPreparationChapter = function (config) {
                         <button type="button" id="outcome-skip-btn" class="btn-outcome-skip">Skip Cutscene ⏭</button>
                         <div id="outcome-final-actions" style="display: none; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
                             ${passed ? `
-                                <a href="${nextTarget}" class="btn-outcome-next">${nextText} &rarr;</a>
+                                <a href="${nextTarget}" class="btn-outcome-next">${nextText}</a>
                                 <button type="button" id="outcome-review-btn" class="btn-outcome-review">Review Code ↩</button>
                                 <button type="button" id="outcome-saved-btn" class="btn-outcome-saved">💾 Saved Code</button>
                             ` : `
