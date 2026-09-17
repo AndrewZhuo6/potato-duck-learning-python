@@ -7,17 +7,9 @@ body {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     color: #4a3f45;
-}
-
-header {
-    font-family: 'Playfair Display', serif;
-    text-align: center;
-    padding: 50px 20px 30px;
-}
-
-header h1 {
-    color: #4f5b79;
-    font-size: 40px;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
 }
 
 .subtitle {

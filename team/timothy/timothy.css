@@ -33,13 +33,6 @@ p:last-child { margin-bottom: 0; }
 
 em { color: var(--amber); font-style: normal; }
 
-header {
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 90px 28px 40px;
-    border-bottom: 1px solid var(--line);
-}
-
 .path {
     font-family: Consolas, "SF Mono", "Courier New", monospace;
     font-size: 13px;

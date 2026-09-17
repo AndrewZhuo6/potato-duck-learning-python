@@ -1,5 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=optional");
 
+:root {
+    --primary: #BF512C;
+    --primary-hover: #545454;
+    --primary-dark: #b45309;
+    --primary-second: #DA9B2B;
+    --secondary: #4f5156;
+    --header-color-1section: #283138;
+    --header-color-2section: #343f4b;
+    --team-card: #acaea2;
+    --team-card2: #e7deca;
+    --dark: #0f172a;
+    --dark-surface: #242424;
+    --main-bg: #353535;
+    --dark-bg: #303030;
+    --card-bg: #404040;
+    --border-color: #e2e8f0;
+    --text-main: #F3F3F3;
+    --text-muted: rgba(243, 243, 243, 0.8);
+    --text-muted-2: rgba(243, 243, 243, 0.432);
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.2);
+    --shadow-lg: 0 10px 25px -5px rgba(191, 81, 44, 0.4);
+    --hover-icon-one: #7BB1FF;
+    --hover-icon-two: #e1d5f2;
+    --hover-icon-three: #fcd34d;
+    --green: #0fac4d;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
 .header {
     display: flex;
     align-items: center;
