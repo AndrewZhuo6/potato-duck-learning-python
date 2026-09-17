@@ -194,7 +194,7 @@ main {
     margin: auto;
     position: absolute;
     background-color: var(--dark-surface);
-    left: 0%;
+    right: 0%;
     bottom: 0;
 }
 
@@ -561,10 +561,10 @@ div[data-label="Challenges"]:hover {
 
 @keyframes slide-on-scroll {
   from {
-    transform: translateX(200px); 
+    transform: translateX(20%); 
   }
   to {
-    transform: translateX(-200px); 
+    transform: translateX(-0%); 
   }
 }
 
