@@ -54,9 +54,11 @@ form.addEventListener("submit", (e) => {
     const addRequest = store.add(newUser);
 
     addRequest.onsuccess = () => {
-        // Log the new duck in right away, then let them pick a username.
         sessionStorage.setItem("currentUser", JSON.stringify({ email: email, id: addRequest.result, username: "" }));
-        window.location.href = "stats.html?setup=1";
+        try {
+            localStorage.setItem(`quackbit_tours_${email.trim().toLowerCase()}`, "on");
+        } catch { }
+        window.location.href = "index.html";
     };
 
     addRequest.onerror = (event) => {
