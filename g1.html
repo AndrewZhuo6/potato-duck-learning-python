@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="script/account.js"></script>
   <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,7 @@
     <div class="header-left">
       <div class="logo">
         <a href="index.html">
-          <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img">
+          <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
         </a>
       </div>
       <a href="story.html" class="go-back-link">Go Back</a>
@@ -28,7 +29,6 @@
       <a href="login.html" class="login-text">Log In</a>
     </div>
   </header>
-  <script src="script/account.js"></script>
   <script>QuackbitAccount.renderHeader();</script>
 
   <main class="story-main">
