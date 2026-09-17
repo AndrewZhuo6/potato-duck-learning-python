@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="script/account.js"></script>
   <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Team</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=optional" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel='stylesheet' href='https://flaticon.com'>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=optional">
   <link rel="stylesheet" href="css/team.css">
 </head>
 <body>
   <header class="header">
     <div class="logo">
       <a href="index.html">
-        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img">
+        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
       </a>
     </div>
     <nav class="navbar" id="nav-logged-out">
@@ -25,14 +25,13 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="story.html">Courses</a></li>
         <li class="nav-auth-only" hidden><a href="history.html">My Code</a></li>
-        <li><a href="team.html">About</a></li>
+        <li><a href="team.html">About Us</a></li>
       </ul>
       <div class="auth-buttons">
         <a href="login.html" class="login-text">Lock In!</a>
       </div>
     </nav>
   </header>
-  <script src="script/account.js"></script>
   <script>QuackbitAccount.renderHeader();</script>
   <main class="team-container">
     <h1>Meet Our Team</h1>

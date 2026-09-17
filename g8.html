@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="script/account.js"></script>
   <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quackbit | Guardian 8: The Decision</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=optional">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -20,7 +21,7 @@
     <div class="header-left">
       <div class="logo">
         <a href="index.html">
-          <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img">
+          <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
         </a>
       </div>
       <a href="story.html" class="go-back-link">Go Back</a>
@@ -29,7 +30,6 @@
       <a href="login.html" class="login-text">Log In</a>
     </div>
   </header>
-  <script src="script/account.js"></script>
   <script>QuackbitAccount.renderHeader();</script>
 
   <main class="story-main">
@@ -110,7 +110,8 @@ findPair([3, 4, 2, 5], 7)  # Returns: [5, 2]
   <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
   <script src="script/solutions-db.js"></script>
   <script src="script/solution-viewer.js"></script>
-  <script src="script/draft-autosave.js"></script><script src="script/story.js"></script>
+  <script src="script/draft-autosave.js"></script>
+  <script src="script/story.js"></script>
   <script src="script/g8.js"></script>
 </body>
 </html>
