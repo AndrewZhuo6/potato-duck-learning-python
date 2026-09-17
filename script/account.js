@@ -198,6 +198,7 @@
         return AVATAR_SVG;
     }
 
+    const FLY_TICK_SECONDS = 15;
     function flyKey(user) {
         return `quackbit_flytime_${ownerKey(user)}`;
     }
