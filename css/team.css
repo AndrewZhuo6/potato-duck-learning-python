@@ -10,6 +10,10 @@ body {
     flex-direction: column;
 }
 
+.header {
+    background-color: var(--header-color-2section);
+}
+
 .team-container {
     display: flex;
     flex-direction: column;
@@ -17,6 +21,12 @@ body {
     padding-top: 4rem;
     flex: 1; 
     padding-bottom: 2rem;
+    width: 100%;
+    aspect-ratio: 3 / 5;
+    background-image: url("../assets/images/bg1.jpeg");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
 }
 
 .team-container h1 {
@@ -40,12 +50,17 @@ body {
     flex-direction: column;
     text-decoration: none;
     color: white;
-    width: 180px;
+    width: auto;
+    padding: 1rem 1rem;
+    background: radial-gradient(circle, var(--team-card2), var(--team-card));
+    border-radius: 7px;
+    border: 3px solid var(--header-color-2section);
     transition: transform 0.2s;
 }
 
 .member-card:hover {
     transform: translateY(-5px);
+    border: 3px solid var(--primary-second);
 }
 
 .member-photo {
@@ -54,14 +69,39 @@ body {
     object-fit: cover;
     border-radius: 12px;
     margin-bottom: 1rem;
-    background-color: #f1f1f1; 
 }
 
 .member-name {
-    font-family: 'Acme', sans-serif;
+    font-family: 'Winky Rough', sans-serif;
     font-size: 1.4rem;
     font-weight: bold;
     margin-bottom: 0.2rem;
+}
+
+#tim {
+    position: absolute;
+    top: 150%;
+    left: 15%;
+}
+
+#cat {
+    
+}
+
+#and {
+    
+}
+
+#cor {
+    
+}
+
+#kez {
+    
+}
+
+#ste {
+    
 }
 
 .member-role {
