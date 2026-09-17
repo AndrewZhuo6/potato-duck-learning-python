@@ -5,11 +5,6 @@
     const PAGE = (location.pathname.split("/").pop() || "index.html").toLowerCase();
     const REDUCED_MOTION = !!(global.matchMedia && global.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
-    /* =========================================================
-       Flags — tours only run for accounts created after this feature
-       quackbit_tours_<owner>          = "on"   (set in register.js)
-       quackbit_tour_<id>_<owner>      = "done" (after finish or skip)
-       ========================================================= */
     function session() {
         return Account ? Account.getSession() : null;
     }
@@ -123,9 +118,6 @@
         setTimeout(() => layer.remove(), 3000);
     }
 
-    /* =========================================================
-       Tour engine
-       ========================================================= */
     class Tour {
         constructor(steps, options = {}) {
             this.allSteps = steps;
@@ -266,7 +258,6 @@
 
             this.position();
 
-            // restart the entrance + duck wiggle animations
             void this.card.offsetWidth;
             this.card.classList.add("is-visible");
             this.avatar.classList.remove("is-quacking");
@@ -422,9 +413,6 @@
         }
     }
 
-    /* =========================================================
-       Shared steps
-       ========================================================= */
     const profileMenuStep = (extra) => ({
         target: [".user-menu", ".user-menu-dropdown"],
         before: openProfileMenu,
@@ -442,11 +430,7 @@
         `
     });
 
-    /* =========================================================
-       Tours
-       ========================================================= */
     const TOURS = {
-        /* ---------------- HOME ---------------- */
         home: {
             page: "index.html",
             subtitle: "🏠 Home",
@@ -532,7 +516,6 @@
             ]
         },
 
-        /* ---------------- COURSES ---------------- */
         courses: {
             page: "story.html",
             subtitle: "🗺️ Courses",
@@ -591,7 +574,6 @@
             ]
         },
 
-        /* ---------------- MY CODE ---------------- */
         mycode: {
             page: "history.html",
             subtitle: "💾 My Code",
@@ -643,7 +625,6 @@
             ]
         },
 
-        /* ---------------- GUIDEBOOK ---------------- */
         guidebook: {
             page: "handbook.html",
             subtitle: "📖 Guidebook",
@@ -705,7 +686,6 @@
             ]
         },
 
-        /* ---------------- ABOUT US ---------------- */
         about: {
             page: "team.html",
             subtitle: "👋 About Us",
