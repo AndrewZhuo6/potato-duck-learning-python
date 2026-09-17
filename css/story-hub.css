@@ -4,6 +4,11 @@
   background: var(--header-color-3section-green);
 }
 
+#bg-music {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 .story-hub-main {
   flex: 1;
   margin: 0 auto;
