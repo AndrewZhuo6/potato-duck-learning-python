@@ -736,7 +736,6 @@
             ]
         },
 
-        /* ---------------- STATS ---------------- */
         stats: {
             page: "stats.html",
             subtitle: "📊 Stats",
@@ -809,7 +808,60 @@
             ]
         },
 
-        /* ---------------- V1: WORKSPACE ---------------- */
+        cutscene: {
+            page: "v1.html",
+            subtitle: "🎬 Story cutscene",
+            ready: () => {
+                const cut = $("#cutscene-container");
+                const ws = $("#workspace-container");
+                return isVisible(cut) && (!ws || getComputedStyle(ws).display === "none");
+            },
+            steps: () => [
+                {
+                    before: () => {
+                        const video = $("#story-video");
+                        if (video && !video.paused) video.pause();
+                    },
+                    title: "Every chapter starts with a story 🎬",
+                    body: `
+                        <p>This is the <strong>cutscene</strong>. Quackbit gets into trouble here, and the trouble is always solved with Python.</p>
+                        <p>I paused it so I can point out a few things. Two seconds, promise.</p>
+                    `,
+                    nextLabel: "Go on then"
+                },
+                {
+                    target: ".cutscene-header",
+                    title: "Where you are",
+                    body: `<p>The badge shows the chapter (<strong>Village 1 Story</strong>) and the title of this part of the adventure.</p>`
+                },
+                {
+                    target: ".video-wrapper",
+                    title: "The scene 🍿",
+                    body: `<p>It plays by itself with sound. Use the video controls to pause, rewind or go full screen. When it ends, you go to the challenge <strong>automatically</strong>.</p>`
+                },
+                {
+                    target: ".cutscene-narrative",
+                    title: "The lesson hidden in the story 📜",
+                    body: `<p>The text under the video explains the Python idea behind this chapter in plain words. Read it, it's basically the answer's cousin.</p>`
+                },
+                {
+                    target: "#skip-video-btn",
+                    title: "In a hurry? Skip ⏭",
+                    body: `<p><strong>Skip Cutscene</strong> jumps straight to the challenge. You can always rewatch the scene from the problem page.</p>`
+                },
+                {
+                    after: () => {
+                        const video = $("#story-video");
+                        if (video && video.paused) video.play().catch(() => {});
+                    },
+                    title: "Enjoy the show! 🦆🍿",
+                    body: `<p>I'll be waiting on the other side to show you the code editor.</p>`,
+                    nextLabel: "Play the scene",
+                    confetti: true
+                }
+            ]
+        },
+
         chapter: {
             page: "v1.html",
             subtitle: "⚔️ How chapters work",
@@ -958,7 +1010,6 @@
             ]
         },
 
-        /* ---------------- V1: PASSED ---------------- */
         pass: {
             page: "v1.html",
             subtitle: "🎉 Victory",
@@ -999,7 +1050,6 @@
             ]
         },
 
-        /* ---------------- V1: SAVED SOLUTION BANNER ---------------- */
         saved: {
             page: "v1.html",
             subtitle: "💾 Saved code",
@@ -1036,9 +1086,6 @@
         return isVisible(container) && $(`.outcome-title-badge.${badgeClass}`) && isVisible(actions);
     }
 
-    /* =========================================================
-       Running tours
-       ========================================================= */
     let running = false;
 
     async function run(id) {
@@ -1062,7 +1109,6 @@
         if (!started) running = false;
     }
 
-    // Which tour fits what is on screen right now (for the replay button).
     function currentTourId() {
         return Object.keys(TOURS)
             .filter((id) => TOURS[id].page === PAGE)
@@ -1087,7 +1133,6 @@
         });
         document.body.appendChild(button);
 
-        // Show the button only when there is a tour that fits the screen.
         const update = () => {
             button.hidden = running || !currentTourId();
         };
@@ -1096,7 +1141,6 @@
     }
 
     async function autoRun(ids) {
-        // Watches the page and starts each tour the first time its moment arrives.
         const pending = () => ids.filter((id) => !isDone(id));
         while (pending().length) {
             if (!running && noModalOpen()) {
