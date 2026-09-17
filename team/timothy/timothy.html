@@ -8,11 +8,29 @@
 </head>
 
 <body>
-    <header>
-        <p class="path">Team / Timothy Pardin - CEO</p>
-        <h1>Timothy Pardin</h1>
-        <p class="subtitle">Project Manager/CEO of Potato Duck &middot; Artificial Intelligence student at BIT</p>
+    <header class="header">
+        <div class="logo">
+        <a href="../../index.html">
+            <img src="../../assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+        </a>
+        </div>
+        <nav class="navbar" id="nav-logged-out">
+        <ul class="nav-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../story.html">Courses</a></li>
+            <li class="nav-auth-only" hidden><a href="../../history.html">My Code</a></li>
+            <li><a href="../../team.html">About Us</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="../../login.html" class="login-text">Lock In!</a>
+        </div>
+        </nav>
     </header>
+    <script>QuackbitAccount.renderHeader();</script>
+    
+    <p class="path">Team / Timothy Pardin - CEO</p>
+    <h1>Timothy Pardin</h1>
+    <p class="subtitle">Project Manager/CEO of Potato Duck &middot; Artificial Intelligence student at BIT</p>
 
     <main>
 

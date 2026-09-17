@@ -7,10 +7,27 @@
     </head>
 
     <body>
-        <header>
-            <h1>˖˚⊹ ꣑ৎ‎ Welcome to My Personal Page!</h1>
-            <p class="subtitle">A little corner about me ~ ♡</p>
+        <header class="header">
+            <div class="logo">
+            <a href="../../index.html">
+                <img src="../../assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+            </a>
+            </div>
+            <nav class="navbar" id="nav-logged-out">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../story.html">Courses</a></li>
+                <li class="nav-auth-only" hidden><a href="../../history.html">My Code</a></li>
+                <li><a href="../../team.html">About Us</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="../../login.html" class="login-text">Lock In!</a>
+            </div>
+            </nav>
         </header>
+        <script>QuackbitAccount.renderHeader();</script>
+        <h1>˖˚⊹ ꣑ৎ‎ Welcome to My Personal Page!</h1>
+        <p class="subtitle">A little corner about me ~ ♡</p>
 
         <section class="about">
             <div class="about-text">

@@ -22,18 +22,11 @@ body {
     flex: 1; 
     padding-bottom: 2rem;
     width: 100%;
-    aspect-ratio: 3 / 5;
-    background-image: url("../assets/images/bg1.jpeg");
+    aspect-ratio: 3 / 4;
+    background-image: url("../assets/images/bg1.png");
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-}
-
-.team-container h1 {
-    font-family: 'Winky Rough', sans-serif;
-    font-size: 2.8rem;
-    margin-bottom: 3.5rem;
-    letter-spacing: 1px;
 }
 
 .team-row {
@@ -49,7 +42,8 @@ body {
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    color: white;
+    text-align: center;
+    color: var(--header-color-2section);
     width: auto;
     padding: 1rem 1rem;
     background: radial-gradient(circle, var(--team-card2), var(--team-card));
@@ -60,7 +54,6 @@ body {
 
 .member-card:hover {
     transform: translateY(-5px);
-    border: 3px solid var(--primary-second);
 }
 
 .member-photo {
@@ -80,33 +73,42 @@ body {
 
 #tim {
     position: absolute;
-    top: 150%;
+    top: 80%;
     left: 15%;
 }
 
 #cat {
-    
+    position: absolute;
+    top: 80%;
 }
 
 #and {
-    
+    position: absolute;
+    top: 80%;
+    right: 15%;
 }
 
 #cor {
-    
+    position: absolute;
+    top: 159%;
+    left: 15%;
 }
 
 #kez {
-    
+    position: absolute;
+    top: 159%;
 }
 
 #ste {
-    
+    position: absolute;
+    top: 159%;
+    right: 15%;
 }
 
 .member-role {
     font-size: 0.9rem;
-    color: #d1d5db;
+    font-family: 'Plus Jakarta Sans';
+    color: var(--card-bg);
     font-weight: 500;
 }
 
