@@ -11,6 +11,10 @@
     background-color: var(--header-color-1section);
 }
 
+.user-menu-dropdown {
+    background: var(--header-color-1section);
+}
+
 #bg-music {
     display: none !important;
     visibility: hidden !important;
