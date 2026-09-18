@@ -353,7 +353,7 @@ function setActive(id) {
   if (topBtn) {
     window.addEventListener("scroll", () => {
       topBtn.classList.toggle("is-visible", window.scrollY > 600);
-    });
+    }, { passive: true });
     topBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });

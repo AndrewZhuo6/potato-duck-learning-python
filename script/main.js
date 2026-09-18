@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("Browser blocks it:", error);
             });
         }
-    }, { once: true });
+    }, { once: true, passive: true });
 
     const header = document.querySelector('.header');
     const targetSection = document.querySelector('.hero-main');

@@ -236,7 +236,24 @@ window.initPreparationChapter = function (config) {
             if (sessionStorage.getItem(`quackbit_seen_cutscene_${chapterId}`) === "1") {
                 transitionToChallenge();
             }
-        } catch { /* storage unavailable */ }
+        } catch {  }
+        
+        if (video && cutsceneContainer && cutsceneContainer.style.display !== "none") {
+            const tryPlay = video.play();
+            if (tryPlay && tryPlay.catch) {
+                tryPlay.catch(() => {
+                    video.muted = true;
+                    video.play().catch(() => {});
+                    const unmute = () => {
+                        video.muted = false;
+                        document.removeEventListener("pointerdown", unmute);
+                        document.removeEventListener("keydown", unmute);
+                    };
+                    document.addEventListener("pointerdown", unmute);
+                    document.addEventListener("keydown", unmute);
+                });
+            }
+        }
 
         let pyodide = null;
         if (submitBtn) submitBtn.disabled = true;
