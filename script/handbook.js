@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("handbook-search");
   const clearBtn = document.getElementById("handbook-search-clear");
   const emptyState = document.getElementById("handbook-empty");
-  const resultCount = document.getElementById("handbook-result-count");
   const navToggle = document.getElementById("handbook-nav-toggle");
   const sidebar = document.getElementById("handbook-sidebar");
   const chipBar = document.getElementById("handbook-chips");
@@ -228,11 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
     emptyState.style.display = visible === 0 ? "block" : "none";
     clearBtn.style.display = q === "" ? "none" : "block";
     if (chipBar) chipBar.style.display = q === "" ? "flex" : "none";
-
-    resultCount.textContent =
-      q === ""
-        ? `${totalSections} sections across ${GROUPS.length} topics`
-        : `${visible} of ${totalSections} sections match "${term.trim()}"`;
   }
 
   searchInput.addEventListener("input", (e) => applySearch(e.target.value));
@@ -384,4 +378,13 @@ function setActive(id) {
       setTimeout(() => target.classList.remove("is-landed"), 2000);
     }
   }
+  
+  document.addEventListener('scroll', () => {
+        const audio = document.getElementById('bg-music');
+        if (audio && audio.paused) {
+            audio.play().catch(error => {
+                console.log("Browser blocks it:", error);
+            });
+        }
+    }, { once: true });
 });
