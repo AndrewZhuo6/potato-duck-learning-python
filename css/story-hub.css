@@ -20,12 +20,27 @@
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
+  align-items: center;
 }
 
 .story-hub-hero {
   text-align: center;
+  width: 100%;
+  max-width: 650px;
   margin-bottom: 2.5rem;
-  background-color: ;
+  padding: 20px;
+  border-radius: 7px;
+  border: 3px solid var(--header-color-3section-green);
+  background: radial-gradient(circle, var(--team-card2), var(--team-card));
+}
+
+.wood {
+  position: absolute;
+  top: 10%;
+  width: 115px;
+  height: 50px;
+  background-color: var(--radius-md);
+  z-index: 3;
 }
 
 .story-hero-badge {
@@ -47,55 +62,61 @@
 .story-hub-hero h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: var(--header-color-3section-green);
   margin-bottom: 0.75rem;
   letter-spacing: -0.02em;
 }
 
 .story-hub-hero p {
   font-size: 1.1rem;
-  color: var(--text-muted);
+  color: var(--card-bg);
+  font-weight: 500;
   max-width: 650px;
   margin: 0 auto 1.5rem;
   line-height: 1.6;
 }
 
 .progress-tracker-card {
-  background: var(--main-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem 1.75rem;
-  max-width: 580px;
+  background: url(../assets/images/wood.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border: 2.5px solid var(--header-color-3section-green);
+  border-radius: 7px;
+  padding: 0.2rem 1.75rem;
   margin: 0 auto;
-  box-shadow: var(--shadow-sm);
 }
 
 .progress-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 0.6rem;
-  font-size: 0.9rem;
+  margin: 0.6rem 0;
   font-weight: 600;
 }
 
 .progress-info .progress-label {
-  color: var(--text-main);
+  color: var(--header-color-3section-brown);
+  font-family: 'Winky Rough';
+  font-size: 1.2rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .progress-info .progress-count {
-  color: #b45309;
+  color: var(--header-color-3section-brown);
+  font-size: 0.9rem;
   font-weight: 800;
 }
 
 .progress-bar-bg {
   width: 100%;
-  height: 10px;
+  height: 20px;
   background: #e2e8f0;
   border-radius: 9999px;
+  border: 2.5px solid var(--header-color-3section-brown);
   overflow: hidden;
 }
 
@@ -146,7 +167,7 @@
 
 .story-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 
