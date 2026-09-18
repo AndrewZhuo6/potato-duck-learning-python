@@ -137,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="handbook-section-icon" aria-hidden="true">${section.icon || "•"}</span>
           <div>
             <h2 class="handbook-section-title">${escapeHtml(section.title)}</h2>
-            ${section.tagline ? `<p class="handbook-section-tagline">${escapeHtml(section.tagline)}</p>` : ""}
           </div>
         </header>
         <div class="handbook-section-body">${section.blocks.map(renderBlock).join("")}</div>
@@ -378,7 +377,7 @@ function setActive(id) {
       setTimeout(() => target.classList.remove("is-landed"), 2000);
     }
   }
-  
+
   document.addEventListener('scroll', () => {
         const audio = document.getElementById('bg-music');
         if (audio && audio.paused) {
