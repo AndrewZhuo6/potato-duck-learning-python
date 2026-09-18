@@ -14,6 +14,11 @@ body {
     background-color: var(--header-color-2section);
 }
 
+#bg-music {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 .team-container {
     display: flex;
     flex-direction: column;
@@ -50,10 +55,12 @@ body {
     border-radius: 7px;
     border: 3px solid var(--header-color-2section);
     transition: transform 0.2s;
+    box-shadow: 1px 1px 5px var(--secondary);
 }
 
 .member-card:hover {
     transform: translateY(-5px);
+    box-shadow: 1px 1px 10px var(--primary-second);
 }
 
 .member-photo {

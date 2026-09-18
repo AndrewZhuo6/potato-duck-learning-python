@@ -12,8 +12,12 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=optional">
   <link rel="stylesheet" href="css/handbook.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/face.png">
 </head>
 <body>
+  <audio id="bg-music" loop>
+    <source src="assets/music/bg-music-randy.mp3" type="audio/mpeg">
+  </audio>
   <header class="header">
     <div class="logo">
       <a href="index.html">
@@ -37,14 +41,7 @@
   <main class="handbook-main">
 
     <section class="handbook-hero">
-      <div class="handbook-hero-badge">📖 Randy's Handbook</div>
-      <h1>The complete book of Python</h1>
-      <p class="handbook-hero-lead">
-        Written by Randy's students, the apprentice of the first almighty coder. Every word of the language
-        is in here, from your first <code>print</code> to the shape of an
-        algorithm. Nothing solves a Guardian for you, yet nothing is hidden
-        from you either. Read what you need, when you need it.
-      </p>
+      <h1>Randy's Handbook</h1>
       <a href="#" id="handbook-back-link" class="handbook-back-link" style="display: none;">
         &larr; Back to my challenge
       </a>
@@ -62,10 +59,7 @@
           aria-label="Search Randy's Handbook">
         <button type="button" id="handbook-search-clear" class="handbook-search-clear" style="display: none;" aria-label="Clear search">&times;</button>
       </div>
-      <span id="handbook-result-count" class="handbook-result-count" aria-live="polite"></span>
     </div>
-
-    <nav id="handbook-chips" class="handbook-chips" aria-label="Jump to a topic"></nav>
 
     <div class="handbook-layout">
 

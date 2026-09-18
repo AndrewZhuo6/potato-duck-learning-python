@@ -8,15 +8,6 @@ body {
   background-image: url("images/background.png");
 }
 
-.header {
-    background-image: url("images/boarder.png");
-  background-color: #0369a1; 
-  padding: 20px;         
-  display: flex;             
-  justify-content: center;         
-  align-items: center;        
-}
-
 h1 {
   color: #ffffff;             
   font-size: 36px;           

@@ -69,16 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (isUnlocked) {
                 coverContent = `
                     <div class="story-cover-wrap">
-                        <img 
-                            src="assets/images/${story.cover}" 
-                            alt="${story.title}" 
-                            class="story-cover-img"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                        >
+                        <img src="${story.cover}" alt="${story.title}" class="story-cover-img">
                         <div class="story-cover-fallback fallback-${story.category}" style="display: none;">
-                            <span class="fallback-icon">${story.icon}</span>
-                            <span class="fallback-title">${story.title}</span>
-                            <span class="fallback-tag">${story.categoryName} • ${story.topic}</span>
                         </div>
                     </div>
                 `;
@@ -158,4 +150,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateProgressDisplay();
     renderStories();
+    
+    document.addEventListener('scroll', () => {
+        const audio = document.getElementById('bg-music');
+        if (audio && audio.paused) {
+            audio.play().catch(error => {
+                console.log("Browser blocks it:", error);
+            });
+        }
+    }, { once: true });
 });
