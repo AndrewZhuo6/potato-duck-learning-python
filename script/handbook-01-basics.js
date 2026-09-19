@@ -17,11 +17,7 @@ window.HANDBOOK_GROUPS.push({
         { type: "text", value: "It reads top to bottom. Line 1 happens, then line 2, then line 3. Everything else in this book — decisions, loops, functions — is a way of bending that straight line into a more useful shape." },
         { type: "code", label: "order matters", value: `print("first")
 print("second")
-print("third")
-
-# first
-# second
-# third` },
+print("third")`},
         { type: "text", value: "A file of Python is called a script or a module. It ends in .py. In this village you write into the editor on each challenge page and the interpreter runs inside your browser, but it is the same Python." },
         { type: "note", value: "Python was made by Guido van Rossum and released in 1991. The version everything uses now is Python 3. If you find advice online using print without brackets, you are reading Python 2, and it is nearly twenty years out of date. Close the tab." }
       ]
@@ -36,11 +32,13 @@ print("third")
       blocks: [
         { type: "text", value: "Anything after a # on a line is invisible to Python and visible to humans. Use it to explain why you did something, not what you did — the code already says what." },
         { type: "syntax", value: "# your note here" },
-        { type: "code", value: `# check every ten metres, three times at most
-if distance % 10 == 0 and looks_used < 3:
-    looks_used += 1
+        { type: "code", value: `x = 3
 
-total = 0  # a comment can also sit at the end of a line` },
+# check if x is an even number
+if x % 2 == 0:
+    print("x is even")
+
+even = False  # a comment can also sit at the end of a line` },
         { type: "sub", value: "Commenting code out" },
         { type: "text", value: "Putting a # in front of a working line switches it off without deleting it. Useful when you are narrowing down which line is broken." },
         { type: "code", value: `print("one")
@@ -74,30 +72,24 @@ print(True)
 print([1, 2, 3])` },
         { type: "sub", value: "Several values at once" },
         { type: "text", value: "Separate them with commas. print() puts a space between each and a new line at the end." },
-        { type: "code", value: `print("stones:", 12, "safe:", True)
-# stones: 12 safe: True` },
+        { type: "code", value: `print("stones:", 12, "safe:", True)` },
         { type: "sub", value: "Changing the separator and the ending" },
         {
           type: "table",
           head: ["Argument", "Does", "Example"],
           rows: [
             ["sep", "what goes between values", "print(1, 2, sep='-') → 1-2"],
-            ["end", "what goes after the last one", "print('a', end='') → no new line"],
+            ["end", "what goes after the last one, default to '\\n' for new line", "print('a', end='') → no new line"],
             ["flush", "force it out immediately", "rarely needed"]
           ]
         },
-        { type: "code", value: `print("a", "b", "c", sep="")      # abc
-print("a", "b", sep=" | ")        # a | b
-
+        { type: "code", value: `print("a", "b", "c", sep="")
+print("a", "b", sep=" | ")
 print("loading", end="")
-print("...")                      # loading...` },
+print("...")` },
         { type: "sub", value: "Printing inside a loop" },
         { type: "code", value: `for stone in range(1, 4):
-    print("stone", stone)
-
-# stone 1
-# stone 2
-# stone 3` },
+    print("stone", stone)` },
         { type: "warn", value: "print() shows a human something and hands back nothing at all. It is not how a function gives a value to the rest of your code — that is return. Confusing the two is the single most common beginner mistake, and it produces code that looks perfect on screen and fails every test. See Functions." },
         { type: "note", value: "When you are lost, print() the variable you are least sure about, on the line just before the one that breaks. Half of all debugging is discovering a box held something other than what you assumed." }
       ]
@@ -117,10 +109,8 @@ print("You read:", sign)` },
         { type: "warn", value: "input() ALWAYS hands back a string, even when the person typed digits. Typing 5 gives you the text \"5\", not the number 5. \"5\" + 1 is an error, and \"5\" * 3 is \"555\", which is almost certainly not what you wanted." },
         { type: "sub", value: "Getting a number" },
         { type: "code", value: `age = int(input("Age: "))
-price = float(input("Price: "))
-
-steps = int(input("Steps: "))
-print(steps + 1)   # now this adds instead of joining text` },
+print("Age in the next year: ", end="")
+print(age + 1)   # now this adds instead of throwing TypeError` },
         { type: "sub", value: "Reading several values from one line" },
         { type: "code", value: `# the person types:  3 7 12
 raw = input("Numbers: ")
@@ -143,7 +133,8 @@ if answer == "yes":
       keywords: "indentation whitespace spaces tabs block colon indentationerror nesting pep8",
       blocks: [
         { type: "text", value: "Most languages use curly braces to show where a block starts and ends. Python uses the blank space at the start of the line. This is not a style preference. It is the syntax, and getting it wrong stops the program." },
-        { type: "code", value: `if sign == "shelter":
+        { type: "code", value: `sign = "shelter"
+if sign == "shelter":
     print("inside the block")
     print("also inside the block")
 print("outside — back to the left margin")` },
@@ -160,7 +151,8 @@ print("outside — back to the left margin")` },
         },
         { type: "sub", value: "Nesting" },
         { type: "text", value: "Each layer inside another indents four more spaces." },
-        { type: "code", value: `for stone in stones:
+        { type: "code", value: `stones = [1, 2, 3, 4]
+for stone in stones:
     if stone % 2 == 0:
         if stone > 10:
             print("a far, safe stone")

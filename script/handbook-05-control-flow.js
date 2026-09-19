@@ -14,7 +14,9 @@ window.HANDBOOK_GROUPS.push({
       keywords: "if elif else condition branch nested guard clause decision ternary pass",
       blocks: [
         { type: "syntax", value: "if condition:\\n    block\\nelif other_condition:\\n    block\\nelse:\\n    block" },
-        { type: "code", value: `if sign == "shelter":
+        { type: "code", value: `sign = "shelter"
+
+if sign == "shelter":
     print("Go to the safe shelter!")
 elif sign == "bandits":
     print("Turn back! There are bandits!")
@@ -35,10 +37,17 @@ elif score > 50:
           why: "In the left version a score of 95 matches the first branch and stops, so 'excellent' is unreachable. When conditions overlap, put the most specific first."
         },
         { type: "text", value: "elif and else are both optional. A lone if is perfectly good." },
-        { type: "code", value: `if snake_distance <= 0:
-    caught = True` },
+        { type: "code", value: `snake_distance = 0
+caught = False
+
+if snake_distance <= 0:
+    caught = True
+print("caught:", caught)` },
         { type: "sub", value: "Nesting" },
-        { type: "code", value: `if looks_used < 3:
+        { type: "code", value: `looks_used = 1
+snake_distance = 5
+
+if looks_used < 3:
     if snake_distance <= 2:
         print("too close")
     else:
@@ -76,10 +85,13 @@ elif score > 50:
         },
         { type: "sub", value: "pass" },
         { type: "text", value: "A block cannot be empty. pass is a placeholder that does nothing, for when you want the structure before the content." },
-        { type: "code", value: `if condition:
+        { type: "code", value: `condition = True
+
+if condition:
     pass    # decide what goes here later
 else:
-    handle()` },
+    print("else branch")
+print("done")` },
         { type: "warn", value: "A common silent bug: testing a value rather than a comparison. if x = 5 is a SyntaxError so Python saves you there, but if name: is True for any non-empty string, including \"False\" and \"0\". Know whether you mean truthiness or equality." }
       ]
     },
@@ -93,7 +105,15 @@ else:
       blocks: [
         { type: "text", value: "Added in Python 3.10. It looks like a switch statement from other languages, but it matches the SHAPE of a value, not just its value." },
         { type: "syntax", value: "match value:\\n    case pattern:\\n        block\\n    case _:\\n        block" },
-        { type: "code", value: `match command:
+        { type: "code", value: `command = "north"
+
+def move(dx, dy):
+    print(f"moving by ({dx}, {dy})")
+
+def stop():
+    print("stopping")
+
+match command:
     case "north":
         move(0, 1)
     case "south":
@@ -104,13 +124,23 @@ else:
         print("unknown command")` },
         { type: "text", value: "The underscore is the wildcard — it matches anything, so it plays the part of else. It must come last." },
         { type: "sub", value: "Several values in one case" },
-        { type: "code", value: `match answer:
+        { type: "code", value: `answer = "yeah"
+
+def confirm():
+    print("confirmed")
+
+def decline():
+    print("declined")
+
+match answer:
     case "yes" | "y" | "yeah":
         confirm()
     case "no" | "n":
         decline()` },
         { type: "sub", value: "Matching a shape and capturing parts" },
-        { type: "code", value: `match point:
+        { type: "code", value: `point = (0, 5)
+
+match point:
     case (0, 0):
         print("at the origin")
     case (0, y):
@@ -121,17 +151,21 @@ else:
         print(f"at {x}, {y}")` },
         { type: "text", value: "A bare name inside a pattern captures whatever sits in that position. That is the part a plain if/elif chain cannot do without unpacking by hand." },
         { type: "sub", value: "Guards" },
-        { type: "code", value: `match value:
+        { type: "code", value: `value = -5
+
+match value:
     case n if n < 0:
-        print("negative")
+        print("negative:", n)
     case 0:
         print("zero")
     case n if n > 100:
-        print("large")
+        print("large:", n)
     case _:
-        print("ordinary")` },
+        print("ordinary:", n)` },
         { type: "sub", value: "Matching lists and dictionaries" },
-        { type: "code", value: `match data:
+        { type: "code", value: `data = ["torch", "mirror", "snare"]
+
+match data:
     case []:
         print("empty")
     case [single]:
@@ -139,11 +173,13 @@ else:
     case [first, *rest]:
         print("first:", first, "and", len(rest), "more")
 
+config = {"mode": "stealth", "level": 2}
+
 match config:
     case {"mode": "fast"}:
-        run_fast()
+        print("running in fast mode")
     case {"mode": mode, "level": level}:
-        run(mode, level)` },
+        print(f"running in {mode} mode at level {level}")` },
         { type: "warn", value: "A lone lowercase name in a case always CAPTURES, it never compares. case red: matches everything and binds it to red — it does not check against a variable called red. To compare against a constant, use a dotted name like case Colour.RED." },
         { type: "note", value: "For simple value checks a dictionary lookup is usually cleaner than match. Where match earns its keep is destructuring nested data — pulling apart a shape and naming its pieces in one step." }
       ]
@@ -195,7 +231,9 @@ for i in range(1, 11):
     print(i, item)`,
           why: "enumerate hands you both at once and cannot go out of range. Use range(len(x)) only when you genuinely need the index alone."
         },
-        { type: "code", value: `for i, item in enumerate(items, start=1):
+        { type: "code", value: `items = ["torch", "potion", "scroll"]
+
+for i, item in enumerate(items, start=1):
     print(f"{i}. {item}")     # numbering from 1` },
         { type: "sub", value: "Walking two sequences together" },
         { type: "code", value: `names = ["a", "b", "c"]
@@ -205,19 +243,28 @@ for name, score in zip(names, scores):
     print(name, score)` },
         { type: "text", value: "zip stops at the shorter one. Anything left over in the longer is ignored." },
         { type: "sub", value: "Dictionaries" },
-        { type: "code", value: `for key in data:              # keys
-for key in data.keys():       # keys, said explicitly
-for value in data.values():   # values
-for key, value in data.items():   # both` },
+        { type: "code", value: `data = {"torch": 1, "boots": 2}
+
+for key in data:                  # keys
+    print("key:", key)
+
+for value in data.values():       # values
+    print("value:", value)
+
+for key, value in data.items():   # both
+    print(f"{key} -> {value}")` },
         { type: "sub", value: "Nested loops" },
-        { type: "code", value: `for row in matrix:
+        { type: "code", value: `matrix = [[1, 2], [3, 4]]
+for row in matrix:
     for value in row:
         print(value)
 
 # every pair from two lists
+first = ["A", "B"]
+second = [1, 2]
 for a in first:
     for b in second:
-        check(a, b)` },
+        print(a, b)` },
         { type: "warn", value: "A loop inside a loop runs the inner one completely for each round of the outer. Two nested loops over 1,000 items is a million rounds. That is fine at small sizes and fatal at large ones — see Efficiency." },
         { type: "sub", value: "Never change a list while looping over it" },
         {
@@ -241,7 +288,7 @@ for a in first:
         { type: "syntax", value: "while condition:\\n    block" },
         { type: "text", value: "A while loop repeats for as long as its condition stays true. Use it when you do not know in advance how many rounds it will take." },
         { type: "code", value: `steps = 0
-while steps < 30:
+while steps < 10:
     steps += 1
     print("step", steps)` },
         { type: "warn", value: "If nothing inside the loop ever makes the condition false, it runs forever and the page freezes. Every while loop needs something in its body that moves toward stopping — usually changing the variable the condition tests." },
@@ -269,33 +316,36 @@ while count < 5:
           ]
         },
         { type: "sub", value: "Reading until a sentinel" },
-        { type: "code", value: `line = input()
-while line != "quit":
-    print(line)
-    line = input()
-
-# the same, without repeating the input line
-while (line := input()) != "quit":
-    print(line)` },
+        { type: "code", value: `print("type lines ('quit' to stop):")
+while (line := input("line: ")) != "quit":
+    print("you typed:", line)` },
         { type: "sub", value: "Deliberate infinite loops" },
         { type: "text", value: "Sometimes the exit is in the middle rather than at the top. Start with True and break out." },
-        { type: "code", value: `while True:
-    command = input("> ")
+        { type: "code", value: `def handle(cmd):
+    print("handling:", cmd)
+
+while True:
+    command = input("command ('quit' to stop): ")
     if command == "quit":
         break
     handle(command)` },
         { type: "tip", value: "while True with a break is clearer than contorting a condition to fit at the top. It is not a cheat — it is the right shape when the decision to stop happens after some work." },
         { type: "sub", value: "Binary search, the classic while" },
-        { type: "code", value: `low, high = 0, len(pile) - 1
-while low <= high:
-    mid = (low + high) // 2
-    if pile[mid] == target:
-        return mid
-    elif pile[mid] < target:
-        low = mid + 1
-    else:
-        high = mid - 1
-return -1` },
+        { type: "code", value: `def binary_search(pile, target):
+    low, high = 0, len(pile) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if pile[mid] == target:
+            return mid
+        elif pile[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+pile = [1, 3, 5, 7, 9, 11]
+print("found 7 at index:", binary_search(pile, 7))
+print("found 4 at index:", binary_search(pile, 4))` },
         { type: "note", value: "Notice what moves toward stopping there: low rises or high falls every round, so the gap always shrinks. When you write a while loop, be able to point at the line that guarantees it ends." }
       ]
     },
@@ -317,19 +367,30 @@ return -1` },
           ]
         },
         { type: "sub", value: "break" },
-        { type: "code", value: `for item in pile:
+        { type: "code", value: `pile = ["torch", "mirror", "snare"]
+target = "mirror"
+
+for item in pile:
     if item == target:
-        print("found it")
+        print("found it:", item)
         break        # stop looking` },
         { type: "sub", value: "continue" },
-        { type: "code", value: `for n in numbers:
+        { type: "code", value: `numbers = [1, -2, 3, -4, 5]
+total = 0
+
+for n in numbers:
     if n < 0:
         continue     # ignore negatives, carry on
-    total += n` },
+    total += n
+
+print("total of positives:", total)` },
         { type: "tip", value: "continue is a guard clause for loops. It handles the case you do not care about and gets out of the way, so the real work below it never needs an else." },
         { type: "sub", value: "for / else" },
         { type: "text", value: "A loop may have an else. It runs when the loop ran to completion — and is SKIPPED if a break happened. It is the tidy way to express 'searched everything and found nothing'." },
-        { type: "code", value: `for item in pile:
+        { type: "code", value: `pile = ["torch", "mirror", "snare"]
+target = "compass"
+
+for item in pile:
     if item == target:
         print("found")
         break
@@ -394,12 +455,10 @@ f.close()`,
           why: "If .read() raises an error in the left version, .close() is never reached and the file stays open. with closes it no matter what happens."
         },
         { type: "code", value: `with open("out.txt", "w") as f:
-    f.write("hello")
-# the file is closed here, automatically
+    f.write("hello from Quackbit")
 
-# several at once
-with open("in.txt") as src, open("out.txt", "w") as dst:
-    dst.write(src.read())` },
+with open("out.txt", "r") as f:
+    print("read back:", f.read())` },
         { type: "note", value: "Anything can support with — it just needs the right two methods. You will meet it mostly with files, but also with locks, database connections, and timers. See Files & Errors." }
       ]
     }
