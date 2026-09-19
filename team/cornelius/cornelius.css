@@ -1,5 +1,17 @@
 @import "../../css/ultimate-header.css";
 
+:root {
+    --bg-main: #2b2445;
+    --bg-main2: #684481;
+    --card-bg: rgba(154, 138, 199, 0.211);
+    --card-bg2: rgba(186, 172, 226, 0.277);
+    --text-primary: #ffffff;
+    --text-secondary: #b1a5c9;
+    --accent-glow: #d1bcf5;
+    --tag-bg: #3c2d5c;
+    --border-subtle: rgba(255, 255, 255, 0.147);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,102 +19,214 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    font-family: 'Unbounded', 'Segoe UI';
+    background-image: linear-gradient(to bottom right, var(--bg-main), var(--bg-main2));
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
-main {
-    max-width: 900px;
+.header {
+    background-color: rgba(25, 20, 43, 0.85);
+    backdrop-filter: blur(10px);
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 1.2rem;
+    max-width: 1100px;
     margin: 2rem auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
 }
 
-section {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+.bento-item {
+    background-image: linear-gradient(to bottom right, var(--card-bg), var(--card-bg2));
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
     padding: 2rem;
-    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 2px solid var(--border-subtle);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
 }
 
-section:first-of-type {
+.bento-item:hover {
+    transform: translateY(-4px);
+}
+
+.bento-item h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    color: var(--text-primary);
+}
+
+.item-intro {
+    grid-column: span 3;
+    grid-row: span 2;
     display: flex;
-    gap: 2.5rem;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-image: linear-gradient(to bottom right, var(--card-bg), var(--card-bg2));
 }
 
-.profile {
-    text-align: center;
-    flex-shrink: 0;
+.item-intro p {
+    font-family: 'Segoe UI';
+    color: var(--text-main);
+    font-weight: 400;
 }
 
-.profile img {
-    border-radius: 50%;
-    border: 4px solid #3498db;
+.item-intro h5 {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.item-intro h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #ffffff, #c9b0f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.item-intro .role {
+    font-size: 1.25rem;
+    color: var(--accent-glow);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.item-intro p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 95%;
+}
+
+.item-profile {
+    grid-column: span 1;
+    grid-row: span 3;
+    padding: 0;
+    display: flex;
+    align-items: flex-end;
+}
+
+.profile-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    background-color: #ecf0f1;
 }
 
-.profile h4 {
-    margin-top: 1rem;
-    color: #7f8c8d;
+.profile-overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(15, 9, 28, 0.95), transparent);
+    text-align: center;
+}
+
+.profile-overlay h4 {
+    color: #fff;
     font-style: italic;
     font-weight: 500;
 }
 
-.information h3 {
-    font-size: 2.2rem;
-    color: #2c3e50;
-    margin-bottom: 0.2rem;
+.item-skills {
+    grid-column: span 1;
+    grid-row: span 1;
 }
 
-.information h4 {
-    font-size: 1.2rem;
-    color: #3498db;
+.item-interests {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.tag {
+    background-color: var(--tag-bg);
+    color: var(--accent-glow);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* 5. Projects Span Layout */
+.item-projects {
+    grid-column: span 4;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+}
+
+.project-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: var(--tag-bg);
+    color: var(--accent-glow);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
     margin-bottom: 1rem;
-    font-weight: 600;
+    display: inline-block;
 }
 
-.information p {
-    color: #555;
-    font-size: 1.05rem;
+.project-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
 }
 
-h2 {
-    color: #2c3e50;
-    border-bottom: 2px solid #ecf0f1;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
+.project-card p {
+    color: var(--text-secondary);
+    font-size: 1rem;
 }
 
-.skill, .project {
-    margin-bottom: 1.5rem;
-}
-
-.skill:last-child, .project:last-child {
-    margin-bottom: 0;
-}
-
-.skill h3, .project h3 {
-    color: #34495e;
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
-}
-
-.skill p, .project p, .interest p {
-    color: #666;
-}
-
-@media (max-width: 768px) {
-    section:first-of-type {
-        flex-direction: column;
-        text-align: center;
+/* Responsive Logic for Mobile / Tablets */
+@media (max-width: 950px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .information h3 {
-        font-size: 1.8rem;
+    .item-intro, .item-skills, .item-interests, .item-projects {
+        grid-column: span 2;
+    }
+    .item-profile {
+        grid-column: span 2;
+        grid-row: span 2;
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 650px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+    .item-intro, .item-profile, .item-skills, .item-interests, .item-projects {
+        grid-column: span 1;
+    }
+    .item-intro h1 {
+        font-size: 2.5rem;
     }
 }
