@@ -137,7 +137,6 @@
 }
 
 .filter-btn {
-  border: none;
   background: radial-gradient(circle, var(--team-card2), var(--team-card));
   color: var(--header-color-3section-green);
   font-family: 'Winky Rough';
