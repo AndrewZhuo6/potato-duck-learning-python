@@ -1,3 +1,17 @@
+function addCustomCSS(cssCode) {
+    const style = document.createElement('style');
+    style.textContent = cssCode;
+    document.head.appendChild(style);
+}
+
+const myCSS = `
+    body {
+        background: var(--main-bg) url('../assets/images/g-preview/g5_cover.jpeg') center/cover fixed;
+    }
+`;
+
+addCustomCSS(myCSS);
+
 window.initPreparationChapter({
     chapterNumber: 10,
     chapterTitle: "Guardian 5: Palindoom",
