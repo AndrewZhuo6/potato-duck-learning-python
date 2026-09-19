@@ -47,14 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    document.addEventListener('scroll', () => {
+    function startBgMusic() {
         const audio = document.getElementById('bg-music');
-        if (audio && audio.paused) {
-            audio.play().catch(error => {
-                console.log("Browser blocks it:", error);
+        if (!audio) return;
+
+        audio.play().then(() => {
+            ['click', 'pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(eventType => {
+                window.removeEventListener(eventType, startBgMusic);
             });
-        }
-    }, { once: true, passive: true });
+        }).catch(error => {
+        });
+    }
+
+    ['click', 'pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(eventType => {
+        window.addEventListener(eventType, startBgMusic, { passive: true });
+    });
 
     const header = document.querySelector('.header');
     const targetSection = document.querySelector('.hero-main');
