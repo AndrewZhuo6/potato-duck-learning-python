@@ -140,12 +140,13 @@
   border: none;
   background: var(--main-bg);
   color: var(--text-muted);
+  font-family: 'Winky Rough';
   font-weight: 600;
   font-size: 0.9rem;
   padding: 8px 18px;
-  border-radius: 30px;
+  border-radius: 7px;
   cursor: pointer;
-  border: 1px solid var(--border-color);
+  border: 3px solid var(--border-color);
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
@@ -154,14 +155,13 @@
 
 .filter-btn:hover {
   border-color: #f59e0b;
-  color: #b45309;
-  background: #fffbeb;
+  transform: translateY(-1px);
 }
 
 .filter-btn.active {
   background: #b45309;
-  color: var(--main-bg);
-  border-color: #b45309;
+  color: var(--text-main);
+  border-color: #423c37;
   box-shadow: 0 2px 8px rgba(180, 83, 9, 0.25);
 }
 
@@ -176,7 +176,7 @@
 
 .story-card {
   background: var(--main-bg);
-  border: 1px solid var(--border-color);
+  border: 3px solid var(--header-color-3section-green);
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
@@ -393,7 +393,6 @@
   font-size: 0.9rem;
   text-decoration: none;
   border-radius: var(--radius-md);
-  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
   transition: background 0.2s ease, transform 0.15s ease;
   box-sizing: border-box;
 }
