@@ -58,6 +58,26 @@ body {
   -ms-overflow-style: none;
 }
 
+.handbook-back-link {
+  display: inline-flex;
+  font-family: 'Winky Rough';
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding: 0.55rem 1.1rem;
+  background: #e1dac9;
+  border: 3px solid var(--header-color-3section-brown);
+  border-radius: 7px;
+  color: var(--header-color-3section-brown);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.handbook-back-link:hover {
+  transform: translateY(-1px);
+  background: #ded6c1;
+}
+
 /* Style links as protruding physical tabs[cite: 1, 3] */
 .handbook-nav-heading {
   font-size: 2rem;
@@ -166,7 +186,7 @@ body {
 /* Right Page: Header & Search[cite: 1, 3] */
 .handbook-hero {
   grid-area: hero;
-  padding: 3rem 2rem 1rem;
+  padding: 3rem 2rem 2rem;
   text-align: center;
 }
 
@@ -259,7 +279,7 @@ body {
   border: 3px solid var(--header-color-3section-brown);
   border-radius: 7px;
   background: #fffbeb;
-  color: var(--text-main);
+  color: var(--header-color-3section-brown);
 }
 
 .handbook-search-input:focus {
