@@ -128,26 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Dev / Testing Controls
-    const resetProgressBtn = document.getElementById("dev-reset-progress");
-    const unlockAllBtn = document.getElementById("dev-unlock-all");
-
-    if (resetProgressBtn) {
-        resetProgressBtn.addEventListener("click", () => {
-            localStorage.setItem(progressKey, "1");
-            updateProgressDisplay();
-            renderStories();
-        });
-    }
-
-    if (unlockAllBtn) {
-        unlockAllBtn.addEventListener("click", () => {
-            localStorage.setItem(progressKey, STORIES.length.toString());
-            updateProgressDisplay();
-            renderStories();
-        });
-    }
-
     updateProgressDisplay();
     renderStories();
     
