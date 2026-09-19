@@ -13,7 +13,11 @@ window.HANDBOOK_GROUPS.push({
       tagline: "Numbers beyond the basics",
       keywords: "math sqrt floor ceil gcd factorial pi inf isclose log sin trig prod comb",
       blocks: [
-        { type: "code", value: `import math` },
+        { type: "code", value: `import math
+print(math.sqrt(16))
+print(math.floor(2.9))
+print(math.factorial(5))
+print(math.gcd(12, 18))` },
         {
           type: "table",
           head: ["Call", "Does", "Example"],
@@ -52,24 +56,33 @@ window.HANDBOOK_GROUPS.push({
           ]
         },
         { type: "sub", value: "Comparing floats properly" },
-        { type: "code", value: `0.1 + 0.2 == 0.3                    # False
-math.isclose(0.1 + 0.2, 0.3)        # True` },
+        { type: "code", value: `import math
+
+print(0.1 + 0.2 == 0.3)
+print(math.isclose(0.1 + 0.2, 0.3))` },
         { type: "sub", value: "isqrt for prime checking" },
-        { type: "code", value: `def is_prime(n):
+        { type: "code", value: `import math
+
+def is_prime(n):
     if n < 2:
         return False
     for i in range(2, math.isqrt(n) + 1):
         if n % i == 0:
             return False
-    return True` },
+    return True
+
+print("is_prime(29):", is_prime(29))
+print("is_prime(100):", is_prime(100))` },
         { type: "tip", value: "You only need to test divisors up to the square root. Beyond that, any factor would already have been found as the partner of a smaller one. That single observation turns an O(n) check into O(√n)." },
         { type: "sub", value: "Trigonometry" },
-        { type: "code", value: `math.sin(x)    math.cos(x)    math.tan(x)     # x in RADIANS
-math.asin(x)   math.acos(x)   math.atan(x)
-math.atan2(y, x)                                # correct quadrant
-math.degrees(rad)    math.radians(deg)
-math.dist((0,0), (3,4))    # 5.0
-math.hypot(3, 4)           # 5.0` }
+        { type: "code", value: `import math
+
+angle = math.radians(180)
+print("sin(pi):", round(math.sin(angle), 5))
+print("cos(pi):", math.cos(angle))
+print("degrees(pi):", math.degrees(angle))
+print("dist:", math.dist((0, 0), (3, 4)))
+print("hypot:", math.hypot(3, 4))` }
       ]
     },
 
@@ -80,7 +93,9 @@ math.hypot(3, 4)           # 5.0` }
       tagline: "Chance and shuffling",
       keywords: "random randint choice shuffle sample uniform seed choices gauss secrets",
       blocks: [
-        { type: "code", value: `import random` },
+        { type: "code", value: `import random
+print(random.randint(1, 10))
+print(random.choice(["potion", "shield", "sword"]))` },
         {
           type: "table",
           head: ["Call", "Gives"],
@@ -97,19 +112,26 @@ math.hypot(3, 4)           # 5.0` }
             ["random.gauss(mu, sigma)", "a normal distribution"]
           ]
         },
-        { type: "code", value: `random.randint(1, 6)                   # a die roll, 1 to 6 inclusive
-random.choice(["torch", "mirror"])
-random.sample(range(1, 50), 6)         # six different numbers
+        { type: "code", value: `import random
+
+print(random.randint(1, 6))
+print(random.choice(["torch", "mirror"]))
+print(random.sample(range(1, 50), 6))
 
 deck = [1, 2, 3, 4, 5]
-random.shuffle(deck)                   # deck is changed
-shuffled = random.sample(deck, len(deck))   # a new list instead` },
+random.shuffle(deck)
+print("shuffled deck:", deck)
+
+shuffled = random.sample(deck, len(deck))
+print("sampled copy:", shuffled)` },
         { type: "warn", value: "randint INCLUDES both ends; randrange excludes the top, matching range(). Mixing them up is an off-by-one waiting to happen." },
         { type: "sub", value: "Weighted choice" },
-        { type: "code", value: `random.choices(["common", "rare"], weights=[90, 10], k=5)` },
+        { type: "code", value: `import random
+print(random.choices(["common", "rare"], weights=[90, 10], k=5))` },
         { type: "sub", value: "Repeatable randomness" },
-        { type: "code", value: `random.seed(42)
-random.randint(1, 100)     # the same number every run` },
+        { type: "code", value: `import random
+random.seed(42)
+print(random.randint(1, 100))     # the same number every run with seed(42)` },
         { type: "tip", value: "Seeding makes a random program reproducible, which is the only way to debug one. Set a seed while testing and remove it afterwards." },
         { type: "warn", value: "random is predictable by design and must never be used for passwords, tokens or anything security-related. Use the secrets module for that." }
       ]
@@ -126,34 +148,39 @@ random.randint(1, 100)     # the same number every run` },
         { type: "code", value: `from collections import Counter
 
 tally = Counter("waterbitwater")
-tally["w"]                    # 2
-tally["z"]                    # 0 — never a KeyError
-tally.most_common(3)          # the three commonest, as pairs
-tally.most_common()[-1]       # the rarest
+print(tally["w"])
+print(tally["z"])                   # 0 — never a KeyError
+print(tally.most_common(3))         # the three commonest, as pairs
+print(tally.most_common()[-1])      # the rarest
 
-Counter(["a", "b", "a"])      # Counter({'a': 2, 'b': 1})
-sum(tally.values())           # the total count
+print(Counter(["a", "b", "a"]))
+print(sum(tally.values()))          # the total count
 
 a = Counter("aab")
 b = Counter("abc")
-a + b       # combined counts
-a - b       # subtracted, negatives dropped
-a & b       # the smaller of each
-a | b       # the larger of each` },
+print("a + b:", a + b)              # combined counts
+print("a - b:", a - b)              # subtracted, negatives dropped
+print("a & b:", a & b)              # the smaller of each
+print("a | b:", a | b)              # the larger of each` },
         { type: "sub", value: "defaultdict" },
         { type: "text", value: "A dictionary that creates a default value the first time a key is touched, so you never have to check whether it exists." },
         { type: "code", value: `from collections import defaultdict
 
+text = "potato"
 counts = defaultdict(int)          # missing keys start at 0
 for ch in text:
     counts[ch] += 1
+print(dict(counts))
 
+words = ["duck", "goose", "swan", "bit"]
 groups = defaultdict(list)         # missing keys start at []
 for word in words:
     groups[len(word)].append(word)
+print(dict(groups))
 
 pairs = defaultdict(set)
-pairs["a"].add(1)` },
+pairs["a"].add(1)
+print(dict(pairs))` },
         { type: "warn", value: "Merely LOOKING at a missing key in a defaultdict creates it. That makes the dictionary grow as you inspect it, which is surprising if you then count its length." },
         { type: "sub", value: "deque" },
         { type: "text", value: "A list that is fast at BOTH ends. A normal list is O(n) to remove from the front; a deque is O(1)." },
@@ -162,11 +189,18 @@ pairs["a"].add(1)` },
 queue = deque([1, 2, 3])
 queue.append(4)          # to the right
 queue.appendleft(0)      # to the left
-queue.pop()              # from the right
-queue.popleft()          # from the left — this is the fast one
-queue.rotate(1)          # shift everything round
+print("after appends:", queue)
 
-recent = deque(maxlen=5)  # keeps only the last five, drops the oldest` },
+print("pop:", queue.pop())
+print("popleft:", queue.popleft())
+
+queue.rotate(1)
+print("after rotate:", queue)
+
+recent = deque(maxlen=3)  # keeps only the last three
+for i in range(5):
+    recent.append(i)
+print("recent maxlen=3:", recent)` },
         {
           type: "compare",
           bad: `queue = []
@@ -180,9 +214,10 @@ queue.popleft()  # O(1)`,
 
 Point = namedtuple("Point", ["x", "y"])
 p = Point(4, 9)
-p.x          # 4
-p[0]         # 4
-x, y = p` }
+print(p.x)
+print(p[0])
+x, y = p
+print("unpacked:", x, y)` }
       ]
     },
 
@@ -213,20 +248,13 @@ x, y = p` }
             ["zip_longest(a, b)", "zip that pads instead of stopping"]
           ]
         },
-        { type: "code", value: `list(itertools.combinations([1,2,3], 2))
-# [(1,2), (1,3), (2,3)]
+        { type: "code", value: `import itertools
 
-list(itertools.permutations([1,2,3], 2))
-# [(1,2), (1,3), (2,1), (2,3), (3,1), (3,2)]
-
-list(itertools.product([1,2], "ab"))
-# [(1,'a'), (1,'b'), (2,'a'), (2,'b')]
-
-list(itertools.accumulate([1,2,3,4]))
-# [1, 3, 6, 10]
-
-list(itertools.pairwise([1,2,3,4]))
-# [(1,2), (2,3), (3,4)]` },
+print(list(itertools.combinations([1, 2, 3], 2)))
+print(list(itertools.permutations([1, 2, 3], 2)))
+print(list(itertools.product([1, 2], "ab")))
+print(list(itertools.accumulate([1, 2, 3, 4])))
+print(list(itertools.pairwise([1, 2, 3, 4])))` },
         { type: "warn", value: "groupby only groups items that are ADJACENT. To group a whole collection you must sort by the same key first, or use a defaultdict instead." },
         { type: "sub", value: "functools" },
         { type: "code", value: `from functools import lru_cache, cache, reduce, partial
@@ -235,19 +263,21 @@ list(itertools.pairwise([1,2,3,4]))
 def fib(n):
     if n <= 1:
         return n
-    return fib(n-1) + fib(n-2)
+    return fib(n - 1) + fib(n - 2)
 
 @lru_cache(maxsize=128)   # keeps only the 128 most recent
 def expensive(n):
-    ...
+    return n * 2
 
-reduce(lambda a, b: a * b, [1,2,3,4])    # 24
+print("fib(10):", fib(10))
+print("expensive(5):", expensive(5))
+print("reduce sum:", reduce(lambda a, b: a * b, [1, 2, 3, 4]))
 
 def power(base, exponent):
     return base ** exponent
 
 square = partial(power, exponent=2)
-square(5)     # 25` },
+print("square(5):", square(5))` },
         { type: "tip", value: "@cache turns an exponential recursive function into a linear one with a single line. It only works when the function is pure — same arguments, same answer, no side effects — and the arguments must be hashable." }
       ]
     },
@@ -264,17 +294,20 @@ square(5)     # 25` },
 now = datetime.now()
 today = date.today()
 
-now.year, now.month, now.day
-now.hour, now.minute, now.second
-today.weekday()        # Monday is 0
-today.isoweekday()     # Monday is 1` },
+print("date:", now.year, now.month, now.day)
+print("time:", now.hour, now.minute, now.second)
+print("weekday:", today.weekday())        # Monday is 0
+print("isoweekday:", today.isoweekday())  # Monday is 1` },
         { type: "sub", value: "Formatting and parsing" },
-        { type: "code", value: `now.strftime("%Y-%m-%d")             # '2026-09-15'
-now.strftime("%d/%m/%Y %H:%M")       # '15/09/2026 18:30'
+        { type: "code", value: `from datetime import datetime, date
 
-datetime.strptime("2026-09-15", "%Y-%m-%d")
+now = datetime.now()
+print(now.strftime("%Y-%m-%d"))
+print(now.strftime("%d/%m/%Y %H:%M"))
 
-date.today().isoformat()             # '2026-09-15'` },
+parsed = datetime.strptime("2026-09-15", "%Y-%m-%d")
+print("parsed date:", parsed)
+print(date.today().isoformat())` },
         {
           type: "table",
           head: ["Code", "Means"],
@@ -294,24 +327,33 @@ date.today().isoformat()             # '2026-09-15'` },
           ]
         },
         { type: "sub", value: "Arithmetic" },
-        { type: "code", value: `tomorrow = today + timedelta(days=1)
+        { type: "code", value: `from datetime import datetime, date, timedelta
+
+today = date.today()
+now = datetime.now()
+
+tomorrow = today + timedelta(days=1)
 last_week = now - timedelta(weeks=1)
 later = now + timedelta(hours=2, minutes=30)
+print("tomorrow:", tomorrow)
+print("last week:", last_week)
+print("later:", later)
 
 gap = date(2026, 12, 25) - today
-gap.days                  # how many days until
+print("days until:", gap.days)
 
-delta = end - start
-delta.total_seconds()` },
+delta = timedelta(days=2, hours=3)
+print("total seconds:", delta.total_seconds())` },
         { type: "sub", value: "time" },
         { type: "code", value: `import time
 
-time.sleep(2)              # pause for two seconds
-time.time()                # seconds since 1970
+time.sleep(0.05)           # pause
+print("timestamp:", time.time())
 
 start = time.perf_counter()
-do_work()
-elapsed = time.perf_counter() - start` },
+total = sum(range(10000))
+elapsed = time.perf_counter() - start
+print(f"elapsed: {elapsed:.6f}s")` },
         { type: "tip", value: "Use perf_counter for measuring how long something takes — it is the highest-resolution clock available and is not affected by the system clock changing." }
       ]
     },
@@ -326,11 +368,11 @@ elapsed = time.perf_counter() - start` },
         { type: "text", value: "A regular expression describes a pattern of text. It is a small language of its own, and it is worth knowing enough to recognise when a plain string method would be simpler." },
         { type: "code", value: `import re
 
-re.search(r"\\d+", "abc123")      # a Match object, or None
-re.findall(r"\\d+", "a1b22c333")  # ['1', '22', '333']
-re.sub(r"\\d", "#", "a1b2")       # 'a#b#'
-re.split(r"[,;]", "a,b;c")        # ['a', 'b', 'c']
-re.fullmatch(r"\\d+", "123")      # matches the WHOLE string` },
+print(re.search(r"\\d+", "abc123"))
+print(re.findall(r"\\d+", "a1b22c333"))
+print(re.sub(r"\\d", "#", "a1b2"))
+print(re.split(r"[,;]", "a,b;c"))
+print(re.fullmatch(r"\\d+", "123"))` },
         { type: "warn", value: "Always write patterns as raw strings — r\"\\d+\" not \"\\d+\". Without the r, Python processes the backslashes first and the regex engine never sees them." },
         { type: "sub", value: "Character classes" },
         {
@@ -371,18 +413,23 @@ re.fullmatch(r"\\d+", "123")      # matches the WHOLE string` },
           ]
         },
         { type: "sub", value: "Groups" },
-        { type: "code", value: `m = re.search(r"(\\d{4})-(\\d{2})-(\\d{2})", "on 2026-09-15 we")
-m.group(0)      # '2026-09-15' — the whole match
-m.group(1)      # '2026'
-m.groups()      # ('2026', '09', '15')
+        { type: "code", value: `import re
 
-m = re.search(r"(?P<year>\\d{4})", "2026")
-m.group("year")  # '2026'` },
+m = re.search(r"(\\d{4})-(\\d{2})-(\\d{2})", "on 2026-09-15 we")
+print(m.group(0))
+print(m.group(1))
+print(m.groups())
+
+m2 = re.search(r"(?P<year>\\d{4})", "2026")
+print(m2.group("year"))` },
         { type: "sub", value: "Compiling" },
-        { type: "code", value: `pattern = re.compile(r"\\d+")
-pattern.findall(text)      # faster when reused many times
+        { type: "code", value: `import re
 
-re.search(r"abc", text, re.IGNORECASE)` },
+pattern = re.compile(r"\\d+")
+text = "abc 123 def 456"
+print(pattern.findall(text))
+
+print(bool(re.search(r"abc", text, re.IGNORECASE)))` },
         {
           type: "compare",
           bad: `re.sub(r"[^a-zA-Z]", "", msg).lower()`,
@@ -406,51 +453,50 @@ re.search(r"abc", text, re.IGNORECASE)` },
 heap = [3, 1, 4]
 heapq.heapify(heap)         # rearrange into a heap
 heapq.heappush(heap, 2)
-heapq.heappop(heap)         # 1 — always the smallest, O(log n)
+print("pop smallest:", heapq.heappop(heap))
 
-heapq.nlargest(3, values)
-heapq.nsmallest(3, values)` },
+values = [10, 5, 20, 1, 8, 15]
+print("nlargest 3:", heapq.nlargest(3, values))
+print("nsmallest 3:", heapq.nsmallest(3, values))` },
         { type: "tip", value: "For the top k of a large collection, heapq.nlargest is O(n log k) against sorting's O(n log n). On a million items where you want the top ten, that is a large difference." },
         { type: "sub", value: "bisect — binary search, written for you" },
         { type: "code", value: `import bisect
 
 sorted_list = [1, 3, 5, 7]
-bisect.bisect_left(sorted_list, 5)     # 2
-bisect.insort(sorted_list, 4)          # insert, keeping it sorted` },
+print("bisect_left index:", bisect.bisect_left(sorted_list, 5))
+bisect.insort(sorted_list, 4)
+print("after insort:", sorted_list)` },
         { type: "sub", value: "statistics" },
         { type: "code", value: `import statistics
 
-statistics.mean([1, 2, 3])       # 2
-statistics.median([1, 2, 3, 4])  # 2.5
-statistics.mode([1, 1, 2])       # 1
-statistics.stdev([1, 2, 3])` },
+print("mean:", statistics.mean([1, 2, 3]))
+print("median:", statistics.median([1, 2, 3, 4]))
+print("mode:", statistics.mode([1, 1, 2]))
+print("stdev:", round(statistics.stdev([1, 2, 3]), 4))` },
         { type: "sub", value: "os and sys" },
         { type: "code", value: `import os, sys
 
-os.getcwd()
-os.listdir(".")
-os.path.exists("data.txt")
-os.environ.get("HOME")
-
-sys.argv          # command-line arguments
-sys.exit(0)
-sys.path` },
+print("cwd:", os.getcwd())
+print("files:", os.listdir(".")[:5])
+print("exists data.txt:", os.path.exists("data.txt"))
+print("platform:", sys.platform)
+print("version:", sys.version.split()[0])` },
         { type: "sub", value: "string" },
         { type: "code", value: `import string
 
-string.ascii_lowercase     # 'abcdefghijklmnopqrstuvwxyz'
-string.ascii_uppercase
-string.ascii_letters
-string.digits              # '0123456789'
-string.punctuation
-string.whitespace` },
+print("ascii_lowercase:", string.ascii_lowercase)
+print("ascii_uppercase:", string.ascii_uppercase)
+print("digits:", string.digits)
+print("punctuation:", string.punctuation)` },
         { type: "sub", value: "pprint and textwrap" },
         { type: "code", value: `from pprint import pprint
-pprint(nested_data)        # readable, indented output
+
+nested_data = {"name": "Quackbit", "stats": {"hp": 100, "mana": 50}, "inventory": ["torch", "map"]}
+pprint(nested_data)
 
 import textwrap
-textwrap.fill(long_text, width=70)
-textwrap.dedent(indented_block)` },
+long_text = "Python is an interpreted, high-level and general-purpose programming language. Created by Guido van Rossum."
+print(textwrap.fill(long_text, width=40))` },
         { type: "note", value: "Python's slogan for this is 'batteries included'. Before writing anything more than a few lines, it is worth thirty seconds asking whether the standard library already has it. It usually does." }
       ]
     }

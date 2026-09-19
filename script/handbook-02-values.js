@@ -18,11 +18,21 @@ window.HANDBOOK_GROUPS.push({
         { type: "code", value: `stones = 12
 name = "Quackbit"
 is_safe = True
-nothing_yet = None` },
+nothing_yet = None
+
+print(stones)
+print(name)
+print(is_safe)
+print(nothing_yet)` },
         { type: "text", value: "Point the name somewhere else and the old value is forgotten. The name does not remember its past." },
         { type: "code", value: `count = 0
-count = count + 1    # 1
-count += 1           # 2` },
+print(count)
+
+count = count + 1
+print(count)
+
+count += 1
+print(count)` },
         { type: "sub", value: "Augmented assignment" },
         { type: "text", value: "Every arithmetic operator has a shorthand that reads the variable, changes it, and stores it back." },
         {
@@ -40,21 +50,34 @@ count += 1           # 2` },
         },
         { type: "sub", value: "Assigning several at once" },
         { type: "code", value: `x, y = 3, 7
-low, high = 0, len(pile) - 1
+print(x, y)
+
+low, high = 0, y - 1
+print(low, high)
 
 a = b = c = 0        # all three point at 0
+print(a, b, c)
 
-x, y = y, x          # swap, no temporary variable needed` },
+x, y = y, x          # swap, no temporary variable needed
+print(x, y)` },
         { type: "tip", value: "That last line is the Python way to swap two values. In most languages you need a third variable to hold one of them while you move the other. Here the right-hand side is built first, then unpacked." },
         { type: "sub", value: "Unpacking" },
         { type: "code", value: `point = (4, 9)
 x, y = point                 # x is 4, y is 9
+print(x, y)
 
 first, *rest = [1, 2, 3, 4]  # first is 1, rest is [2, 3, 4]
-*most, last = [1, 2, 3, 4]   # most is [1, 2, 3], last is 4` },
+print(first, rest)
+
+*most, last = [1, 2, 3, 4]   # most is [1, 2, 3], last is 4
+print(most, last)` },
         { type: "warn", value: "Unpacking demands an exact match unless you use a star. Writing a, b = [1, 2, 3] raises ValueError: too many values to unpack." },
         { type: "sub", value: "Deleting a name" },
-        { type: "code", value: `del stones     # the name is gone; using it now raises NameError` },
+        { type: "code", value: `stones = 5
+print(stones)
+
+del stones     # the name is gone; using it now raises NameError
+print(stones)`},
         { type: "note", value: "Two names can point at the same value. For numbers and strings that never matters, because those cannot be changed. For lists and dictionaries it matters enormously — see Copying in Data Structures." }
       ]
     },
@@ -150,14 +173,18 @@ print(big)
 binary = 0b1010            # 10
 octal = 0o17               # 15
 hexadecimal = 0xFF         # 255
-scientific = 1.5e3         # 1500.0` },
+scientific = 1.5e3         # 1500.0
+
+print(population)
+print(binary)
+print(octal)
+print(hexadecimal)
+print(scientific)` },
         { type: "sub", value: "The float trap" },
         { type: "warn", value: "Floats are stored in binary, and some decimal fractions have no exact binary form — exactly as one third has no exact decimal form. This is not a Python bug; every language that uses this standard behaves the same way." },
-        { type: "code", value: `0.1 + 0.2
-# 0.30000000000000004
+        { type: "code", value: `print(0.1 + 0.2)
 
-0.1 + 0.2 == 0.3
-# False` },
+0.1 + 0.2 == 0.3` },
         { type: "text", value: "So never compare two floats with ==. Compare the size of their difference instead." },
         {
           type: "compare",
@@ -175,10 +202,13 @@ Decimal("0.1") + Decimal("0.2")     # Decimal('0.3')` },
 float("-inf")     # negative infinity
 float("nan")      # not a number
 
+errors = [1e1000, 100, 1]
 best = float("inf")
-for value in pile:
+for value in errors:
     if value < best:
-        best = value` },
+        best = value
+
+print(best)        ` },
         { type: "tip", value: "Starting a 'find the smallest' search at float('inf') means the first real value always wins the first comparison. It saves a special case for the empty start." }
       ]
     },
@@ -191,17 +221,21 @@ for value in pile:
       keywords: "bool boolean true false truthy falsy empty zero none condition",
       blocks: [
         { type: "text", value: "There are exactly two boolean values: True and False. Capital first letter, always. Every comparison produces one of them." },
-        { type: "code", value: `5 > 3          # True
-5 == 4         # False
-"a" in "cat"   # True` },
+        { type: "code", value: `print(5 > 3)
+print(5 == 4)
+print("a" in "cat")` },
         { type: "sub", value: "Booleans are numbers underneath" },
-        { type: "code", value: `True + True      # 2
-False * 10       # 0
-int(True)        # 1
+        { type: "code", value: `print(True + True) 
+print(False * 10)
+print(int(True))
 
 vowels = "potatis"
-count = sum(1 for ch in vowels if ch in "aeiou")   # 3
-count = sum(ch in "aeiou" for ch in vowels)        # 3, same thing` },
+
+count = sum(1 for ch in vowels if ch in "aeiou")
+print(count)
+
+count = sum(ch in "aeiou" for ch in vowels)
+print(count)` },
         { type: "tip", value: "Because True counts as 1, summing a series of tests gives you how many were true. It is a tidy way to count matches without writing a counter and a loop body." },
         { type: "sub", value: "Truthiness" },
         { type: "text", value: "Anything can be used where a condition is expected. Empty things are treated as False; everything else is True." },
@@ -236,11 +270,11 @@ if name:
         },
         { type: "warn", value: "Be careful when zero is a legitimate value. if count: is False when count is 0, which may be exactly the case you wanted to handle. When zero is meaningful, test explicitly: if count is not None." },
         { type: "sub", value: "bool()" },
-        { type: "code", value: `bool(0)       # False
-bool("")      # False
-bool([])      # False
-bool("no")    # True  — a non-empty string is True even if it says "no"
-bool(" ")     # True  — a space is a character` }
+        { type: "code", value: `print(bool(0))
+print(bool(""))
+print(bool([]))
+print(bool("no"))    # a non-empty string is True even if it says "no"
+print(bool(" "))     # a space is a character` }
       ]
     },
 
@@ -311,25 +345,24 @@ print(value)            # None — shout returns nothing` },
           ]
         },
         { type: "warn", value: "int(3.9) is 3, not 4. It truncates toward zero, so int(-3.9) is -3. When you want the nearest whole number, use round()." },
-        { type: "code", value: `int(3.9)        # 3
-int(-3.9)       # -3
-round(3.9)      # 4
-round(-3.9)     # -4` },
+        { type: "code", value: `print(int(3.9))
+print(int(-3.9))
+print(round(3.9))
+print(round(-3.9))` },
         { type: "sub", value: "Converting a decimal string" },
-        { type: "code", value: `int("3.9")          # ValueError
-int(float("3.9"))   # 3 — two explicit steps` },
+        { type: "code", value: `# int("3.9")        This line will throw ValurError
+print(int(float("3.9")))` },
         { type: "sub", value: "Handling bad input" },
         { type: "code", value: `raw = input("Number: ")
 try:
     value = int(raw)
 except ValueError:
-    print("That was not a whole number.")
-    value = 0` },
+    print("That was not a whole number.")` },
         { type: "sub", value: "Where Python does convert quietly" },
         { type: "text", value: "Mixed arithmetic between int and float gives a float. That is the one automatic conversion you can rely on." },
-        { type: "code", value: `3 + 2.0        # 5.0
-7 / 2          # 3.5  — division ALWAYS gives a float
-7 // 2         # 3    — unless you ask for floor division` },
+        { type: "code", value: `print(3 + 2.0)
+print(7 / 2)
+print(7 // 2)      # unless you ask for floor division using //` },
         { type: "note", value: "round() has a surprise worth knowing: it rounds halves to the nearest EVEN number, so round(0.5) is 0 and round(1.5) is 2. This is deliberate — always rounding up would bias any large set of numbers upward." }
       ]
     },
@@ -341,15 +374,15 @@ except ValueError:
       tagline: "type() and isinstance()",
       keywords: "type isinstance check class instance duck typing hasattr",
       blocks: [
-        { type: "code", value: `type(7)           # <class 'int'>
-type("a")         # <class 'str'>
-type([1, 2])      # <class 'list'>
-type(None)        # <class 'NoneType'>` },
+        { type: "code", value: `print(type(7))
+print(type("a"))
+print(type([1, 2]))
+print(type(None))` },
         { type: "sub", value: "isinstance() is the one to use" },
         { type: "syntax", value: "isinstance(value, type_or_tuple_of_types)" },
-        { type: "code", value: `isinstance(7, int)              # True
-isinstance(7, (int, float))     # True — any of these
-isinstance(True, int)           # True — bool is a kind of int` },
+        { type: "code", value: `print(isinstance(7, int))        
+print(isinstance(7, (int, float)))     # any of these
+print(isinstance(True, int))           # bool is a kind of int` },
         {
           type: "compare",
           bad: `if type(x) == int:

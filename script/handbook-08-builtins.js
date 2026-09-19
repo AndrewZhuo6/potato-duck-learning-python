@@ -66,24 +66,42 @@ window.HANDBOOK_GROUPS.push({
           ]
         },
         { type: "sub", value: "min and max take a key" },
-        { type: "code", value: `max([3, 1, 2])                      # 3
-max("a", "b", "c")                  # 'c' — several arguments also work
-max(words, key=len)                 # the LONGEST word, not the length
-max(people, key=lambda p: p.age)    # the whole person
-min(values, default=0)              # 0 instead of ValueError when empty` },
+        { type: "code", value: `words = ["apple", "banana", "pear"]
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    def __repr__(self):
+        return f"Person('{self.name}', {self.age})"
+
+people = [Person("Alice", 30), Person("Bob", 25)]
+values = []
+
+print(max([3, 1, 2]))
+print(max("a", "b", "c"))               # several arguments also work
+print(max(words, key=len))              # the LONGEST word, not the length
+print(max(people, key=lambda p: p.age)) # the whole person
+print(min(values, default=0))           # default prevents ValueError when empty` },
         { type: "warn", value: "min() and max() on an empty sequence raise ValueError. Pass default= when the collection might be empty." },
         { type: "sub", value: "round's surprise" },
-        { type: "code", value: `round(0.5)     # 0  — not 1
-round(1.5)     # 2
-round(2.5)     # 2  — not 3` },
+        { type: "code", value: `print(round(0.5))
+print(round(1.5))
+print(round(2.5))` },
         { type: "text", value: "It rounds halves to the nearest EVEN number. This is deliberate: always rounding up would bias any large set of numbers upward. If you want the school rule, use math.floor(x + 0.5)." },
         { type: "sub", value: "sum on other things" },
-        { type: "code", value: `sum([1.5, 2.5])                     # 4.0
-sum(1 for ch in word if ch in "aeiou")   # counting
-sum(n % 2 == 0 for n in numbers)         # counting, since True is 1
+        { type: "code", value: `numbers = [1, 2, 3, 4, 5, 6]
+word = "potato"
+
+print(sum([1.5, 2.5]))
+print(sum(1 for ch in word if ch in "aeiou"))   # counting
+print(sum(n % 2 == 0 for n in numbers))         # counting, since True is 1
 
 # not for strings — use join
-sum(["a", "b"])       # TypeError` }
+try:
+    sum(["a", "b"])
+except TypeError as e:
+    print("TypeError:", e)` }
       ]
     },
 
@@ -113,40 +131,49 @@ sum(["a", "b"])       # TypeError` }
             ["slice(a, b, c)", "a reusable slice object"]
           ]
         },
-        { type: "code", value: `len("potato")        # 6
-len([1, 2, 3])       # 3
-len({"a": 1})        # 1
+        { type: "code", value: `print(len("potato"))
+print(len([1, 2, 3]))
+print(len({"a": 1}))
 
+items = ["apple", "banana", "cherry"]
 for i, item in enumerate(items, start=1):
     print(i, item)
 
+names = ["Alice", "Bob"]
+scores = [95, 88]
 for a, b in zip(names, scores):
     print(a, b)
 
-list(reversed([1, 2, 3]))    # [3, 2, 1]` },
+print(list(reversed([1, 2, 3])))` },
         { type: "sub", value: "all and any" },
-        { type: "code", value: `all([True, True])          # True
-all([])                    # True  — vacuously, nothing failed
-any([False, True])         # True
-any([])                    # False — nothing succeeded
+        { type: "code", value: `print(all([True, True]))
+print(all([]))             # True  — vacuously, nothing failed
+print(any([False, True]))
+print(any([]))             # False — nothing succeeded
 
-all(n > 0 for n in numbers)
-any(ch in "aeiou" for ch in word)` },
+numbers = [1, 2, 3]
+word = "potato"
+print(all(n > 0 for n in numbers))
+print(any(ch in "aeiou" for ch in word))` },
         { type: "warn", value: "all([]) is True and any([]) is False. On an empty collection these give the opposite answers, which is mathematically correct and occasionally surprising in a loop." },
         { type: "sub", value: "zip in both directions" },
         { type: "code", value: `# pairing up
-pairs = list(zip([1, 2], "ab"))     # [(1, 'a'), (2, 'b')]
+pairs = list(zip([1, 2], "ab"))
+print(pairs)
 
 # unzipping — the star spreads the list back out
-numbers, letters = zip(*pairs)      # (1, 2), ('a', 'b')
+numbers, letters = zip(*pairs)
+print(numbers, letters)
 
 # transposing a grid
 matrix = [[1, 2], [3, 4]]
-list(zip(*matrix))                  # [(1, 3), (2, 4)]` },
+print(list(zip(*matrix)))` },
         { type: "warn", value: "zip stops at the shortest input and silently ignores the rest. Pass strict=True (Python 3.10+) to raise an error when lengths differ." },
         { type: "sub", value: "next with a default" },
         { type: "code", value: `# the first item matching a test, or None
-first_even = next((n for n in numbers if n % 2 == 0), None)` },
+numbers = [1, 3, 4, 6]
+first_even = next((n for n in numbers if n % 2 == 0), None)
+print(first_even)` },
         { type: "tip", value: "That pattern finds the first match without building a whole filtered list, and stops as soon as it succeeds." }
       ]
     },
@@ -178,17 +205,20 @@ first_even = next((n for n in numbers if n % 2 == 0), None)` },
           ]
         },
         { type: "code", value: `# dict has several forms
-dict(a=1, b=2)                    # {'a': 1, 'b': 2}
-dict([("a", 1), ("b", 2)])        # from pairs
-dict(zip(keys, values))           # from two lists
-dict.fromkeys("abc", 0)           # {'a': 0, 'b': 0, 'c': 0}` },
+keys = ["a", "b"]
+values = [1, 2]
+
+print(dict(a=1, b=2))
+print(dict([("a", 1), ("b", 2)]))        # from pairs
+print(dict(zip(keys, values)))           # from two lists
+print(dict.fromkeys("abc", 0))` },
         { type: "sub", value: "Asking about types" },
-        { type: "code", value: `type(7)                    # <class 'int'>
-isinstance(7, int)         # True
-isinstance(7, (int, float))# True — any of these
-issubclass(bool, int)      # True
-callable(print)            # True — can it be called?
-callable(7)                # False` },
+        { type: "code", value: `print(type(7))
+print(isinstance(7, int))
+print(isinstance(7, (int, float)))       # any of these
+print(issubclass(bool, int))
+print(callable(print))                   # can it be called?
+print(callable(7))` },
         { type: "sub", value: "Number bases" },
         {
           type: "table",
@@ -227,21 +257,20 @@ callable(7)                # False` },
         { type: "sub", value: "str against repr" },
         { type: "code", value: `s = "hi\\nthere"
 
-print(str(s))     # hi
-                  # there
-print(repr(s))    # 'hi\\nthere'
+print(str(s))
+print(repr(s))
 
-str(3.0)          # '3.0'
-repr([1, "a"])    # "[1, 'a']"` },
+print(str(3.0))
+print(repr([1, "a"]))` },
         { type: "text", value: "str() is for people; repr() is for you, when debugging. repr shows the quotes and the escapes, so you can see exactly what a value is rather than how it looks." },
         { type: "tip", value: "When a printed value looks right but behaves wrong, print its repr. That is how you spot the trailing space or the string \"5\" masquerading as the number 5." },
         { type: "sub", value: "format()" },
-        { type: "code", value: `format(3.14159, ".2f")     # '3.14'
-format(42, "05")           # '00042'
-format(1234567, ",")       # '1,234,567'
+        { type: "code", value: `print(format(3.14159, ".2f"))
+print(format(42, "05"))
+print(format(1234567, ","))
 
 # usually an f-string is clearer
-f"{3.14159:.2f}"` }
+print(f"{3.14159:.2f}")` },
       ]
     },
 
@@ -272,20 +301,23 @@ f"{3.14159:.2f}"` }
           ]
         },
         { type: "code", value: `help(len)
-help(str.split)
-help("".join)
 
-dir(str)      # every string method
-dir([])       # every list method
+# list every list method
+print(dir([]))
 
 # what can this thing do?
-[name for name in dir(str) if not name.startswith("_")]` },
+methods = [name for name in dir(str) if not name.startswith("_")]
+print(methods)` },
         { type: "tip", value: "dir() with that filter is the fastest way to discover methods you did not know existed. It works on anything — a module, a class, an instance." },
         { type: "sub", value: "Attributes by name" },
-        { type: "code", value: `getattr(obj, "name", "unknown")
+        { type: "code", value: `class Item:
+    name = "Potato"
+
+obj = Item()
+print(getattr(obj, "name", "unknown"))
 
 action = "upper"
-getattr("potato", action)()    # 'POTATO'` }
+print(getattr("potato", action)())` },
       ]
     },
 
@@ -297,8 +329,9 @@ getattr("potato", action)()    # 'POTATO'` }
       keywords: "eval exec compile danger security injection literal_eval avoid",
       blocks: [
         { type: "text", value: "eval() runs a string as a Python expression. exec() runs a string as Python statements. Both exist, both work, and both are almost always the wrong answer." },
-        { type: "code", value: `eval("2 + 3")          # 5
-exec("x = 5")          # creates x` },
+        { type: "code", value: `print(eval("2 + 3"))
+exec("x = 5")          # creates x in the current scope
+print(x)` },
         { type: "warn", value: "Never call eval or exec on anything a user typed. A string from outside your program can do anything Python can do — read your files, delete them, open a network connection. There is no safe way to sanitise it." },
         {
           type: "compare",
@@ -308,8 +341,12 @@ exec("x = 5")          # creates x` },
         },
         { type: "sub", value: "When you really need to read a literal" },
         { type: "code", value: `import ast
-ast.literal_eval("[1, 2, 3]")     # [1, 2, 3]
-ast.literal_eval("__import__('os')")  # ValueError — refuses` },
+print(ast.literal_eval("[1, 2, 3]"))
+
+try:
+    ast.literal_eval("__import__('os')")
+except ValueError as e:
+    print("ValueError:", e)  # refuses unsafe code` },
         { type: "text", value: "literal_eval only accepts literals: numbers, strings, tuples, lists, dicts, sets, booleans, None. It cannot call anything." },
         { type: "note", value: "If you find yourself reaching for eval to build a variable name from a string, you want a dictionary instead. That is what dictionaries are for." }
       ]

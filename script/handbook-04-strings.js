@@ -15,18 +15,24 @@ window.HANDBOOK_GROUPS.push({
       blocks: [
         { type: "text", value: "A string is text in quotes. Single or double — Python does not care, as long as they match." },
         { type: "code", value: `name = "Quackbit"
+print(name)
+
 name = 'Quackbit'
-empty = ""` },
+print(name)
+
+empty = ""
+print(repr(empty))` },
         { type: "text", value: "Use whichever quote saves you from escaping." },
-        { type: "code", value: `"don't"            # easy
-'don\\'t'          # awkward
-'He said "hi"'     # easy
-"He said \\"hi\\""  # awkward` },
+        { type: "code", value: `print("don't")            # easy
+print('don\\'t')          # awkward
+print('He said "hi"')     # easy
+print("He said \\"hi\\"")  # awkward` },
         { type: "sub", value: "Triple quotes" },
         { type: "text", value: "Three quotes in a row let a string run across several lines, keeping the line breaks." },
         { type: "code", value: `message = """The village is quiet.
 The stones are cold.
-The road is long."""` },
+The road is long."""
+print(message)` },
         { type: "sub", value: "Escape sequences" },
         { type: "text", value: "A backslash gives the next character a special meaning." },
         {
@@ -48,12 +54,13 @@ print("name\\tvalue")
 print("C:\\\\Users\\\\Tim")` },
         { type: "sub", value: "Raw strings" },
         { type: "text", value: "Put r before the quotes and backslashes lose their power. Essential for Windows paths and regular expressions." },
-        { type: "code", value: `print(r"C:\\Users\\Tim")     # C:\\Users\\Tim
-print("C:\\Users\\Tim")      # \\U starts a unicode escape — error` },
+        { type: "code", value: `print(r"C:\\Users\\Tim")
+# print("C:\\Users\\Tim")   # \\U starts a unicode escape — error` },
         { type: "sub", value: "Joining strings written side by side" },
         { type: "code", value: `long = ("the first part "
         "and the second part "
-        "and the third")` },
+        "and the third")
+print(long)` },
         { type: "warn", value: "Strings cannot be changed once made. word[0] = \"x\" raises TypeError. Every method that seems to change a string actually builds a new one and hands it back — which is why you must catch the result: word = word.upper(), not just word.upper()." }
       ]
     },
@@ -66,15 +73,18 @@ print("C:\\Users\\Tim")      # \\U starts a unicode escape — error` },
       keywords: "index slice substring position negative step reverse range character len out of range",
       blocks: [
         { type: "text", value: "Every character has a position, counting from 0. Negative positions count backwards from the end." },
-        { type: "code", label: "positions", value: `  p  o  t  a  t  o
-  0  1  2  3  4  5
- -6 -5 -4 -3 -2 -1` },
+        { type: "code", label: "positions", value: `#   p  o  t  a  t  o
+#   0  1  2  3  4  5
+#  -6 -5 -4 -3 -2 -1
+word = "potato"
+for i, ch in enumerate(word):
+    print(f"index {i}: {ch}")` },
         { type: "code", value: `word = "potato"
-word[0]      # 'p'
-word[3]      # 'a'
-word[-1]     # 'o'  — the last character
-word[-2]     # 't'  — second from the end
-len(word)    # 6` },
+print(word[0])
+print(word[3])
+print(word[-1])     # the last character
+print(word[-2])     # second from the end
+print(len(word))` },
         { type: "warn", value: "The last valid position is len - 1. word[6] on a 6-character string raises IndexError. Negative indexing is the safe way to get the end: word[-1] never needs you to compute the length." },
         { type: "sub", value: "Slicing" },
         { type: "syntax", value: "text[start:stop:step]" },
@@ -97,9 +107,9 @@ len(word)    # 6` },
         { type: "tip", value: "text[::-1] is the standard way to reverse anything with an order — a string, a list, a tuple. The step of -1 walks from the end to the start." },
         { type: "sub", value: "Slices never go out of range" },
         { type: "code", value: `word = "potato"
-word[10]        # IndexError
-word[2:99]      # 'tato' — no error, it just stops at the end
-word[99:]       # ''     — an empty string, still no error` },
+print(word[2:99])       # no error, it just stops at the end
+print(repr(word[99:]))  # an empty string, still no error
+# print(word[10])       # raises IndexError` },
         { type: "note", value: "That stop-before rule looks odd until you notice two things it gives you: text[:n] and text[n:] split the string perfectly with no overlap and nothing lost, and text[a:b] always contains exactly b - a characters." }
       ]
     },
@@ -117,12 +127,10 @@ word[99:]       # ''     — an empty string, still no error` },
         { type: "code", value: `name = "Quackbit"
 stones = 12
 
-f"{name} crossed {stones} stones"
-# 'Quackbit crossed 12 stones'
-
-f"{stones * 2} in total"           # any expression works
-f"{name.upper()}"                  # including method calls
-f"{'even' if stones % 2 == 0 else 'odd'}"` },
+print(f"{name} crossed {stones} stones")
+print(f"{stones * 2} in total")           # any expression works
+print(f"{name.upper()}")                  # including method calls
+print(f"{'even' if stones % 2 == 0 else 'odd'}")` },
         { type: "sub", value: "Formatting inside an f-string" },
         { type: "text", value: "A colon after the expression starts a format specification." },
         {
@@ -142,27 +150,28 @@ f"{'even' if stones % 2 == 0 else 'odd'}"` },
             ["f\"{1500:.2e}\"", "'1.50e+03'", "scientific"]
           ]
         },
-        { type: "code", value: `for item, price in prices.items():
-    print(f"{item:<12} {price:>8.2f}")
-
-# torch            4.50
-# mirror          12.00` },
+        { type: "code", value: `prices = {"torch": 4.5, "mirror": 12.0}
+for item, price in prices.items():
+    print(f"{item:<12} {price:>8.2f}")` },
         { type: "sub", value: "Debugging with =" },
         { type: "code", value: `count = 7
-print(f"{count=}")      # count=7
-print(f"{count * 2=}")  # count * 2=14` },
+print(f"{count=}")
+print(f"{count * 2=}")` },
         { type: "tip", value: "That equals sign prints the expression AND its value. It turns a print-debugging session into one keystroke per variable." },
         { type: "sub", value: "The older ways" },
-        { type: "code", value: `# .format() — still fine, more verbose
-"{} crossed {} stones".format(name, stones)
-"{0} and {0} again".format(name)
-"{n} crossed".format(n=name)
+        { type: "code", value: `name = "Quackbit"
+stones = 12
+
+# .format() — still fine, more verbose
+print("{} crossed {} stones".format(name, stones))
+print("{0} and {0} again".format(name))
+print("{n} crossed".format(n=name))
 
 # % formatting — old, avoid in new code
-"%s crossed %d stones" % (name, stones)
+print("%s crossed %d stones" % (name, stones))
 
 # plain joining
-name + " crossed " + str(stones) + " stones"` },
+print(name + " crossed " + str(stones) + " stones")` },
         { type: "warn", value: "Plain + requires every piece to already be a string. \"count: \" + 5 raises TypeError; you must write str(5). f-strings convert automatically, which is one more reason to prefer them." },
         { type: "sub", value: "Building a long string in a loop" },
         {
@@ -197,10 +206,11 @@ for word in words:
           ]
         },
         { type: "code", value: `word = "pOtAtO"
-word.lower()      # 'potato'
-word              # 'pOtAtO' — unchanged
+print(word.lower())
+print(word)              # unchanged
 
-word = word.lower()   # catch the result to keep it` },
+word = word.lower()      # catch the result to keep it
+print(word)` },
         { type: "sub", value: "Trimming" },
         {
           type: "table",
@@ -214,12 +224,12 @@ word = word.lower()   # catch the result to keep it` },
             [".removesuffix(s)", "s from the end, if present"]
           ]
         },
-        { type: "code", value: `"  hello  ".strip()        # 'hello'
-"  hello  ".lstrip()       # 'hello  '
-"###hi###".strip("#")      # 'hi'
-"xyxhixyx".strip("xy")     # 'hi' — strips ANY of those characters
+        { type: "code", value: `print(repr("  hello  ".strip()))
+print(repr("  hello  ".lstrip()))
+print(repr("###hi###".strip("#")))
+print(repr("xyxhixyx".strip("xy")))     # strips ANY of those characters
 
-"file.txt".removesuffix(".txt")   # 'file'` },
+print("file.txt".removesuffix(".txt"))` },
         { type: "warn", value: ".strip(chars) does not remove a whole word — it removes any of those individual characters from each end until it hits one that is not listed. \"banana\".strip(\"ban\") gives an empty string." },
         { type: "tip", value: "Reading user input, .strip().lower() should be reflexive. It makes \" YES \" and \"yes\" behave identically, which is nearly always what you want." }
       ]
@@ -245,18 +255,17 @@ word = word.lower()   # catch the result to keep it` },
           ]
         },
         { type: "code", value: `text = "waterbitwater"
-text.find("bit")      # 5
-text.find("zzz")      # -1
-text.count("water")   # 2
-text.index("zzz")     # ValueError
+print(text.find("bit"))
+print(text.find("zzz"))
+print(text.count("water"))
 
 # find also takes a start position
-text.find("water", 1)   # 8 — skips the first one` },
+print(text.find("water", 1))   # skips the first one` },
         { type: "tip", value: "Use .find() when a miss is normal and you will handle it; use .index() when a miss means something has gone wrong and you want it to stop loudly." },
         { type: "sub", value: "Testing the start and end" },
-        { type: "code", value: `"potato.txt".startswith("pot")        # True
-"potato.txt".endswith(".txt")        # True
-"potato.txt".endswith((".txt",".md")) # True — a tuple means any of these` },
+        { type: "code", value: `print("potato.txt".startswith("pot"))
+print("potato.txt".endswith(".txt"))
+print("potato.txt".endswith((".txt", ".md"))) # a tuple means any of these` },
         { type: "sub", value: "Asking what kind of characters" },
         { type: "text", value: "Each of these returns True only if EVERY character qualifies, and False for an empty string." },
         {
@@ -276,18 +285,22 @@ text.find("water", 1)   # 8 — skips the first one` },
             [".isprintable()", "printable"]
           ]
         },
-        { type: "code", value: `"abc".isalpha()      # True
-"ab1".isalpha()      # False — the digit disqualifies it
-"".isalpha()         # False — empty is never True
-"AB".isupper()       # True
-"AB1".isupper()      # True — digits are ignored, letters decide` },
+        { type: "code", value: `print("abc".isalpha())
+print("ab1".isalpha())      # the digit disqualifies it
+print("".isalpha())         # empty is never True
+print("AB".isupper())
+print("AB1".isupper())      # digits are ignored, letters decide` },
         { type: "warn", value: "\"-5\".isdigit() is False, because the minus sign is not a digit. To test whether text can become a number, try the conversion and catch the failure." },
         { type: "code", value: `def is_number(text):
     try:
         float(text)
         return True
     except ValueError:
-        return False` }
+        return False
+
+print(is_number("123"))
+print(is_number("-3.14"))
+print(is_number("abc"))` }
       ]
     },
 
@@ -300,29 +313,31 @@ text.find("water", 1)   # 8 — skips the first one` },
       blocks: [
         { type: "sub", value: "split()" },
         { type: "syntax", value: "text.split(separator=None, maxsplit=-1)" },
-        { type: "code", value: `"a b c".split()           # ['a', 'b', 'c'] — any whitespace
-"a,b,c".split(",")        # ['a', 'b', 'c']
-"a,b,c".split(",", 1)     # ['a', 'b,c'] — at most one split
-"a b  c".split()          # ['a', 'b', 'c'] — runs of spaces collapse
-"a b  c".split(" ")       # ['a', 'b', '', 'c'] — they do not` },
+        { type: "code", value: `print("a b c".split())           # any whitespace
+print("a,b,c".split(","))
+print("a,b,c".split(",", 1))     # at most one split
+print("a b  c".split())          # runs of spaces collapse
+print("a b  c".split(" "))       # they do not` },
         { type: "warn", value: "Calling .split() with no argument treats any run of whitespace as one separator and ignores leading and trailing space. Passing \" \" explicitly does not. The bare version is almost always what you want." },
-        { type: "code", value: `"line1\\nline2".splitlines()    # ['line1', 'line2']
-"a-b-c".rsplit("-", 1)         # ['a-b', 'c'] — split from the right
+        { type: "code", value: `print("line1\\nline2".splitlines())
+print("a-b-c".rsplit("-", 1))         # split from the right
 
 # partition splits once and keeps the separator
-"key=value".partition("=")     # ('key', '=', 'value')` },
+print("key=value".partition("="))` },
         { type: "sub", value: "join()" },
         { type: "syntax", value: "separator.join(list_of_strings)" },
-        { type: "code", value: `" ".join(["a", "b", "c"])     # 'a b c'
-"".join(["a", "b", "c"])      # 'abc'
-", ".join(["a", "b"])         # 'a, b'
-"\\n".join(lines)` },
+        { type: "code", value: `lines = ["first line", "second line"]
+
+print(" ".join(["a", "b", "c"]))
+print("".join(["a", "b", "c"]))
+print(", ".join(["a", "b"]))
+print("\\n".join(lines))` },
         { type: "warn", value: "Every item must already be a string. \" \".join([1, 2]) raises TypeError. Convert first: \" \".join(str(n) for n in numbers)." },
         { type: "tip", value: "The separator goes first and the list second, which reads backwards the first hundred times. Remember it as: this separator, applied to that list." },
         { type: "sub", value: "replace()" },
-        { type: "code", value: `"aaa".replace("a", "b")       # 'bbb'
-"aaa".replace("a", "b", 2)    # 'bba' — at most two
-"a-b-c".replace("-", "")      # 'abc' — deleting` },
+        { type: "code", value: `print("aaa".replace("a", "b"))
+print("aaa".replace("a", "b", 2))    # at most two
+print("a-b-c".replace("-", ""))      # deleting` },
         { type: "sub", value: "Padding and aligning" },
         {
           type: "table",
@@ -338,11 +353,11 @@ text.find("water", 1)   # 8 — skips the first one` },
         { type: "sub", value: "translate()" },
         { type: "text", value: "Replaces or deletes many characters in one pass — faster than chaining several .replace() calls." },
         { type: "code", value: `table = str.maketrans("abc", "xyz")
-"aabbcc".translate(table)      # 'xxyyzz'
+print("aabbcc".translate(table))
 
 # deleting characters
 table = str.maketrans("", "", "aeiou")
-"potato".translate(table)      # 'ptt'` }
+print("potato".translate(table))` }
       ]
     },
 
@@ -364,32 +379,42 @@ for ch in reversed("potato"):
     print(ch)` },
         { type: "sub", value: "Building a new string from an old one" },
         { type: "text", value: "The standard shape: start empty, walk the original, add what passes your test." },
-        { type: "code", value: `cleaned = ""
+        { type: "code", value: `message = "The 12 stones of Potato Village!"
+
+cleaned = ""
 for ch in message:
     if ch.isalpha():
         cleaned += ch
+print(cleaned)
 
 # the same thing, shorter and faster
-cleaned = "".join(ch for ch in message if ch.isalpha())` },
+cleaned = "".join(ch for ch in message if ch.isalpha())
+print(cleaned)` },
         { type: "sub", value: "Counting things" },
-        { type: "code", value: `# count vowels
+        { type: "code", value: `word = "Potato"
+
+# count vowels
 count = 0
 for ch in word.lower():
     if ch in "aeiou":
         count += 1
+print("vowel count:", count)
 
 # same, in one line
 count = sum(1 for ch in word.lower() if ch in "aeiou")
+print("one-line count:", count)
 
 # count every character at once
 from collections import Counter
 tally = Counter("waterbitwater")
-tally["w"]        # 2
-tally.most_common(1)   # [('w', 2)]` },
+print("w count:", tally["w"])
+print("most common:", tally.most_common(1))` },
         { type: "sub", value: "Counting without importing anything" },
-        { type: "code", value: `counts = {}
+        { type: "code", value: `spell = "abracadabra"
+counts = {}
 for ch in spell:
-    counts[ch] = counts.get(ch, 0) + 1` },
+    counts[ch] = counts.get(ch, 0) + 1
+print(counts)` },
         { type: "sub", value: "Comparing two strings position by position" },
         { type: "code", value: `for a, b in zip("abc", "abd"):
     if a != b:
@@ -406,11 +431,11 @@ for ch in spell:
       keywords: "ord chr unicode ascii encode decode bytes utf-8 character code alphabet",
       blocks: [
         { type: "text", value: "Every character has a number. ord() gives you the number, chr() gives you back the character." },
-        { type: "code", value: `ord("a")     # 97
-ord("A")     # 65
-ord("0")     # 48
-chr(97)      # 'a'
-chr(65)      # 'A'` },
+        { type: "code", value: `print(ord("a"))
+print(ord("A"))
+print(ord("0"))
+print(chr(97))
+print(chr(65))` },
         {
           type: "table",
           head: ["Characters", "Codes"],
@@ -423,7 +448,7 @@ chr(65)      # 'A'` },
         },
         { type: "sub", value: "What that lets you do" },
         { type: "code", value: `# position in the alphabet
-ord("c") - ord("a")        # 2
+print(ord("c") - ord("a"))
 
 # shift a letter, wrapping around (a Caesar cipher)
 def shift(ch, n):
@@ -432,26 +457,30 @@ def shift(ch, n):
     base = ord("a") if ch.islower() else ord("A")
     return chr((ord(ch) - base + n) % 26 + base)
 
+print(shift("a", 3))
+print(shift("z", 1))
+
 # build the alphabet
-alphabet = "".join(chr(ord("a") + i) for i in range(26))` },
+alphabet = "".join(chr(ord("a") + i) for i in range(26))
+print(alphabet)` },
         { type: "tip", value: "The % 26 is what makes z wrap round to a. That is the wrap-around trick from the arithmetic section, doing real work." },
         { type: "sub", value: "Strings are unicode" },
         { type: "text", value: "Python 3 strings hold any character in any writing system. Emoji, Chinese, accented letters — all ordinary characters." },
         { type: "code", value: `word = "土豆"
-len(word)        # 2
-word[0]          # '土'
+print(len(word))
+print(word[0])
 
-"café"[3]        # 'é'
-ord("é")         # 233
-ord("🦆")        # 129414` },
+print("café"[3])
+print(ord("é"))
+print(ord("🦆"))` },
         { type: "sub", value: "Bytes" },
         { type: "text", value: "A string is characters. Bytes are raw numbers. Converting between them is called encoding and decoding, and UTF-8 is the encoding to use." },
-        { type: "code", value: `data = "potato".encode("utf-8")    # b'potato'
-type(data)                         # <class 'bytes'>
-data.decode("utf-8")               # 'potato'
+        { type: "code", value: `data = "potato".encode("utf-8")
+print(data)
+print(type(data))
+print(data.decode("utf-8"))
 
-"土豆".encode("utf-8")
-# b'\\xe5\\x9c\\x9f\\xe8\\xb1\\x86' — six bytes for two characters` },
+print("土豆".encode("utf-8"))  # six bytes for two characters` },
         { type: "note", value: "You only meet bytes when reading files in binary mode or talking over a network. For everything else, work with strings and let Python handle the rest." }
       ]
     }

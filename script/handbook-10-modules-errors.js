@@ -15,17 +15,19 @@ window.HANDBOOK_GROUPS.push({
       blocks: [
         { type: "syntax", value: "import module · from module import name · import module as alias" },
         { type: "code", value: `import math
-math.sqrt(16)             # 4.0
+print(math.sqrt(16))
 
 from math import sqrt
-sqrt(16)                  # no prefix needed
+print(sqrt(16))           # no prefix needed
 
 from math import sqrt, pi, floor
+print(pi, floor(3.99))
 
 import math as m
-m.sqrt(16)
+print(m.sqrt(16))
 
-from collections import Counter as Tally` },
+from collections import Counter as Tally
+print(Tally("banana"))` },
         {
           type: "table",
           head: ["Form", "Use when"],
@@ -45,16 +47,24 @@ from collections import Counter as Tally` },
     for i in range(2, int(n ** 0.5) + 1):
         if n % i == 0:
             return False
-    return True` },
-        { type: "code", label: "main.py", value: `import helpers
-helpers.is_prime(17)
+    return True
+
+print("helpers.py loaded")` },
+        { type: "code", label: "main.py", value: `# in your project, Python imports helpers.py from the same directory
+import types, sys
+helpers = types.ModuleType("helpers")
+helpers.is_prime = lambda n: n > 1 and all(n % i != 0 for i in range(2, int(n ** 0.5) + 1))
+sys.modules["helpers"] = helpers
+
+import helpers
+print(helpers.is_prime(17))
 
 from helpers import is_prime
-is_prime(17)` },
+print(is_prime(17))` },
         { type: "warn", value: "Never name your own file after a standard module. A file called math.py or random.py in your folder will be imported instead of the real one, and the error will make no sense at all." },
         { type: "sub", value: "Where Python looks" },
         { type: "code", value: `import sys
-print(sys.path)     # the folders searched, in order` },
+print(sys.path[:3])  # first few search folders` },
         { type: "sub", value: "__name__ == \"__main__\"" },
         { type: "text", value: "When a file is run directly its __name__ is \"__main__\"; when it is imported, __name__ is the module's name. This lets a file be both a program and a library." },
         { type: "code", value: `def main():
@@ -67,12 +77,13 @@ if __name__ == "__main__":
         { type: "code", value: `# standard library first
 import math
 import os
+print("Standard modules imported")
 
-# then third-party
-import requests
+# then third-party (e.g. requests, numpy)
+# import requests
 
 # then your own
-import helpers` }
+# import helpers` }
       ]
     },
 
@@ -98,15 +109,21 @@ import helpers` }
         },
         { type: "warn", value: "Mode \"w\" erases the file the instant it opens, before you write anything. If you meant to add to it, use \"a\"." },
         { type: "sub", value: "Reading" },
-        { type: "code", value: `with open("data.txt", encoding="utf-8") as f:
+        { type: "code", value: `# create sample file
+with open("data.txt", "w", encoding="utf-8") as f:
+    f.write("first line\\nsecond line\\nthird line\\n")
+
+with open("data.txt", encoding="utf-8") as f:
     content = f.read()          # the whole thing as one string
+    print("content:", repr(content))
 
 with open("data.txt", encoding="utf-8") as f:
     lines = f.readlines()       # a list, each ending in \\n
+    print("lines:", lines)
 
 with open("data.txt", encoding="utf-8") as f:
     for line in f:              # one line at a time, low memory
-        print(line.rstrip())` },
+        print("line:", line.rstrip())` },
         { type: "tip", value: "Looping over the file object directly is the best default — it never loads the whole file into memory, so it works on a file larger than your RAM." },
         { type: "sub", value: "Writing" },
         { type: "code", value: `with open("out.txt", "w", encoding="utf-8") as f:
@@ -117,8 +134,11 @@ with open("log.txt", "a", encoding="utf-8") as f:
     f.write("another entry\\n")
 
 # print can write to a file
-with open("out.txt", "w") as f:
-    print("hello", file=f)` },
+with open("out.txt", "w", encoding="utf-8") as f:
+    print("hello", file=f)
+
+with open("out.txt", "r", encoding="utf-8") as f:
+    print(f.read().rstrip())` },
         { type: "sub", value: "Always use with" },
         {
           type: "compare",
@@ -134,32 +154,43 @@ f.close()`,
         { type: "code", value: `from pathlib import Path
 
 p = Path("data") / "notes.txt"     # works on every OS
-p.exists()
-p.read_text(encoding="utf-8")
+p.parent.mkdir(exist_ok=True)
 p.write_text("hello", encoding="utf-8")
-p.suffix          # '.txt'
-p.stem            # 'notes'
-p.parent          # Path('data')
+
+print(p.exists())
+print(p.read_text(encoding="utf-8"))
+print(p.suffix)
+print(p.stem)
+print(p.parent)
 
 for f in Path("data").glob("*.txt"):
     print(f)` },
         { type: "sub", value: "JSON and CSV" },
         { type: "code", value: `import json
 
-with open("data.json", encoding="utf-8") as f:
-    data = json.load(f)
+data = {"name": "Quackbit", "level": 3}
 
 with open("out.json", "w", encoding="utf-8") as f:
     json.dump(data, f, indent=2)
 
+with open("out.json", encoding="utf-8") as f:
+    loaded = json.load(f)
+    print("json loaded:", loaded)
+
 text = json.dumps(data)      # to a string
+print("json text:", text)
 data = json.loads(text)      # from a string
 
 import csv
 
+with open("data.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow(["name", "score"])
+    writer.writerow(["Quackbit", "100"])
+
 with open("data.csv", newline="", encoding="utf-8") as f:
     for row in csv.DictReader(f):
-        print(row["name"])` }
+        print(row["name"], row["score"])` }
       ]
     },
 
@@ -173,6 +204,7 @@ with open("data.csv", newline="", encoding="utf-8") as f:
         { type: "syntax", value: "try:\\n    risky\\nexcept SomeError:\\n    handle\\nelse:\\n    ran cleanly\\nfinally:\\n    always" },
         { type: "code", value: `try:
     value = int(input("Number: "))
+    print("Parsed number:", value)
 except ValueError:
     print("That was not a whole number.")
     value = 0` },
@@ -192,6 +224,7 @@ except FileNotFoundError:
     print("no such file")
 else:
     print(f.read())      # only if the open succeeded
+    f.close()
 finally:
     print("done")        # always` },
         { type: "sub", value: "Catch what you expect, not everything" },
@@ -209,32 +242,36 @@ except (ValueError, KeyError) as e:
           why: "A bare except swallows everything — including typos in your own code and Ctrl-C. You get a program that silently does nothing and gives you no way to find out why."
         },
         { type: "code", value: `# several kinds, handled the same way
-except (ValueError, TypeError):
-    ...
+try:
+    int("abc")
+except (ValueError, TypeError) as e:
+    print("Caught ValueError or TypeError:", e)
 
 # several kinds, handled differently
-except ValueError:
-    ...
-except KeyError:
-    ...
-
-# catching the object to inspect it
-except ValueError as e:
-    print("failed:", e)` },
-        { type: "sub", value: "raise" },
-        { type: "code", value: `if level < 1:
-    raise ValueError("level must be at least 1")
-
-# re-raise after noting it
+data = {}
 try:
-    risky()
+    val = data["missing"]
 except ValueError:
-    log("it failed")
-    raise
+    print("Caught ValueError")
+except KeyError as e:
+    print("Caught KeyError:", e)` },
+        { type: "sub", value: "raise" },
+        { type: "code", value: `level = 0
+try:
+    if level < 1:
+        raise ValueError("level must be at least 1")
+except ValueError as e:
+    print("Caught validation error:", e)
 
 # raise a new one, keeping the original as the cause
+try:
+    config = {}
+    port = config["port"]
 except KeyError as e:
-    raise ValueError("bad config") from e` },
+    try:
+        raise ValueError("bad config") from e
+    except ValueError as err:
+        print(f"Raised: {err!r} caused by {err.__cause__!r}")` },
         { type: "sub", value: "Your own exception types" },
         { type: "code", value: `class GuardianError(Exception):
     pass
@@ -242,10 +279,14 @@ except KeyError as e:
 class WrongAnswer(GuardianError):
     pass
 
+def check(answer):
+    if answer != 42:
+        raise WrongAnswer("Incorrect answer provided!")
+
 try:
-    check(answer)
+    check(10)
 except GuardianError as e:      # catches both
-    print(e)` },
+    print("Caught GuardianError:", e)` },
         { type: "sub", value: "Ask forgiveness, not permission" },
         { type: "text", value: "Python's style prefers trying the thing and catching the failure over checking first. It is one operation rather than two, and it has no gap between the check and the use." },
         {
@@ -324,14 +365,21 @@ value = data.get("key", 0)`,
         },
         { type: "sub", value: "Catching a parent" },
         { type: "code", value: `# catches both IndexError and KeyError
-except LookupError:
-    ...
+try:
+    items = [1, 2]
+    val = items[10]
+except LookupError as e:
+    print("Caught with LookupError:", repr(e))
 
 # catches every file and permission problem
-except OSError:
-    ...` },
+try:
+    open("missing_dir/file.txt")
+except OSError as e:
+    print("Caught with OSError:", repr(e))` },
         { type: "sub", value: "assert" },
-        { type: "code", value: `assert len(pile) > 0, "the pile must not be empty"` },
+        { type: "code", value: `pile = [1, 2, 3]
+assert len(pile) > 0, "the pile must not be empty"
+print("Assert passed, pile items:", len(pile))` },
         { type: "warn", value: "assert is for catching your own mistakes during development, not for validating user input. Python removes every assert when run with the -O flag, so any check you actually need must be a real if and raise." }
       ]
     },
@@ -345,9 +393,14 @@ except OSError:
       blocks: [
         { type: "text", value: "Debugging is the discipline of replacing what you assume with what you observe. Almost every bug is a variable holding something other than what you expected." },
         { type: "sub", value: "print, used well" },
-        { type: "code", value: `print(f"{count=}")              # count=7
-print(f"{data=}")               # shows the whole structure
-print(f"{type(value)=}")        # when the type is the suspect
+        { type: "code", value: `count = 7
+data = {"a": 1, "b": 2}
+value = 3.14
+text = "potato "
+
+print(f"{count=}")
+print(f"{data=}")
+print(f"{type(value)=}")
 print(repr(text))               # reveals hidden spaces and newlines` },
         { type: "tip", value: "Print the repr, not the value. 'potato ' and 'potato' look identical printed; their reprs do not. That trailing space has cost more hours than any other single character." },
         { type: "sub", value: "Reading a traceback" },
@@ -361,8 +414,11 @@ ZeroDivisionError: division by zero` },
         { type: "sub", value: "breakpoint()" },
         { type: "code", value: `def process(data):
     total = sum(data)
-    breakpoint()        # execution pauses here
-    return total / len(data)` },
+    # breakpoint()        # execution pauses here in interactive debuggers
+    print("data total:", total)
+    return total / len(data)
+
+print("result:", process([10, 20, 30]))` },
         {
           type: "table",
           head: ["Command", "Does"],
@@ -378,7 +434,7 @@ ZeroDivisionError: division by zero` },
         { type: "sub", value: "logging" },
         { type: "text", value: "For anything beyond a quick check, logging beats print — it can be switched off, filtered by severity, and sent to a file." },
         { type: "code", value: `import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG, force=True, format="%(levelname)s: %(message)s")
 
 logging.debug("detail for me")
 logging.info("normal progress")
