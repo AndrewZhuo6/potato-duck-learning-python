@@ -8,7 +8,7 @@ window.QUACKBIT_STORIES = [
         title: "The Decision",
         desc: "Learn to make decisions at the crossroad based on the magical signs before you.",
         url: "v1.html",
-        cover: "/assets/images/v-preview/v1_cover.jpeg"
+        cover: "./assets/images/v-preview/v1_cover.jpeg"
     },
     {
         id: "v2",
@@ -19,7 +19,7 @@ window.QUACKBIT_STORIES = [
         title: "Something Redundant",
         desc: "Escape the enchanted cave by checking for monsters without breaking the cave's curse.",
         url: "v2.html",
-        cover: "/assets/images/v-preview/v2_cover.jpeg"
+        cover: "./assets/images/v-preview/v2_cover.jpeg"
     },
     {
         id: "v3",
@@ -30,7 +30,7 @@ window.QUACKBIT_STORIES = [
         title: "Our Inventory",
         desc: "Master key-value dictionaries to instantly counter monsters with weapons.",
         url: "v3.html",
-        cover: "/assets/images/v-preview/v3_cover.jpeg"
+        cover: "./assets/images/v-preview/v3_cover.jpeg"
     },
     {
         id: "v4",
@@ -41,7 +41,7 @@ window.QUACKBIT_STORIES = [
         title: "Existing Spell",
         desc: "Create custom sorting spells to tidy up your crowded backpack inventory.",
         url: "v4.html",
-        cover: "/assets/images/v-preview/v4_cover.jpeg"
+        cover: "./assets/images/v-preview/v4_cover.jpeg"
     },
     {
         id: "v5",
@@ -52,7 +52,7 @@ window.QUACKBIT_STORIES = [
         title: "Your Consideration",
         desc: "Fuse resonance crystals while respecting duration and body mana capacity limits.",
         url: "v5.html",
-        cover: "/assets/images/v-preview/v5_cover.jpeg"
+        cover: "./assets/images/v-preview/v5_cover.jpeg"
     },
     {
         id: "g1",
@@ -63,7 +63,7 @@ window.QUACKBIT_STORIES = [
         title: "Jumping River",
         desc: "Cross the roaring river with calculated leaps and careful decision making.",
         url: "g1.html",
-        cover: "/assets/images/g-preview/g1_cover.jpeg"
+        cover: "./assets/images/g-preview/g1_cover.jpeg"
     },
     {
         id: "g2",
@@ -74,7 +74,7 @@ window.QUACKBIT_STORIES = [
         title: "Endless Doubts",
         desc: "Decipher mystical words and conquer inner doubts guarding the ancient trail.",
         url: "g2.html",
-        cover: "/assets/images/g-preview/g2_cover.jpeg"
+        cover: "./assets/images/g-preview/g2_cover.jpeg"
     },
     {
         id: "g3",
@@ -85,7 +85,7 @@ window.QUACKBIT_STORIES = [
         title: "7 Floating Alphabet",
         desc: "Align the 7 floating alphabetic runes in the guardian's sanctum.",
         url: "g3.html",
-        cover: "/assets/images/g-preview/g3_cover.jpeg"
+        cover: "./assets/images/g-preview/g3_cover.jpeg"
     },
     {
         id: "g4",
@@ -96,7 +96,7 @@ window.QUACKBIT_STORIES = [
         title: "Fuzzy Talking Wall",
         desc: "Parse riddles whispered from the fuzzy living wall blocking your path.",
         url: "g4.html",
-        cover: "/assets/images/g-preview/g4_cover.jpeg"
+        cover: "./assets/images/g-preview/g4_cover.jpeg"
     },
     {
         id: "g5",
@@ -107,7 +107,7 @@ window.QUACKBIT_STORIES = [
         title: "Palindoom",
         desc: "Defeat the guardian that mirrors every attack back at you.",
         url: "g5.html",
-        cover: "/assets/images/g-preview/g5_cover.jpeg"
+        cover: "./assets/images/g-preview/g5_cover.jpeg"
     },
     {
         id: "g6",
@@ -118,7 +118,7 @@ window.QUACKBIT_STORIES = [
         title: "SuPrime",
         desc: "Calculate prime numerical spells under strict time and memory limits.",
         url: "g6.html",
-        cover: "/assets/images/g-preview/g6_cover.jpeg"
+        cover: "./assets/images/g-preview/g6_cover.jpeg"
     },
     {
         id: "g7",
@@ -129,7 +129,7 @@ window.QUACKBIT_STORIES = [
         title: "The Echoing Gate",
         desc: "Unravel recursive chants echoing across the ancient archway.",
         url: "g7.html",
-        cover: "/assets/images/g-preview/g7_cover.jpeg"
+        cover: "./assets/images/g-preview/g7_cover.jpeg"
     },
     {
         id: "g8",
@@ -140,7 +140,7 @@ window.QUACKBIT_STORIES = [
         title: "The Decision",
         desc: "Execute high-speed hash lookups to outpace the swift guardian.",
         url: "g8.html",
-        cover: "/assets/images/g-preview/g8_cover.jpeg"
+        cover: "./assets/images/g-preview/g8_cover.jpeg"
     },
     {
         id: "g9",
@@ -151,7 +151,7 @@ window.QUACKBIT_STORIES = [
         title: "The Hungry Cobra",
         desc: "Outmaneuver the venomous cobra with optimal algorithmic speed.",
         url: "g9.html",
-        cover: "/assets/images/g-preview/g9_cover.jpeg"
+        cover: "./assets/images/g-preview/g9_cover.jpeg"
     },
     {
         id: "g10",
@@ -162,7 +162,7 @@ window.QUACKBIT_STORIES = [
         title: "Fast, We're Running Out of Time!",
         desc: "Search the two-dimensional realm before the hourglass runs out.",
         url: "g10.html",
-        cover: "/assets/images/g-preview/g10_cover.jpeg"
+        cover: "./assets/images/g-preview/g10_cover.jpeg"
     },
     {
         id: "boss",
@@ -173,7 +173,7 @@ window.QUACKBIT_STORIES = [
         title: "The Pythorn",
         desc: "The ultimate showdown against the great serpent PyThorn! Combine all your spells to save the village.",
         url: "boss.html",
-        cover: "/assets/images/boss-preview/boss.jpeg"
+        cover: "./assets/images/boss-preview/boss_cover.jpeg"
     }
 ];
 
