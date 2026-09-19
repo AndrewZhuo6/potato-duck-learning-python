@@ -12,6 +12,15 @@ const myCSS = `
 
 addCustomCSS(myCSS);
 
+document.addEventListener('scroll', () => {
+    const audio = document.getElementById('bg-music');
+    if (audio && audio.paused) {
+        audio.play().catch(error => {
+            console.log("Browser blocks it:", error);
+        });
+    }
+}, { once: true, passive: true });
+
 window.initPreparationChapter({
     chapterNumber: 15,
     chapterTitle: "Guardian 10: Fast, We're Running Out of Time!",
