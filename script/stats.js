@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     ];
 
     const BADGES = [
-        { icon: "🥚", name: "First Quack",      need: 1,  desc: "Clear your first challenge" },
-        { icon: "🏡", name: "Village Graduate", need: 5,  desc: "Clear all 5 village chapters" },
-        { icon: "🛡️", name: "Guardian Breaker", need: 10, desc: "Beat 5 guardians" },
-        { icon: "🗺️", name: "Road Conqueror",   need: 15, desc: "Beat all 10 guardians" },
-        { icon: "🐍", name: "PyThorn Slayer",   need: 16, desc: "Defeat PyThorn" }
+        { icon: "🥚", name: "First Quack", need: 1, rarity: "Common", desc: "Clear your first challenge" },
+        { icon: "🏡", name: "Village Graduate", need: 5, rarity: "Novice",  desc: "Clear all 5 village chapters" },
+        { icon: "🛡️", name: "Guardian Breaker", need: 10, rarity: "Epic", desc: "Beat 5 guardians" },
+        { icon: "🗺️", name: "Road Conqueror", need: 15, rarity: "Ancient", desc: "Beat all 10 guardians" },
+        { icon: "🐍", name: "PyThorn Slayer", need: 16, rarity: "Legendary", desc: "Defeat PyThorn" }
     ];
 
     function renderProfile() {
@@ -79,9 +79,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("badge-list").innerHTML = BADGES.map((b) => {
             const earned = completed >= b.need;
             return `
-                <li class="badge ${earned ? "earned" : "locked"}" title="${b.desc}">
+                <li class="badge ${earned ? "earned " + b.rarity : "locked"}" title="${b.desc}">
                     <span class="badge-icon">${b.icon}</span>
                     <span class="badge-name">${b.name}</span>
+                    <span class="badge-rank">${b.rarity}</span>
                 </li>`;
         }).join("");
     }

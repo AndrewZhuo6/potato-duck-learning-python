@@ -3,71 +3,79 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cornelius</title>
+        <title>Cornelius Jabez Lim - Portfolio</title>
         <link rel="stylesheet" href="cornelius.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="../../assets/images/face.png">
     </head>
     <body>
         <header class="header">
             <div class="logo">
-            <a href="../../index.html">
-                <img src="../../assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
-            </a>
+                <a href="../../index.html">
+                    <img src="../../assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+                </a>
             </div>
             <nav class="navbar" id="nav-logged-out">
                 <ul class="nav-links">
-                    <li><a href="../../team.html">Go Back!</a></li>
+                    <li><a href="../../team.html" class="nav-btn">Go Back!</a></li>
                 </ul>
             </nav>
         </header>
         <script>QuackbitAccount.renderHeader();</script>
-        <main>
-            <section>
-                <div class="profile">
-                    <img src="assets/images/cornelius.jpg" alt="Cornelius" width="200">
+        <main class="bento-grid">
+            <section class="bento-item item-intro">
+                <h5>Welcome to the portfolio of</h5>
+                <h1>Cornelius Jabez Lim</h1>
+                <h4 class="role">UI Designer | AI Major</h4>
+                <p>Tech enthusiast with a passion for AI implementation in physical machines and embedded systems. Mainly focused on back-end development, data manipulation, and crafting seamless user interfaces.</p>
+            </section>
+            <section class="bento-item item-profile">
+                <img src="cornelius.jpeg" alt="Cornelius" class="profile-img">
+                <div class="profile-overlay">
                     <h4>Unfathomable Curiosity</h4>
                 </div>
-                <div class="information">
-                    <h3>Cornelius Jabez Lim</h3>
-                    <h4>UI Designer | AI Major</h4>
-                    <p>
-                        Tech enthusiast with a passion for AI implementation in physical machine and embedded system. Mainly focused on back-end development and data manipulation. Experienced in designing and implementing user interfaces for web and mobile applications. 
-                    </p>
+            </section>
+            <section class="bento-item item-skills">
+                <h2>Skills</h2>
+                <div class="tags">
+                    <span class="tag">C</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">MATLAB</span>
+                    <span class="tag">Figma</span>
+                    <span class="tag">HTML/CSS</span>
+                    <span class="tag">Git & GitHub</span>
                 </div>
             </section>
-            <section>
-                <div class="developed-skills">
-                    <h2>Developed Skills</h2>
-                    <div class="skill">
-                        <h3>Programming Languages</h3>
-                        <p>C, Python</p>
-                    </div>
-                    <div class="skill">
-                        <h3>Front-End Development</h3>
-                        <p>Figma, HTML, CSS</p>
-                    </div>
-                    <div class="skill">
-                        <h3>Version Control</h3>
-                        <p>Git, GitHub</p>
-                    </div>
+
+            <section class="bento-item item-interests">
+                <h2 id="interest-h">Interests & Beyond</h2>
+                <div class="tags">
+                    <span class="tag">AI Implementation</span>
+                    <span class="tag">User Interface Design</span>
+                    <span class="tag">Embedded Systems</span>
+                    <span class="tag">Marathon Running</span>
                 </div>
             </section>
-            <section>
-                <div class="interest">
-                    <h2>Interest</h2>
-                    <p>AI Implementation, User Interface Design</p>
-                </div>
-            </section>
-            <section>
-                <div class="Projects">
-                    <h2>Projects</h2>
-                    <div class="project">
+
+            <section class="bento-item item-projects">
+                <h2>Featured Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <span class="project-category">Game Dev</span>
                         <h3>2D Game Development</h3>
                         <p>Developed a 2D style game using C and raylib, implementing core gameplay mechanics and level design.</p>
                     </div>
-                    <div class="project">
-                        <h3>Ultrasonic Sensor Wireless Web Integration</h3>
-                        <p>During my high school years, I worked on a project that integrated ultrasonic sensors with a wireless web interface via ESP8266 and firebase, allowing real-time monitoring and data visualization.</p>
+                    <div class="project-card">
+                        <span class="project-category">IoT & Web Integration</span>
+                        <h3>Ultrasonic Sensor Network</h3>
+                        <p>Integrated ultrasonic sensors with a wireless web interface via ESP8266 and Firebase, allowing real-time monitoring and data visualization.</p>
+                    </div>
+                    <div class="project-card">
+                        <span class="project-category">E-Learning Website</span>
+                        <h3>UI Design</h3>
+                        <p>Ensuring visual pleasant and user experience through design structuring and visual queue.</p>
                     </div>
                 </div>
             </section>
