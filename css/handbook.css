@@ -195,12 +195,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.9rem;
-  border-radius: 9999px;
+  padding: 0.35rem 1rem;
+  border-radius: 7px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-weight: 600;
-  border: 1.5px solid;
+  border: 2px solid;
+  margin-left: 0.5%;
   transition: all 0.3s ease;
   user-select: none;
 }
@@ -220,7 +221,6 @@ body {
 
 .handbook-engine-pill.loading .pill-dot {
   background: #f59e0b;
-  box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
   animation: pill-pulse 1.5s infinite;
 }
 
@@ -232,7 +232,6 @@ body {
 
 .handbook-engine-pill.ready .pill-dot {
   background: #22c55e;
-  box-shadow: 0 0 6px rgba(34, 197, 94, 0.7);
 }
 
 .handbook-engine-pill.error {
@@ -243,12 +242,6 @@ body {
 
 .handbook-engine-pill.error .pill-dot {
   background: #ef4444;
-}
-
-@keyframes pill-pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
 }
 
 .handbook-searchbar {
@@ -272,7 +265,6 @@ body {
 .handbook-search-input:focus {
   outline: none;
   border-color: var(--primary-second);
-  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
 }
 
 .handbook-search-clear {
@@ -312,28 +304,21 @@ body {
   gap: 1rem;
   padding: 1.25rem 1.5rem;
   margin-bottom: 1.5rem;
-  background: #525d38;
+  background: #3a402d;
   border: 3px dashed var(--header-color-3section-brown);
   border-radius: 7px;
 }
 
 .handbook-group-icon {
-  font-size: 2rem;
+  font-size: 3rem;
   line-height: 1;
 }
 
 .handbook-group-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 800;
   margin: 0;
   color: #ffffff;
-}
-
-.handbook-group-blurb {
-  margin: 0.25rem 0 0;
-  font-size: 0.9rem;
-  color: #cbd5e1;
-  line-height: 1.6;
 }
 
 .handbook-group.is-landed,
@@ -344,7 +329,7 @@ body {
 
 .handbook-content {
   grid-area: content;
-  padding: 1rem 4rem 4rem 3rem;
+  padding: 2rem 4rem 4rem 3rem;
   height: 100vh;
   overflow-y: auto;
   border-radius: 7px;
@@ -575,10 +560,9 @@ body {
 .handbook-notebook-cell {
   position: relative;
   margin: 1.35rem 0 1.65rem;
-  border-radius: 9px;
+  border-radius: 7px;
   background: #141a23;
-  border: 1px solid #333d4d;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  border: 3px solid #333d4d;
   overflow: hidden;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }

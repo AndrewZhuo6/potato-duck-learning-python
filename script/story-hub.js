@@ -58,11 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let statusBadge = "";
             if (isCompleted) {
-                statusBadge = `<span class="card-status-badge completed">✓ Completed</span>`;
+                statusBadge = `<span class="card-status-badge completed">Completed</span>`;
             } else if (isCurrent) {
-                statusBadge = `<span class="card-status-badge current">⭐ Current</span>`;
+                statusBadge = `<span class="card-status-badge current">Current</span>`;
             } else {
-                statusBadge = `<span class="card-status-badge locked">🔒 Locked</span>`;
+                statusBadge = `<span class="card-status-badge locked">Locked</span>`;
             }
 
             let coverContent = "";

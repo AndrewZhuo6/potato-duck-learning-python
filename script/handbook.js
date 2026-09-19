@@ -335,7 +335,6 @@ def _quackbit_run_cell_isolated(code_str):
           <span class="handbook-group-icon" aria-hidden="true">${group.icon}</span>
           <div>
             <h2 class="handbook-group-title">${escapeHtml(group.title)}</h2>
-            ${group.blurb ? `<p class="handbook-group-blurb">${escapeHtml(group.blurb)}</p>` : ""}
           </div>
         </header>
         ${group.sections.map(renderSection).join("")}
