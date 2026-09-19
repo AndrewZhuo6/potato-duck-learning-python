@@ -166,9 +166,12 @@
 }
 
 .story-grid {
+  width: 100%;
+  max-width: 1400px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
+  padding: 0 1.5rem;
 }
 
 .story-card {

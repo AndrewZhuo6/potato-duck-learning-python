@@ -23,7 +23,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 4rem;
+    padding-top: 40%;
     flex: 1; 
     padding-bottom: 2rem;
     width: 100%;
@@ -35,11 +35,12 @@ body {
 }
 
 .team-row {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem 5rem;
     max-width: 800px;
-    width: 100%;
+    padding: 0 1.5rem;
     justify-items: center;
 }
 
@@ -76,40 +77,6 @@ body {
     font-size: 1.4rem;
     font-weight: bold;
     margin-bottom: 0.2rem;
-}
-
-#tim {
-    position: absolute;
-    top: 80%;
-    left: 15%;
-}
-
-#cat {
-    position: absolute;
-    top: 80%;
-}
-
-#and {
-    position: absolute;
-    top: 80%;
-    right: 15%;
-}
-
-#cor {
-    position: absolute;
-    top: 159%;
-    left: 15%;
-}
-
-#kez {
-    position: absolute;
-    top: 159%;
-}
-
-#ste {
-    position: absolute;
-    top: 159%;
-    right: 15%;
 }
 
 .member-role {
