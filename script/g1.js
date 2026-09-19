@@ -1,3 +1,17 @@
+function addCustomCSS(cssCode) {
+    const style = document.createElement('style');
+    style.textContent = cssCode;
+    document.head.appendChild(style);
+}
+
+const myCSS = `
+    body {
+        background: var(--main-bg) url('../assets/images/g-preview/g1_cover.jpeg') center/cover fixed;
+    }
+`;
+
+addCustomCSS(myCSS);
+
 window.initPreparationChapter({
     chapterNumber: 6,
     chapterTitle: "Guardian 1: Jumping River",

@@ -271,7 +271,7 @@ window.initPreparationChapter = function (config) {
 
             if (enginePill) {
                 enginePill.className = "engine-status-pill ready";
-                enginePill.innerHTML = `<span>🟢</span> Python 3.11 Ready`;
+                enginePill.innerHTML = `Python 3.11 Ready`;
             }
 
             if (submitBtn) submitBtn.disabled = false;
@@ -279,7 +279,7 @@ window.initPreparationChapter = function (config) {
             console.error("Pyodide loading error:", err);
             if (enginePill) {
                 enginePill.className = "engine-status-pill error";
-                enginePill.innerHTML = `<span>🔴</span> Python Engine Failed`;
+                enginePill.innerHTML = `Python Engine Failed`;
             }
             if (statusMsg){
                 statusMsg.style.color = "#dc2626";
@@ -304,7 +304,7 @@ window.initPreparationChapter = function (config) {
             outcomeContainer.innerHTML = `
                 <div class="outcome-header">
                     <span class="outcome-title-badge ${passed ? 'badge-pass' : 'badge-fail'}">
-                        ${passed ? '🎉 Victory' : '💥 Attempt Failed'}
+                        ${passed ? 'Victory' : 'Attempt Failed'}
                     </span>
                     <h2 class="outcome-heading">
                         ${passed ? `${chapterTitle || `Chapter ${chapterNumber}`} Conquered!` : `${chapterTitle || `Chapter ${chapterNumber}`} - Try Again!`}
@@ -338,7 +338,7 @@ window.initPreparationChapter = function (config) {
                             ${passed ? `
                                 <a href="${nextTarget}" class="btn-outcome-next">${nextText}</a>
                                 <button type="button" id="outcome-review-btn" class="btn-outcome-review">Review Code ↩</button>
-                                <button type="button" id="outcome-saved-btn" class="btn-outcome-saved">💾 Saved Code</button>
+                                <button type="button" id="outcome-saved-btn" class="btn-outcome-saved">Saved Code</button>
                             ` : `
                                 <button type="button" id="outcome-retry-btn" class="btn-outcome-retry">Back to Editor & Try Again ↩</button>
                             `}

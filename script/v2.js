@@ -1,3 +1,17 @@
+function addCustomCSS(cssCode) {
+    const style = document.createElement('style');
+    style.textContent = cssCode;
+    document.head.appendChild(style);
+}
+
+const myCSS = `
+    body {
+        background: var(--main-bg) url('../assets/images/v-preview/v2_cover.jpeg') center/cover fixed;
+    }
+`;
+
+addCustomCSS(myCSS);
+
 window.initPreparationChapter({
     chapterNumber: 2,
     chapterTitle: "Village 2: Something Redundant",
