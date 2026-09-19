@@ -597,13 +597,13 @@ body {
 }
 
 .handbook-compare-bad .handbook-compare-label {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: #b91c1c;
+  color: #fee2e2;
 }
 
 .handbook-compare-good .handbook-compare-label {
-  background: #dcfce7;
-  color: #15803d;
+  background: #15803d;
+  color: #dcfce7;
 }
 
 .handbook-compare-side pre {
