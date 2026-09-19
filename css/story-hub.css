@@ -420,49 +420,6 @@
   box-sizing: border-box;
 }
 
-
-/* Dev / Testing control */
-.story-dev-controls {
-  margin-top: 3rem;
-  padding: 1rem 1.5rem;
-  background: var(--main-bg);
-  border: 1px dashed #cbd5e1;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.story-dev-text {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.story-dev-buttons {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.btn-dev {
-  background: var(--main-bg);
-  border: 1px solid #cbd5e1;
-  color: var(--text-main);
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.btn-dev:hover {
-  background: #e2e8f0;
-  color: #0f172a;
-}
-
 @media (max-width: 768px) {
   .story-hub-hero h1 {
     font-size: 2rem;
