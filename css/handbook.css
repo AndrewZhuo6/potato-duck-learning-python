@@ -265,7 +265,7 @@ body {
   font-size: 1rem;
   border: 3px solid var(--header-color-3section-brown);
   border-radius: 7px;
-  background: #ffffff;
+  background: #fffbeb;
   color: var(--text-main);
 }
 
@@ -357,6 +357,9 @@ body {
   padding: 1.75rem;
   margin-bottom: 1.75rem;
   scroll-margin-top: 90px;
+  background: #e1dac9;
+  border: 3.5px dashed var(--header-color-3section-brown);
+  border-radius: 7px;
   color: var(--text-main);
 }
 
@@ -377,6 +380,16 @@ body {
   line-height: 1.4;
 }
 
+.handbook-list {
+  margin: 0.75rem 0 1.25rem 1.25rem;
+  padding: 0;
+}
+
+.handbook-list li {
+  line-height: 1.75;
+  margin-bottom: 0.4rem;
+}
+
 .handbook-section-head {
   display: flex;
   align-items: flex-start;
@@ -388,6 +401,8 @@ body {
 
 .handbook-section-icon {
   font-size: 2rem;
+  background-color: var(--header-color-3section-brown);
+  border-radius: 7px;
 }
 
 .handbook-section-title {
@@ -400,6 +415,95 @@ body {
   line-height: 1.75;
   margin-bottom: 1rem;
   color: var(--text-main);
+}
+
+.handbook-table-wrap {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  border-radius: 7px;
+  border: 3px solid var(--header-color-3section-brown);
+}
+
+.handbook-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: #fffbeb;
+}
+
+.handbook-table th {
+  background: #f1e5c0;
+  text-align: left;
+  font-weight: 700;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 2px solid var(--header-color-3section-brown);
+  border-right: 1px solid var(--header-color-3section-brown);
+  white-space: nowrap;
+  color: var(--header-color-3section-brown);
+}
+
+.handbook-table td {
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--header-color-3section-brown);
+  border-right: 1px solid var(--header-color-3section-brown);
+  vertical-align: top;
+  line-height: 1.6;
+  color: var(--header-color-3section-brown);
+}
+
+.handbook-table tr:last-child td {
+  border-bottom: none;
+}
+
+.handbook-table td:first-child {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.handbook-table td:last-child, .handbook-table th:last-child{
+  border-right: none;
+}
+
+.handbook-subhead {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 1.75rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--header-color-3section-brown);
+  color: var(--header-color-3section-brown);
+}
+
+.handbook-subhead:first-child {
+  margin-top: 0;
+}
+
+.handbook-syntax {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.7rem 1rem;
+  margin: 1rem 0;
+  background: #f1f5f9;
+  border: 3px solid var(--header-color-3section-brown);
+  border-radius: 7px;
+}
+
+.handbook-syntax-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: black;
+}
+
+.handbook-syntax code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: green;
 }
 
 .handbook-code-block {
@@ -426,6 +530,7 @@ body {
   background: var(--dark);
   color: #e2e8f0;
   border-radius: 7px;
+  border: 3px solid var(--header-color-3section-brown);
   padding: 1.1rem 1.2rem;
   overflow-x: auto;
 }
@@ -816,55 +921,21 @@ body {
 
 .handbook-callout-warn {
   background: #fffbeb;
-  border-left-color: var(--primary);
+  border: 3px solid var(--primary);
 }
 
 .handbook-callout-warn .handbook-callout-label {
   color: var(--primary-dark);
 }
 
-
-.handbook-table-wrap {
-  overflow-x: auto;
-  margin: 1.25rem 0;
-  border: 1px solid var(--border-color);
-  border-radius: 7px;
+.handbook-callout-tip {
+  background: #eff6ff;
+  border: 3px solid #3b82f6;
 }
 
-.handbook-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
+.handbook-callout-tip .handbook-callout-label {
+  color: #1d4ed8;
 }
-
-.handbook-table th {
-  background: var(--light-bg);
-  text-align: left;
-  font-weight: 700;
-  padding: 0.75rem 0.9rem;
-  border-bottom: 2px solid var(--border-color);
-  white-space: nowrap;
-}
-
-.handbook-table td {
-  padding: 0.7rem 0.9rem;
-  border-bottom: 1px solid var(--border-color);
-  vertical-align: top;
-  line-height: 1.6;
-}
-
-.handbook-table tr:last-child td {
-  border-bottom: none;
-}
-
-.handbook-table td:first-child {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.82rem;
-  color: var(--primary-dark);
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 
 .is-hidden {
   display: none !important;
@@ -919,13 +990,13 @@ body {
 }
 
 .handbook-compare-bad .handbook-compare-label {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: #b91c1c;
+  color: #fee2e2;
 }
 
 .handbook-compare-good .handbook-compare-label {
-  background: #dcfce7;
-  color: #15803d;
+  background: #15803d;
+  color: #dcfce7;
 }
 
 .handbook-compare-side pre {
