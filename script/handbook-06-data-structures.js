@@ -48,26 +48,31 @@ window.HANDBOOK_GROUPS.push({
       keywords: "list append extend insert remove pop index count sort reverse slice nested matrix clear",
       blocks: [
         { type: "text", value: "A list holds items in order, each in a numbered slot from 0 upward. Unlike a string, a list can be changed in place." },
-        { type: "code", value: `inventory = []
-inventory = ["torch", "mirror"]
-mixed = [1, "a", True, None, [2, 3]]    # any types, even other lists
+        { type: "code", value: `inventory = ["torch", "mirror"]
 
-inventory[0]         # 'torch'
-inventory[-1]        # 'mirror'
-len(inventory)       # 2
-inventory[0] = "lamp"   # allowed — strings are not` },
+print("inventory[0]:", inventory[0])
+print("inventory[-1]:", inventory[-1])
+print("len:", len(inventory))
+
+inventory[0] = "lamp"   # allowed — strings are not
+print("updated:", inventory)` },
         { type: "sub", value: "Slicing" },
         { type: "text", value: "Exactly the same rules as strings: [start:stop:step], stop is exclusive, negatives count from the end." },
         { type: "code", value: `nums = [0, 1, 2, 3, 4, 5]
-nums[1:4]      # [1, 2, 3]
-nums[:3]       # [0, 1, 2]
-nums[3:]       # [3, 4, 5]
-nums[::2]      # [0, 2, 4]
-nums[::-1]     # [5, 4, 3, 2, 1, 0]
-nums[:]        # a shallow copy` },
-        { type: "code", value: `# slices can be assigned to
-nums[1:3] = [9, 9, 9]     # [0, 9, 9, 9, 3, 4, 5]
-del nums[0:2]             # removes those positions` },
+print(nums[1:4])
+print(nums[:3])
+print(nums[3:])
+print(nums[::2])
+print(nums[::-1])
+print(nums[:])        # a shallow copy` },
+        { type: "code", value: `nums = [0, 1, 2, 3, 4, 5]
+
+# slices can be assigned to
+nums[1:3] = [9, 9, 9]
+print("after slice assign:", nums)
+
+del nums[0:2]             # removes those positions
+print("after del:", nums)` },
         { type: "sub", value: "Every list method" },
         {
           type: "table",
@@ -90,23 +95,27 @@ del nums[0:2]             # removes those positions` },
         { type: "warn", value: "Every method that changes the list returns None. values = values.sort() destroys your list. Write values.sort() alone, or new = sorted(values)." },
         { type: "sub", value: "append against extend" },
         { type: "code", value: `a = [1, 2]
-a.append([3, 4])     # [1, 2, [3, 4]]  — one new item, a list
+a.append([3, 4])
+print("append:", a)     # one new item, a list
 
 b = [1, 2]
-b.extend([3, 4])     # [1, 2, 3, 4]    — four items
-b += [5, 6]          # same as extend` },
+b.extend([3, 4])
+print("extend:", b)     # four items
+
+b += [5, 6]
+print("+=:", b)` },
         { type: "sub", value: "Combining and repeating" },
-        { type: "code", value: `[1, 2] + [3, 4]      # [1, 2, 3, 4]
-[0] * 5              # [0, 0, 0, 0, 0]
-[1, 2] * 2           # [1, 2, 1, 2]` },
+        { type: "code", value: `print([1, 2] + [3, 4])
+print([0] * 5)
+print([1, 2] * 2)` },
         { type: "warn", value: "[[0] * 3] * 3 does NOT make an independent grid. It makes three references to the SAME row, so changing one row changes all three. Build it with a comprehension instead — see Nested Lists below." },
         { type: "sub", value: "Nested lists and grids" },
         { type: "code", value: `matrix = [[1, 63, 82],
           [3, 67, 22],
           [18, 8, 5]]
 
-matrix[0]        # [1, 63, 82]
-matrix[2][1]     # 8  — row 2, column 1
+print("row 0:", matrix[0])
+print("matrix[2][1]:", matrix[2][1])     # row 2, column 1
 
 for row in matrix:
     for value in row:
@@ -131,13 +140,13 @@ grid[0][0] = 1
 stack = []
 stack.append(1)
 stack.append(2)
-stack.pop()        # 2
+print("popped from stack:", stack.pop())
 
 # queue — first in, first out. pop(0) is O(n), so use deque
 from collections import deque
 queue = deque([1, 2, 3])
 queue.append(4)
-queue.popleft()    # 1, and it is O(1)` }
+print("popped from queue:", queue.popleft())` }
       ]
     },
 
@@ -153,13 +162,17 @@ queue.popleft()    # 1, and it is O(1)` }
 rgb = (255, 128, 0)
 empty = ()
 
-point[0]        # 4
-len(point)      # 2
-point[0] = 5    # TypeError — tuples do not change` },
+print(point[0])
+print(len(point))
+# point[0] = 5    # TypeError — tuples do not change` },
         { type: "warn", value: "A one-item tuple needs a trailing comma. (5) is just the number five in brackets; (5,) is a tuple. This catches everyone once." },
-        { type: "code", value: `not_a_tuple = (5)      # int
-actual_tuple = (5,)    # tuple
-also_a_tuple = 5,      # brackets are often optional` },
+        { type: "code", value: `not_a_tuple = (5)
+actual_tuple = (5,)
+also_a_tuple = 5,
+
+print(type(not_a_tuple))
+print(type(actual_tuple))
+print(type(also_a_tuple))` },
         { type: "sub", value: "Why bother, when lists exist" },
         {
           type: "list",
@@ -170,17 +183,23 @@ also_a_tuple = 5,      # brackets are often optional` },
             "It is slightly smaller and faster than a list."
           ]
         },
-        { type: "code", value: `# a tuple can be a key; a list cannot
-seen = {}
+        { type: "code", value: `seen = {}
 seen[(2, 3)] = "visited"
+print("seen:", seen)
 
 positions = {(0, 0), (1, 1)}     # a set of coordinates
+print("positions:", positions)
 
-bad = {[2, 3]: "x"}    # TypeError: unhashable type: 'list'` },
+# bad = {[2, 3]: "x"}    # TypeError: unhashable type: 'list'` },
         { type: "sub", value: "Unpacking" },
         { type: "code", value: `x, y = (4, 9)
+print(x, y)
+
 a, b, c = 1, 2, 3
-first, *rest = (1, 2, 3, 4)     # first is 1, rest is [2, 3, 4]
+print(a, b, c)
+
+first, *rest = (1, 2, 3, 4)
+print(first, rest)
 
 for name, score in [("a", 90), ("b", 85)]:
     print(name, score)` },
@@ -189,8 +208,11 @@ for name, score in [("a", 90), ("b", 85)]:
         { type: "code", value: `def min_max(pile):
     return min(pile), max(pile)
 
-low, high = min_max([3, 9, 1])    # 1, 9
-result = min_max([3, 9, 1])       # (1, 9)` },
+low, high = min_max([3, 9, 1])
+print("low:", low, "high:", high)
+
+result = min_max([3, 9, 1])
+print("result tuple:", result)` },
         { type: "sub", value: "Named tuples" },
         { type: "text", value: "When positions start to be hard to remember, give them names without giving up the tuple." },
         { type: "code", value: `from collections import namedtuple
@@ -198,9 +220,10 @@ result = min_max([3, 9, 1])       # (1, 9)` },
 Point = namedtuple("Point", ["x", "y"])
 p = Point(4, 9)
 
-p.x        # 4
-p[0]       # 4 — still works like a tuple
-x, y = p   # still unpacks` },
+print("p.x:", p.x)
+print("p[0]:", p[0])       # still works like a tuple
+x, y = p
+print("unpacked:", x, y)` },
         { type: "warn", value: "A tuple cannot be changed, but the things inside it can be, if THEY are changeable. ([1,2], 3) is a tuple whose first item is a mutable list, and that list can still be appended to." }
       ]
     },
@@ -215,10 +238,11 @@ x, y = p   # still unpacks` },
         { type: "text", value: "A set holds unique items in no particular order. Its one great strength is that checking membership is instant regardless of size." },
         { type: "code", value: `seen = set()
 colours = {"red", "green", "blue"}
-from_list = set([1, 2, 2, 3])     # {1, 2, 3} — duplicates vanish
+from_list = set([1, 2, 2, 3])     # duplicates vanish
+print("from_list:", from_list)
 
-"red" in colours       # True, and O(1)
-len(colours)           # 3` },
+print("red in colours:", "red" in colours)
+print("len:", len(colours))` },
         { type: "warn", value: "{} makes an empty DICTIONARY, not an empty set. For an empty set you must write set()." },
         { type: "sub", value: "Methods" },
         {
@@ -251,31 +275,36 @@ len(colours)           # 3` },
         { type: "code", value: `a = {1, 2, 3}
 b = {3, 4, 5}
 
-a | b     # {1, 2, 3, 4, 5}
-a & b     # {3}
-a - b     # {1, 2}
-a ^ b     # {1, 2, 4, 5}` },
+print("union | :", a | b)
+print("intersection & :", a & b)
+print("difference - :", a - b)
+print("symmetric diff ^ :", a ^ b)` },
         { type: "sub", value: "What sets are actually for" },
-        { type: "code", value: `# remove duplicates, keeping order
+        { type: "code", value: `items = ["torch", "mirror", "torch", "snare"]
+
+# remove duplicates, keeping order
 unique = list(dict.fromkeys(items))
+print("unique ordered:", unique)
 
 # remove duplicates, order irrelevant
-unique = list(set(items))
+print("unique set:", list(set(items)))
 
 # have I seen this before?
 seen = set()
+stream = ["a", "b", "a", "c"]
 for item in stream:
     if item in seen:
         print("duplicate:", item)
     seen.add(item)
 
 # does the word contain any vowel?
-if set(word) & set("aeiou"):
-    ...` },
+word = "sky"
+print("has vowel:", bool(set(word) & set("aeiou")))` },
         { type: "warn", value: "Only hashable things can go in a set — numbers, strings, tuples, booleans. Lists and dictionaries cannot, because they can change and that would break the lookup." },
         { type: "sub", value: "frozenset" },
         { type: "code", value: `frozen = frozenset([1, 2, 3])
-# unchangeable, so it CAN be a dict key or a member of another set` }
+print(frozen)
+print(type(frozen))` }
       ]
     },
 
@@ -292,13 +321,14 @@ if set(word) & set("aeiou"):
     "Carpet Python": "potion"
 }
 
-weakness["Blood Python"]           # 'vinegar'
+print(weakness["Blood Python"])
 weakness["Water Python"] = "snare" # add a new pair
-len(weakness)                      # 3
-"Blood Python" in weakness         # True — checks KEYS` },
+print("len:", len(weakness))
+print("Blood Python in weakness:", "Blood Python" in weakness)` },
         { type: "warn", value: "Asking for a key that is not there raises KeyError and stops the program. Use .get() when absence is possible." },
-        { type: "code", value: `weakness.get("Tree Python")            # None
-weakness.get("Tree Python", "unknown") # 'unknown'` },
+        { type: "code", value: `weakness = {"Blood Python": "vinegar"}
+print(weakness.get("Tree Python"))
+print(weakness.get("Tree Python", "unknown"))` },
         { type: "sub", value: "Every dictionary method" },
         {
           type: "table",
@@ -320,7 +350,9 @@ weakness.get("Tree Python", "unknown") # 'unknown'` },
           ]
         },
         { type: "sub", value: "Looping" },
-        { type: "code", value: `for key in weakness:
+        { type: "code", value: `weakness = {"Blood Python": "vinegar", "Carpet Python": "potion"}
+
+for key in weakness:
     print(key)
 
 for value in weakness.values():
@@ -329,48 +361,54 @@ for value in weakness.values():
 for key, value in weakness.items():
     print(key, "fears", value)` },
         { type: "sub", value: "Counting — the most useful pattern in the language" },
-        { type: "code", value: `counts = {}
+        { type: "code", value: `spell = "abracadabra"
+
+counts = {}
 for ch in spell:
     counts[ch] = counts.get(ch, 0) + 1
-
-# with setdefault
-for ch in spell:
-    counts.setdefault(ch, 0)
-    counts[ch] += 1
+print("with get():", counts)
 
 # with defaultdict
 from collections import defaultdict
-counts = defaultdict(int)
+counts2 = defaultdict(int)
 for ch in spell:
-    counts[ch] += 1
+    counts2[ch] += 1
+print("with defaultdict:", dict(counts2))
 
 # with Counter — the shortest
 from collections import Counter
-counts = Counter(spell)
-counts.most_common(3)` },
+counts3 = Counter(spell)
+print("Counter most common 3:", counts3.most_common(3))` },
         { type: "sub", value: "Grouping" },
-        { type: "code", value: `groups = {}
+        { type: "code", value: `words = ["cat", "dog", "horse", "elephant"]
+groups = {}
 for word in words:
     key = len(word)
     groups.setdefault(key, []).append(word)
 
-# {3: ['cat', 'dog'], 5: ['horse']}` },
+print(groups)` },
         { type: "sub", value: "Merging" },
         { type: "code", value: `a = {"x": 1}
 b = {"y": 2}
 
-merged = {**a, **b}     # {'x': 1, 'y': 2}
-merged = a | b          # Python 3.9+
-a.update(b)             # changes a in place` },
+merged = {**a, **b}
+print("merged ** :", merged)
+
+merged2 = a | b          # Python 3.9+
+print("merged | :", merged2)
+
+a.update(b)             # changes a in place
+print("after update:", a)` },
         { type: "sub", value: "Nested dictionaries" },
         { type: "code", value: `data = {
     "quackbit": {"level": 3, "items": ["torch"]},
     "pythorn":  {"level": 99, "items": []}
 }
 
-data["quackbit"]["level"]              # 3
+print("level:", data["quackbit"]["level"])
 data["quackbit"]["items"].append("map")
-data.get("unknown", {}).get("level", 0)  # 0, no crash` },
+print("items:", data["quackbit"]["items"])
+print("unknown level:", data.get("unknown", {}).get("level", 0))` },
         { type: "note", value: "Since Python 3.7 a dictionary remembers the order things were inserted. Do not confuse that with being sorted — it is insertion order, not key order." }
       ]
     },
@@ -393,46 +431,77 @@ for n in range(5):
           why: "Same result. The right version says 'this is a new list built from that one' as a single thought, rather than three statements you have to assemble mentally."
         },
         { type: "sub", value: "With a filter" },
-        { type: "code", value: `evens = [n for n in numbers if n % 2 == 0]
+        { type: "code", value: `numbers = [1, 2, 3, 4, 5, 6]
+text = "The village road was long and winding"
+msg = "hello 123 world!"
+
+evens = [n for n in numbers if n % 2 == 0]
+print("evens:", evens)
+
 words = [w for w in text.split() if len(w) > 3]
-cleaned = "".join(ch for ch in msg if ch.isalpha())` },
+print("long words:", words)
+
+cleaned = "".join(ch for ch in msg if ch.isalpha())
+print("cleaned text:", cleaned)` },
         { type: "sub", value: "With a choice" },
         { type: "text", value: "A conditional expression goes BEFORE the for; a filter goes after. They are different things." },
-        { type: "code", value: `# transform every item
+        { type: "code", value: `stones = [1, 2, 3, 4, -1, 5]
+
+# transform every item
 labels = ["JUMP" if n % 2 else "STEP" for n in stones]
+print("labels:", labels)
 
 # keep only some items
 odds = [n for n in stones if n % 2]
+print("odds:", odds)
 
 # both
-labels = ["odd" if n % 2 else "even" for n in stones if n > 0]` },
+labels2 = ["odd" if n % 2 else "even" for n in stones if n > 0]
+print("positive odd/even:", labels2)` },
         { type: "sub", value: "Other kinds" },
-        { type: "code", value: `# set — duplicates vanish
+        { type: "code", value: `words = ["apple", "banana", "pear", "apple"]
+original = {"a": 1, "b": 2}
+
+# set — duplicates vanish
 unique_lengths = {len(w) for w in words}
+print("unique lengths:", unique_lengths)
 
 # dict
 lengths = {w: len(w) for w in words}
+print("lengths dict:", lengths)
+
 flipped = {v: k for k, v in original.items()}
+print("flipped dict:", flipped)
 
 # generator — computes lazily, uses almost no memory
-total = sum(n * n for n in range(1000000))` },
+total = sum(n * n for n in range(1000))
+print("sum of squares:", total)` },
         { type: "tip", value: "When a comprehension feeds straight into sum(), max(), any() or all(), drop the brackets. That makes it a generator, which never builds the whole collection in memory." },
         { type: "sub", value: "Nested" },
-        { type: "code", value: `# flatten a grid — read the fors left to right, outer first
+        { type: "code", value: `matrix = [[1, 2], [3, 4]]
+first = ["A", "B"]
+second = [1, 2]
+
+# flatten a grid
 flat = [value for row in matrix for value in row]
+print("flat:", flat)
 
 # build a grid
 grid = [[0 for _ in range(3)] for _ in range(3)]
+print("grid:", grid)
 
 # every pair
-pairs = [(a, b) for a in first for b in second]` },
+pairs = [(a, b) for a in first for b in second]
+print("pairs:", pairs)` },
         { type: "warn", value: "Stop at one or two levels. A comprehension with three fors and two ifs is a write-only line — you will not be able to read it next week, and neither will Steave. Write the loop." },
         { type: "sub", value: "any() and all()" },
-        { type: "code", value: `any(n < 0 for n in numbers)        # is at least one negative?
-all(n > 0 for n in numbers)        # are they all positive?
-any(ch in "aeiou" for ch in word)  # does it contain a vowel?
+        { type: "code", value: `numbers = [3, 7, -2, 12, 15]
+word = "potato"
 
-sum(1 for n in numbers if n > 10)  # how many are over 10` }
+print("any negative?", any(n < 0 for n in numbers))
+print("all positive?", all(n > 0 for n in numbers))
+print("contains vowel?", any(ch in "aeiou" for ch in word))
+print("count > 10:", sum(1 for n in numbers if n > 10))` }
       ]
     },
 
@@ -447,31 +516,28 @@ sum(1 for n in numbers if n > 10)  # how many are over 10` }
         { type: "code", value: `a = [1, 2, 3]
 b = a           # NOT a copy
 b.append(4)
-print(a)        # [1, 2, 3, 4] — a changed too
-
-a is b          # True — one list, two names` },
+print("a:", a)
+print("a is b:", a is b)` },
         { type: "sub", value: "Making a real copy" },
-        { type: "code", value: `b = a.copy()
-b = a[:]
-b = list(a)
-b = [*a]
+        { type: "code", value: `a = [1, 2, 3]
+b = a.copy()
+print("b is copy:", b, "a is b:", a is b)
 
-# for dictionaries
+d = {"torch": 1}
 d2 = d.copy()
-d2 = dict(d)
-d2 = {**d}` },
+print("d2 is copy:", d2, "d is d2:", d is d2)` },
         { type: "sub", value: "Shallow against deep" },
         { type: "text", value: "All of those are SHALLOW copies. The outer list is new, but the things inside it are still shared." },
         { type: "code", value: `original = [[1, 2], [3, 4]]
 shallow = original.copy()
 
 shallow[0].append(99)
-print(original)    # [[1, 2, 99], [3, 4]] — the inner list was shared
+print("shallow modified:", original)    # the inner list was shared
 
 import copy
 deep = copy.deepcopy(original)
-deep[0].append(99)
-print(original)    # unchanged` },
+deep[0].append(999)
+print("after deepcopy:", original)    # unchanged` },
         { type: "warn", value: "Only reach for deepcopy when you genuinely have nested mutable data. It is slow, and it will happily follow references round in circles if your data has loops." },
         { type: "sub", value: "Why this matters in functions" },
         { type: "text", value: "A function receives the same object, not a copy. Changing it inside changes it outside." },
@@ -480,7 +546,14 @@ print(original)    # unchanged` },
 
 def safer(pile):
     pile = pile + ["new"]   # builds a new list, caller untouched
-    return pile` },
+    return pile
+
+my_pile = [1, 2]
+add_item(my_pile)
+print("after add_item:", my_pile)
+
+safer_pile = safer(my_pile)
+print("after safer:", safer_pile)` },
         {
           type: "compare",
           bad: `def tidy(items):
@@ -513,46 +586,63 @@ def safer(pile):
         },
         { type: "code", value: `values = [3, 1, 2]
 
-new = sorted(values)          # [1, 2, 3], values untouched
-values.sort()                 # values is now [1, 2, 3]
-sorted(values, reverse=True)  # [3, 2, 1]` },
+new = sorted(values)
+print("sorted(values):", new)
+
+values.sort()
+print("values.sort():", values)
+
+print("reverse sorted:", sorted(values, reverse=True))` },
         { type: "sub", value: "key — sorting by a rule" },
         { type: "text", value: "key takes a function. Python calls it on each item and sorts by whatever it returns, not by the item itself." },
-        { type: "code", value: `sorted(words, key=len)                 # shortest first
-sorted(words, key=str.lower)           # ignoring capitals
-sorted(pairs, key=lambda p: p[1])      # by the second element
-sorted(people, key=lambda p: p["age"]) # by a dict field
+        { type: "code", value: `words = ["potato", "duck", "python", "AI"]
+pairs = [("torch", 5), ("potion", 2), ("map", 10)]
+people = [{"name": "Steave", "age": 30}, {"name": "Randy", "age": 20}]
+
+print(sorted(words, key=len))                 # shortest first
+print(sorted(words, key=str.lower))           # ignoring capitals
+print(sorted(pairs, key=lambda p: p[1]))      # by the second element
+print(sorted(people, key=lambda p: p["age"])) # by a dict field
 
 from operator import itemgetter
-sorted(pairs, key=itemgetter(1))       # the same, slightly faster` },
+print(sorted(pairs, key=itemgetter(1)))       # the same, slightly faster` },
         { type: "sub", value: "Sorting by several things at once" },
         { type: "text", value: "Return a tuple from key. Python compares the first element, and only looks at the second when the first ties." },
-        { type: "code", value: `# by score descending, then name ascending
-sorted(people, key=lambda p: (-p["score"], p["name"]))
+        { type: "code", value: `people = [
+    {"name": "Steave", "score": 90},
+    {"name": "Randy", "score": 95},
+    {"name": "Alice", "score": 90}
+]
+words = ["potato", "duck", "pea", "corn"]
 
-# by length, then alphabetically
-sorted(words, key=lambda w: (len(w), w))` },
+print(sorted(people, key=lambda p: (-p["score"], p["name"])))
+print(sorted(words, key=lambda w: (len(w), w)))` },
         { type: "tip", value: "Negating a number reverses just that one field. For text, where you cannot negate, sort twice — Python's sort is stable, so the earlier order survives within ties." },
         { type: "sub", value: "Stability" },
-        { type: "code", value: `# sort by the secondary key first, then the primary
+        { type: "code", value: `from collections import namedtuple
+Item = namedtuple("Item", ["name", "score"])
+
+items = [Item("torch", 10), Item("boots", 10), Item("apple", 20)]
 items.sort(key=lambda x: x.name)
 items.sort(key=lambda x: x.score, reverse=True)
-# equal scores keep their alphabetical order` },
+print(items)` },
         { type: "sub", value: "Sorting dictionaries" },
-        { type: "code", value: `# by key
-dict(sorted(data.items()))
+        { type: "code", value: `data = {"torch": 5, "mirror": 12, "snare": 3}
 
-# by value
-dict(sorted(data.items(), key=lambda kv: kv[1]))
-
-# the top three by value
-sorted(data.items(), key=lambda kv: kv[1], reverse=True)[:3]` },
+print("by key:", dict(sorted(data.items())))
+print("by value:", dict(sorted(data.items(), key=lambda kv: kv[1])))
+print("top 2 by value:", sorted(data.items(), key=lambda kv: kv[1], reverse=True)[:2])` },
         { type: "warn", value: "Sorting is O(n log n). If all you need is the largest or smallest, min() and max() are O(n) and do not build a new list. For the top few, heapq.nlargest(k, items) beats sorting everything." },
-        { type: "code", value: `max(values)                       # O(n)
-max(people, key=lambda p: p.age)  # the whole item, not just the value
+        { type: "code", value: `values = [5, 12, 3, 99, 42]
+from collections import namedtuple
+Person = namedtuple("Person", ["name", "age"])
+people = [Person("Steave", 30), Person("Randy", 20)]
+
+print("max:", max(values))
+print("oldest:", max(people, key=lambda p: p.age))
 
 import heapq
-heapq.nlargest(3, values)` }
+print("3 largest:", heapq.nlargest(3, values))` }
       ]
     }
 

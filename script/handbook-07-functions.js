@@ -19,8 +19,8 @@ window.HANDBOOK_GROUPS.push({
         return "STEP"
     return "JUMP"
 
-jump_or_step(5)     # 'JUMP'
-jump_or_step(2)     # 'STEP'` },
+print(jump_or_step(5))
+print(jump_or_step(2))` },
         {
           type: "table",
           head: ["Word", "Means"],
@@ -39,15 +39,16 @@ jump_or_step(2)     # 'STEP'` },
         { type: "code", value: `def greet():
     print("Quack.")
 
-greet()           # prints
-x = greet()       # x is None — it returned nothing` },
+greet()
+x = greet()
+print("x is:", x)` },
         { type: "sub", value: "Several parameters" },
         { type: "code", value: `def damage(base, multiplier):
     return base * multiplier
 
-damage(5, 3)                    # 15 — by position
-damage(base=5, multiplier=3)    # 15 — by name, clearer
-damage(multiplier=3, base=5)    # 15 — names free you from order` },
+print(damage(5, 3))                    # by position
+print(damage(base=5, multiplier=3))    # by name
+print(damage(multiplier=3, base=5))    # names free you from order` },
         { type: "warn", value: "Positional arguments must come before keyword ones. damage(base=5, 3) is a SyntaxError." },
         { type: "sub", value: "Docstrings" },
         { type: "code", value: `def vowel_count(word):
@@ -57,8 +58,8 @@ damage(multiplier=3, base=5)    # 15 — names free you from order` },
     """
     return sum(1 for ch in word.lower() if ch in "aeiou")
 
-help(vowel_count)
-vowel_count.__doc__` },
+print("count:", vowel_count("Potato"))
+print("docstring:", vowel_count.__doc__)` },
         { type: "note", value: "A function should do one thing its name describes. If you cannot name it without using 'and', it is two functions. That single rule prevents most of the mess that grows into spaghetti code." }
       ]
     },
@@ -92,23 +93,33 @@ print(result + 1)   # 11`,
             return ch      # leaves at once
     return None            # only reached if the loop finished
 
-def check(n):
-    return "positive"
-    print("never runs")` },
+print(first_vowel("potato"))
+print(first_vowel("rhythm"))` },
         { type: "sub", value: "Returning several values" },
         { type: "code", value: `def min_max(pile):
     return min(pile), max(pile)     # really one tuple
 
 low, high = min_max([3, 9, 1])
-both = min_max([3, 9, 1])           # (1, 9)` },
+print("low:", low, "high:", high)
+
+both = min_max([3, 9, 1])
+print("both:", both)` },
         { type: "sub", value: "Bare return and implicit None" },
-        { type: "code", value: `def check(n):
+        { type: "code", value: `def process(n):
+    print("processing:", n)
+
+def check(n):
     if n < 0:
         return        # returns None, used to leave early
     process(n)
 
+check(-1)
+check(5)
+
 def nothing():
-    pass              # also returns None` },
+    pass
+
+print("nothing() returns:", nothing())` },
         { type: "sub", value: "Multiple returns are fine" },
         { type: "text", value: "Some teaching insists on a single exit point. Python style does not. Guard clauses that return early are clearer than deep nesting." },
         {
@@ -147,8 +158,8 @@ def nothing():
         { type: "code", value: `def damage(base, multiplier=2):
     return base * multiplier
 
-damage(5)        # 10 — multiplier defaults
-damage(5, 3)     # 15` },
+print(damage(5))        # multiplier defaults
+print(damage(5, 3))` },
         { type: "warn", value: "Parameters with defaults must come after those without. def f(a=1, b) is a SyntaxError." },
         { type: "sub", value: "The mutable default trap" },
         { type: "text", value: "A default value is created ONCE, when the function is defined — not each time it is called. With a list or dict as the default, every call shares the same one." },
@@ -174,12 +185,14 @@ add("b")    # ['b']`,
         { type: "code", value: `def total(*numbers):
     return sum(numbers)          # numbers is a tuple
 
-total(1, 2)          # 3
-total(1, 2, 3, 4)    # 10
-total()              # 0
+print(total(1, 2))
+print(total(1, 2, 3, 4))
+print(total())
 
 def describe(name, *tags):
-    print(name, "has tags:", tags)` },
+    print(name, "has tags:", tags)
+
+describe("Quackbit", "duck", "python", "hero")` },
         { type: "sub", value: "**kwargs — any number of keyword arguments" },
         { type: "code", value: `def settings(**options):
     for key, value in options.items():
@@ -189,20 +202,28 @@ settings(mode="fast", level=3)` },
         { type: "sub", value: "All together" },
         { type: "text", value: "The order is fixed: ordinary parameters, then defaults, then *args, then **kwargs." },
         { type: "code", value: `def f(required, optional=1, *args, **kwargs):
-    ...` },
+    print(f"required={required}, optional={optional}, args={args}, kwargs={kwargs}")
+
+f("first", 2, "extra1", "extra2", mode="fast")` },
         { type: "sub", value: "Unpacking into a call" },
         { type: "text", value: "The same stars work in reverse, spreading a list or dict into arguments." },
-        { type: "code", value: `values = [1, 2, 3]
-total(*values)         # same as total(1, 2, 3)
+        { type: "code", value: `def total(*numbers):
+    return sum(numbers)
+
+def damage(base, multiplier):
+    return base * multiplier
+
+values = [1, 2, 3]
+print(total(*values))
 
 config = {"base": 5, "multiplier": 3}
-damage(**config)       # same as damage(base=5, multiplier=3)` },
+print(damage(**config))` },
         { type: "sub", value: "Forcing keyword-only arguments" },
         { type: "code", value: `def move(x, y, *, fast=False):
-    ...
+    print(f"moving to ({x}, {y}), fast={fast}")
 
-move(1, 2, fast=True)    # fine
-move(1, 2, True)         # TypeError — fast must be named` },
+move(1, 2, fast=True)
+# move(1, 2, True)  # TypeError — fast must be named` },
         { type: "tip", value: "A bare * in the signature means everything after it must be passed by name. Use it for boolean flags — move(1, 2, True) tells the reader nothing, move(1, 2, fast=True) tells them everything." }
       ]
     },
@@ -217,10 +238,10 @@ move(1, 2, True)         # TypeError — fast must be named` },
         { type: "text", value: "A name created inside a function lives only there. It cannot be seen outside, and it disappears when the function ends." },
         { type: "code", value: `def f():
     inside = 5
-    print(inside)     # fine
+    print("inside function:", inside)
 
 f()
-print(inside)         # NameError` },
+# print(inside)  # NameError: name 'inside' is not defined` },
         { type: "sub", value: "The LEGB rule" },
         { type: "text", value: "Python looks for a name in four places, in this order:" },
         {
@@ -238,19 +259,25 @@ print(inside)         # NameError` },
         { type: "code", value: `count = 0
 
 def read():
-    print(count)      # 0 — reading is fine
+    print("read():", count)
 
 def write():
     count = 99        # creates a LOCAL count
+    print("inside write():", count)
     
 write()
-print(count)          # still 0` },
+print("global count:", count)` },
         { type: "warn", value: "Worse, this fails: if a function assigns to a name anywhere in its body, Python treats it as local throughout — so reading it before that line raises UnboundLocalError even though a global of that name exists." },
         { type: "code", value: `count = 0
 
-def broken():
-    print(count)      # UnboundLocalError
-    count = 1         # this line makes count local everywhere above` },
+def demo():
+    print("reading global count:", count)
+
+demo()
+
+# def broken():
+#     print(count)  # UnboundLocalError
+#     count = 1` },
         { type: "sub", value: "global and nonlocal" },
         { type: "code", value: `count = 0
 
@@ -258,13 +285,20 @@ def increment():
     global count
     count += 1        # now it really is the outer one
 
+increment()
+increment()
+print("global count after increment:", count)
+
 def outer():
     total = 0
     def inner():
         nonlocal total
         total += 1    # the enclosing function's variable
     inner()
-    return total` },
+    inner()
+    return total
+
+print("outer total:", outer())` },
         {
           type: "compare",
           bad: `total = 0
@@ -280,8 +314,10 @@ total = add(total, 5)`,
         },
         { type: "sub", value: "Shadowing" },
         { type: "code", value: `def f():
-    list = [1, 2]     # now list() is unavailable in this function
-    return list(range(3))    # TypeError` },
+    my_list = [1, 2]
+    return list(range(3))
+
+print("shadowing avoided:", f())` },
         { type: "note", value: "Mutable arguments are the exception to all of this. A function cannot rebind the caller's name, but it can absolutely change the object that name points at. See Copying & References." }
       ]
     },
@@ -296,18 +332,24 @@ total = add(total, 5)`,
         { type: "syntax", value: "lambda parameters: expression" },
         { type: "text", value: "A lambda is a small function written inline. It holds exactly one expression, and its value is automatically returned." },
         { type: "code", value: `double = lambda n: n * 2
-double(5)      # 10
+print("lambda double(5):", double(5))
 
 # the same thing, written properly
-def double(n):
-    return n * 2` },
+def double_func(n):
+    return n * 2
+
+print("def double_func(5):", double_func(5))` },
         { type: "warn", value: "Do not assign a lambda to a name like that. If it needs a name it should be a def — you get a docstring, a readable traceback, and no reason to squeeze it onto one line." },
         { type: "sub", value: "Where lambdas belong" },
-        { type: "text", value: "As a throwaway argument to a function that takes a function." },
-        { type: "code", value: `sorted(pairs, key=lambda p: p[1])
-sorted(people, key=lambda p: (-p["score"], p["name"]))
-max(words, key=lambda w: len(w))
-filter(lambda n: n % 2 == 0, numbers)` },
+        { type: "code", value: `pairs = [("a", 3), ("b", 1), ("c", 2)]
+people = [{"name": "Steave", "score": 90}, {"name": "Randy", "score": 95}]
+words = ["potato", "duck", "ai"]
+numbers = [1, 2, 3, 4, 5, 6]
+
+print("by 2nd element:", sorted(pairs, key=lambda p: p[1]))
+print("by score desc:", sorted(people, key=lambda p: (-p["score"], p["name"])))
+print("longest word:", max(words, key=lambda w: len(w)))
+print("even numbers:", list(filter(lambda n: n % 2 == 0, numbers)))` },
         { type: "sub", value: "Limits" },
         {
           type: "list",
@@ -318,10 +360,9 @@ filter(lambda n: n % 2 == 0, numbers)` },
           ]
         },
         { type: "code", value: `# a conditional expression IS an expression, so this works
-lambda n: "even" if n % 2 == 0 else "odd"
-
-# this does not
-lambda n: if n > 0: return n     # SyntaxError` },
+parity = lambda n: "even" if n % 2 == 0 else "odd"
+print(parity(4))
+print(parity(7))` },
         {
           type: "compare",
           bad: `sorted(items, key=lambda x: (x.priority, -x.score, x.name.lower()))`,
@@ -345,16 +386,19 @@ sorted(items, key=sort_order)`,
         { type: "code", value: `def shout(word):
     return word.upper()
 
-f = shout          # no brackets — the function itself
-f("hi")            # 'HI'
+f = shout
+print(f("hi"))
 
 actions = {"shout": shout, "whisper": str.lower}
-actions["shout"]("hi")` },
+print(actions["shout"]("hi"))
+print(actions["whisper"]("HI"))` },
         { type: "sub", value: "map and filter" },
-        { type: "code", value: `map(str.upper, words)               # apply to each
-filter(lambda n: n > 0, numbers)    # keep those that pass
+        { type: "code", value: `words = ["potato", "duck", "village"]
+numbers = [-2, -1, 0, 1, 2]
 
-list(map(int, ["1", "2", "3"]))     # [1, 2, 3]` },
+print(list(map(str.upper, words)))
+print(list(filter(lambda n: n > 0, numbers)))
+print(list(map(int, ["1", "2", "3"])))` },
         {
           type: "compare",
           bad: `list(map(lambda n: n * 2, numbers))
@@ -365,12 +409,15 @@ list(filter(lambda n: n > 0, numbers))`,
         },
         { type: "sub", value: "reduce" },
         { type: "code", value: `from functools import reduce
-reduce(lambda a, b: a * b, [1, 2, 3, 4])    # 24
+import math
+
+numbers = [1, 2, 3, 4]
+print("reduce * :", reduce(lambda a, b: a * b, numbers))
 
 # usually there is a better way
-sum(numbers)
-max(numbers)
-math.prod(numbers)` },
+print("sum:", sum(numbers))
+print("max:", max(numbers))
+print("prod:", math.prod(numbers))` },
         { type: "sub", value: "Closures" },
         { type: "text", value: "A function defined inside another remembers the outer function's variables, even after the outer one has finished." },
         { type: "code", value: `def multiplier(n):
@@ -380,8 +427,9 @@ math.prod(numbers)` },
 
 double = multiplier(2)
 triple = multiplier(3)
-double(5)     # 10
-triple(5)     # 15` },
+
+print("double(5):", double(5))
+print("triple(5):", triple(5))` },
         { type: "sub", value: "Decorators" },
         { type: "text", value: "A decorator wraps a function in another function. The @ line is shorthand for reassigning the name." },
         { type: "code", value: `def announce(func):
@@ -396,18 +444,22 @@ triple(5)     # 15` },
 def greet(name):
     print("Hello", name)
 
-greet("Quackbit")
-# calling greet
-# Hello Quackbit
-# done` },
+greet("Quackbit")` },
         { type: "text", value: "The @ line means exactly greet = announce(greet)." },
         { type: "code", value: `from functools import wraps
 
 def announce(func):
     @wraps(func)          # keeps the original name and docstring
     def wrapper(*args, **kwargs):
+        print("running", func.__name__)
         return func(*args, **kwargs)
-    return wrapper` },
+    return wrapper
+
+@announce
+def say_hello():
+    return "hello!"
+
+print(say_hello())` },
         { type: "tip", value: "Decorators you will meet before you write your own: @property, @staticmethod, @classmethod on classes, and @functools.lru_cache for automatic memoisation." }
       ]
     },
@@ -426,7 +478,7 @@ def announce(func):
         n -= 1
 
 for value in countdown(3):
-    print(value)      # 3, 2, 1` },
+    print(value)` },
         { type: "sub", value: "Why bother" },
         {
           type: "compare",
@@ -447,10 +499,15 @@ for x in squares(10_000_000):
           why: "The left builds a ten-million-item list in memory before the loop starts. The right holds one number at a time. Same output, vastly different cost."
         },
         { type: "sub", value: "Generator expressions" },
-        { type: "code", value: `squares = (n * n for n in range(1000000))   # brackets, not square brackets
+        { type: "code", value: `numbers = [1, 2, -3, 4]
 
-total = sum(n * n for n in range(1000000))  # no intermediate list
-any(n < 0 for n in numbers)` },
+squares = (n * n for n in range(5))
+print(list(squares))
+
+total = sum(n * n for n in range(1000))
+print("total:", total)
+
+print("any negative?", any(n < 0 for n in numbers))` },
         { type: "sub", value: "They can be endless" },
         { type: "code", value: `def naturals():
     n = 0
@@ -459,24 +516,30 @@ any(n < 0 for n in numbers)` },
         n += 1
 
 for n in naturals():
-    if n > 100:
+    if n > 10:
         break
     print(n)` },
         { type: "warn", value: "A generator is exhausted once. After you have looped over it, it is empty — looping again gives nothing. If you need the values twice, convert to a list." },
         { type: "code", value: `gen = (n for n in range(3))
-list(gen)     # [0, 1, 2]
-list(gen)     # [] — already spent` },
+print("first list():", list(gen))
+print("second list():", list(gen))  # already spent` },
         { type: "sub", value: "next()" },
-        { type: "code", value: `gen = countdown(3)
-next(gen)     # 3
-next(gen)     # 2
-next(gen, "done")    # a default instead of StopIteration` },
+        { type: "code", value: `def countdown(n):
+    while n > 0:
+        yield n
+        n -= 1
+
+gen = countdown(3)
+print(next(gen))
+print(next(gen))
+print(next(gen, "done"))
+print(next(gen, "done"))` },
         { type: "sub", value: "yield from" },
         { type: "code", value: `def chain(a, b):
     yield from a
     yield from b
 
-list(chain([1, 2], [3, 4]))    # [1, 2, 3, 4]` }
+print(list(chain([1, 2], [3, 4])))` }
       ]
     },
 
@@ -493,14 +556,14 @@ list(chain([1, 2], [3, 4]))    # [1, 2, 3, 4]` }
         return 1
     return n * factorial(n - 1)    # recursive step
 
-factorial(5)    # 120` },
-        { type: "code", label: "how it unwinds", value: `factorial(5)
-= 5 * factorial(4)
-= 5 * 4 * factorial(3)
-= 5 * 4 * 3 * factorial(2)
-= 5 * 4 * 3 * 2 * factorial(1)
-= 5 * 4 * 3 * 2 * 1
-= 120` },
+print("5! =", factorial(5))` },
+        { type: "code", label: "how it unwinds", value: `# factorial(5)
+# = 5 * factorial(4)
+# = 5 * 4 * factorial(3)
+# = 5 * 4 * 3 * factorial(2)
+# = 5 * 4 * 3 * 2 * factorial(1)
+# = 5 * 4 * 3 * 2 * 1
+print(5 * 4 * 3 * 2 * 1)` },
         { type: "warn", value: "No base case, or a step that does not approach it, means RecursionError. Python stops at about 1000 nested calls, deliberately — it is a guard against a runaway function taking the whole program down." },
         { type: "sub", value: "Where recursion earns its place" },
         { type: "text", value: "Anything shaped like a tree: nested folders, nested lists, parsing, exploring a maze. There the recursive version is genuinely simpler than the loop." },
@@ -513,7 +576,7 @@ factorial(5)    # 120` },
             result.append(item)
     return result
 
-flatten([1, [2, [3, [4]]]])    # [1, 2, 3, 4]` },
+print(flatten([1, [2, [3, [4]]]]))` },
         { type: "sub", value: "Where it does not" },
         {
           type: "compare",
@@ -542,7 +605,8 @@ def fib(n):
         return n
     return fib(n-1) + fib(n-2)
 
-fib(100)    # instant` },
+print("fib(10):", fib(10))
+print("fib(50):", fib(50))` },
         { type: "note", value: "Every recursion can be rewritten as a loop, and in Python the loop is usually faster because there is no call overhead and no depth limit. Choose recursion when it makes the code clearer, not because it feels clever." }
       ]
     },
@@ -563,7 +627,11 @@ def total(numbers: list[int]) -> int:
     return sum(numbers)
 
 def find(data: dict[str, int], key: str) -> int | None:
-    return data.get(key)` },
+    return data.get(key)
+
+print(jump_or_step(3))
+print(total([1, 2, 3]))
+print(find({"a": 10}, "a"))` },
         {
           type: "table",
           head: ["Hint", "Means"],
@@ -585,12 +653,18 @@ def apply(f: Callable[[int], int], values: list[int]) -> list[int]:
     return [f(v) for v in values]
 
 def setting(name: str, default: Any = None) -> Any:
-    ...` },
+    return {"theme": "dark"}.get(name, default)
+
+print(apply(lambda x: x * 2, [1, 2, 3]))
+print(setting("theme"))
+print(setting("language", "en"))` },
         { type: "warn", value: "Hints are never checked at runtime. A function hinted -> int will happily return a string, and Python will not complain. Tools like mypy check them separately, before you run anything." },
         { type: "text", value: "Variables can carry hints too." },
         { type: "code", value: `count: int = 0
-names: list[str] = []
-config: dict[str, str] = {}` },
+names: list[str] = ["Quackbit"]
+config: dict[str, str] = {"env": "prod"}
+
+print(count, names, config)` },
         { type: "note", value: "For your Guardian solutions these are optional, and adding them everywhere on a small script is noise. They start paying rent when a function is used from several places, or when it takes a nested structure and the shape is not obvious from the name." }
       ]
     }

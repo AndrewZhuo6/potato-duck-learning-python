@@ -29,8 +29,8 @@ window.HANDBOOK_GROUPS.push({
 
 quackbit = Duck("Quackbit", 3)
 quackbit.pick_up("torch")
-quackbit.describe()        # 'Quackbit, level 3'
-quackbit.inventory         # ['torch']` },
+print(quackbit.describe())
+print(quackbit.inventory)` },
         { type: "sub", value: "What the pieces are" },
         {
           type: "table",
@@ -46,8 +46,19 @@ quackbit.inventory         # ['torch']` },
         },
         { type: "sub", value: "self" },
         { type: "text", value: "Every method's first parameter is the instance itself. Python passes it automatically, so you never write it at the call site." },
-        { type: "code", value: `quackbit.pick_up("torch")     # what you write
-Duck.pick_up(quackbit, "torch")   # what Python does` },
+        { type: "code", value: `class Duck:
+    def __init__(self, name):
+        self.name = name
+        self.inventory = []
+
+    def pick_up(self, item):
+        self.inventory.append(item)
+
+quackbit = Duck("Quackbit")
+
+quackbit.pick_up("torch")          # what you write
+Duck.pick_up(quackbit, "torch")    # what Python does behind the scenes
+print(quackbit.inventory)` },
         { type: "warn", value: "Forgetting self in a method definition gives TypeError: takes 1 positional argument but 2 were given — a confusing message that means exactly this. And forgetting self. inside a method creates a local variable that vanishes when the method ends." },
         {
           type: "compare",
@@ -67,8 +78,10 @@ Duck.pick_up(quackbit, "torch")   # what Python does` },
 
 a = Duck("Quackbit")
 b = Duck("Potatis")
-a.species                     # 'mallard'
-Duck.species = "teal"         # changes it for both` },
+print(a.species)
+Duck.species = "teal"         # changes it for both
+print(a.species)
+print(b.species)` },
         { type: "warn", value: "Never use a list or dict as a class attribute unless you mean it to be shared. Every instance will see the same one — the same trap as mutable default arguments." }
       ]
     },
@@ -94,12 +107,19 @@ Duck.species = "teal"         # changes it for both` },
         return f"{self.name} (level {self.level})"
 
 d = Duck("Quackbit", 3)
-print(d)      # Quackbit (level 3)   — uses __str__
-d             # Duck('Quackbit', 3)  — uses __repr__
-[d]           # [Duck('Quackbit', 3)] — containers use __repr__` },
+print(str(d))   # uses __str__
+print(repr(d))  # uses __repr__
+print([d])      # containers use __repr__` },
         { type: "tip", value: "If you only write one, write __repr__ — Python falls back to it when __str__ is missing, and it is what you see when debugging. Aim for something that could be pasted back in to recreate the object." },
         { type: "sub", value: "Comparison" },
         { type: "code", value: `class Duck:
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level
+
+    def __repr__(self):
+        return f"Duck({self.name!r}, {self.level})"
+
     def __eq__(self, other):
         return self.level == other.level
 
@@ -109,8 +129,12 @@ d             # Duck('Quackbit', 3)  — uses __repr__
     def __hash__(self):
         return hash(self.name)
 
-a < b              # uses __lt__
-sorted(ducks)      # uses __lt__` },
+a = Duck("Quackbit", 3)
+b = Duck("Potatis", 5)
+ducks = [b, a]
+
+print(a < b)          # uses __lt__
+print(sorted(ducks))  # uses __lt__` },
         { type: "warn", value: "Defining __eq__ silently removes the default __hash__, so your objects can no longer go in a set or be dict keys. If you need that, define __hash__ too." },
         { type: "sub", value: "The full set worth knowing" },
         {
@@ -138,8 +162,8 @@ sorted(ducks)      # uses __lt__` },
           ]
         },
         { type: "code", value: `class Inventory:
-    def __init__(self):
-        self.items = []
+    def __init__(self, items=None):
+        self.items = items or []
 
     def __len__(self):
         return len(self.items)
@@ -153,10 +177,10 @@ sorted(ducks)      # uses __lt__` },
     def __iter__(self):
         return iter(self.items)
 
-inv = Inventory()
-len(inv)
-inv[0]
-"torch" in inv
+inv = Inventory(["torch", "map"])
+print(len(inv))
+print(inv[0])
+print("torch" in inv)
 for item in inv:
     print(item)` },
         { type: "note", value: "Defining __len__ alone gives you truthiness for free — an empty Inventory becomes falsy, so if inv: works without writing __bool__. Python is full of these small courtesies." }
@@ -190,15 +214,22 @@ class Guardian(Creature):
         return f"{base}, fears {self.weakness}"
 
 g = Guardian("SuPrime", 200, "primes")
-g.describe()    # 'SuPrime, 200 hp, fears primes'` },
+print(g.describe())` },
         { type: "sub", value: "super()" },
         { type: "text", value: "super() reaches the parent class. Use it in __init__ so the parent's setup still happens, and in any method where you want to extend rather than replace the parent's behaviour." },
         { type: "warn", value: "If you define __init__ in a child and do not call super().__init__(), none of the parent's attributes get created, and every method relying on them fails." },
         { type: "sub", value: "Checking relationships" },
-        { type: "code", value: `isinstance(g, Guardian)     # True
-isinstance(g, Creature)     # True — a Guardian IS a Creature
-issubclass(Guardian, Creature)   # True
-Guardian.__mro__            # the order Python searches for methods` },
+        { type: "code", value: `class Creature:
+    pass
+
+class Guardian(Creature):
+    pass
+
+g = Guardian()
+print(isinstance(g, Guardian))
+print(isinstance(g, Creature))      # a Guardian IS a Creature
+print(issubclass(Guardian, Creature))
+print(Guardian.__mro__)             # the order Python searches for methods` },
         { type: "sub", value: "Inheritance against composition" },
         {
           type: "compare",
@@ -211,13 +242,19 @@ Guardian.__mro__            # the order Python searches for methods` },
         },
         { type: "sub", value: "Multiple inheritance" },
         { type: "code", value: `class Swimmer:
-    def swim(self): ...
+    def swim(self):
+        return "swimming"
 
 class Flyer:
-    def fly(self): ...
+    def fly(self):
+        return "flying"
 
 class Duck(Swimmer, Flyer):
-    pass` },
+    pass
+
+d = Duck()
+print(d.swim())
+print(d.fly())` },
         { type: "warn", value: "Multiple inheritance works, and it gets complicated fast when two parents define the same method. Python resolves it with a defined order (the MRO), but if you need to consult the MRO to predict what your code does, simplify the design instead." }
       ]
     },
@@ -251,10 +288,16 @@ class Duck(Swimmer, Flyer):
         return "novice" if self._level < 5 else "master"
 
 d = Duck("Quackbit", 3)
-d.level          # 3 — no brackets, it looks like an attribute
-d.level = 5      # runs the setter, which validates
-d.level = 0      # ValueError
-d.title          # 'novice' — computed each time, no storage` },
+print(d.level)       # no brackets, looks like an attribute
+d.level = 5          # runs the setter, which validates
+print(d.level)
+
+try:
+    d.level = 0
+except ValueError as e:
+    print("ValueError:", e)
+
+print(d.title)       # computed each time, no storage` },
         { type: "tip", value: "Start with plain attributes. Convert to a property only when you need validation or computation — the syntax at the call site does not change, so nothing that used the attribute needs rewriting." },
         { type: "sub", value: "@staticmethod" },
         { type: "text", value: "A function that lives in the class for organisation but needs neither the instance nor the class." },
@@ -268,13 +311,16 @@ d.title          # 'novice' — computed each time, no storage` },
                 return False
         return True
 
-MathHelper.is_prime(17)    # True — no instance needed` },
+print(MathHelper.is_prime(17))` },
         { type: "sub", value: "@classmethod" },
         { type: "text", value: "Receives the class rather than an instance. Mostly used for alternative constructors." },
         { type: "code", value: `class Duck:
     def __init__(self, name, level):
         self.name = name
         self.level = level
+
+    def __repr__(self):
+        return f"Duck({self.name!r}, {self.level})"
 
     @classmethod
     def novice(cls, name):
@@ -286,7 +332,9 @@ MathHelper.is_prime(17)    # True — no instance needed` },
         return cls(name, int(level))
 
 a = Duck.novice("Quackbit")
-b = Duck.from_string("Potatis,7")` },
+b = Duck.from_string("Potatis,7")
+print(a)
+print(b)` },
         { type: "sub", value: "Privacy conventions" },
         {
           type: "table",
@@ -337,29 +385,41 @@ class Duck:
     inventory: list = field(default_factory=list)
 
 d = Duck("Quackbit")
-d                       # Duck(name='Quackbit', level=1, inventory=[])
-d == Duck("Quackbit")   # True — compares by value` },
+print(d)
+print(d == Duck("Quackbit"))   # compares by value` },
         { type: "warn", value: "For a mutable default you must use field(default_factory=list), not = []. The dataclass decorator refuses the bare list outright — one of the few places Python protects you from that trap." },
         { type: "sub", value: "Frozen dataclasses" },
-        { type: "code", value: `@dataclass(frozen=True)
+        { type: "code", value: `from dataclasses import dataclass, FrozenInstanceError
+
+@dataclass(frozen=True)
 class Point:
     x: int
     y: int
 
 p = Point(1, 2)
-p.x = 5        # FrozenInstanceError
+try:
+    p.x = 5
+except FrozenInstanceError as e:
+    print("FrozenInstanceError:", e)
 
 # frozen means hashable, so it can be a dict key
-seen = {Point(1, 2): "visited"}` },
+seen = {Point(1, 2): "visited"}
+print(seen)` },
         { type: "sub", value: "Post-initialisation" },
-        { type: "code", value: `@dataclass
+        { type: "code", value: `from dataclasses import dataclass
+
+@dataclass
 class Rectangle:
     width: float
     height: float
     area: float = 0
 
     def __post_init__(self):
-        self.area = self.width * self.height` },
+        self.area = self.width * self.height
+
+rect = Rectangle(4, 5)
+print(rect)
+print("area:", rect.area)` },
         {
           type: "table",
           head: ["Need", "Use"],

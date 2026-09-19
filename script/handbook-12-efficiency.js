@@ -43,27 +43,20 @@ window.HANDBOOK_GROUPS.push({
         },
         { type: "text", value: "At a million items, the linear version does a million steps and the quadratic does a million million. One finishes instantly; the other never finishes at all." },
         { type: "sub", value: "Reading your own code" },
-        { type: "code", value: `# O(1) — no loop over the input
-def first(pile):
-    return pile[0]
+        { type: "code", value: `pile = [10, 20, 30]
+
+# O(1) — instant direct access
+def first(p):
+    return p[0]
+
+print("O(1):", first(pile))
 
 # O(n) — one pass
-for item in pile:
-    check(item)
+print("O(n):", [x * 2 for x in pile])
 
-# O(n squared) — a pass for every item
-for a in pile:
-    for b in pile:
-        compare(a, b)
-
-# O(log n) — throw away half each round
-while low <= high:
-    mid = (low + high) // 2
-    ...
-
-# O(n log n) — a pass, with a log-n step inside
-for item in pile:
-    binary_search(sorted_pile, item)` },
+# O(n^2) — pairs
+pairs = [(a, b) for a in pile for b in pile]
+print("O(n^2) pairs:", len(pairs))` },
         { type: "sub", value: "The rules for combining" },
         {
           type: "list",
@@ -96,18 +89,24 @@ for item in pile:
             ["O(n²)", "a grid of the input", "a distance matrix"]
           ]
         },
-        { type: "code", value: `# O(1) space — one accumulator, whatever the size
+        { type: "code", value: `numbers = [1, 2, 3, 4, 5]
+text = "potato"
+
+# O(1) space — one accumulator, whatever the size
 total = 0
 for n in numbers:
     total += n
+print("O(1) total:", total)
 
 # O(n) space — a new list as large as the input
 doubled = [n * 2 for n in numbers]
+print("O(n) list:", doubled)
 
 # O(n) space — the tally grows with distinct items
 counts = {}
 for ch in text:
-    counts[ch] = counts.get(ch, 0) + 1` },
+    counts[ch] = counts.get(ch, 0) + 1
+print("O(n) dict:", counts)` },
         { type: "sub", value: "The classic trade" },
         { type: "text", value: "Most of the time you buy speed with memory. A dictionary of tallies costs O(n) space and turns a search that touched everything into one that touches nothing." },
         {
@@ -126,11 +125,13 @@ for n in pile:
           why: "The right version remembers what it has passed, so it never looks backward. That is the trade: memory spent to avoid repeated work."
         },
         { type: "sub", value: "Spending less memory" },
-        { type: "code", value: `# builds the whole list first
-total = sum([n * n for n in range(10_000_000)])
+        { type: "code", value: `# builds the whole list first in memory: O(n) space
+total_list = sum([n * n for n in range(100_000)])
+print("List sum:", total_list)
 
-# holds one value at a time
-total = sum(n * n for n in range(10_000_000))` },
+# holds one value at a time lazily: O(1) space
+total_gen = sum(n * n for n in range(100_000))
+print("Generator sum:", total_gen)` },
         { type: "text", value: "Dropping the square brackets makes it a generator. Identical answer, O(1) space instead of O(n)." },
         { type: "warn", value: "Recursion costs space you did not ask for. Every pending call sits on the stack, so a recursion n deep is O(n) space even if it stores nothing itself. That is what RecursionError is protecting." }
       ]
@@ -218,74 +219,107 @@ for word in words:
       blocks: [
         { type: "text", value: "Most problems are variations on a handful of shapes. Recognising the shape is most of the work." },
         { type: "sub", value: "Hash map lookup — O(n²) becomes O(n)" },
-        { type: "code", value: `# instead of comparing every pair, remember what you have seen
-seen = {}
-for i, n in enumerate(pile):
-    if target - n in seen:
-        return [seen[target - n], i]
-    seen[n] = i` },
+        { type: "code", value: `def two_sum(pile, target):
+    # instead of comparing every pair, remember what you have seen
+    seen = {}
+    for i, n in enumerate(pile):
+        if target - n in seen:
+            return [seen[target - n], i]
+        seen[n] = i
+    return []
+
+pile = [2, 7, 11, 15]
+target = 9
+print("two_sum indices:", two_sum(pile, target))` },
         { type: "sub", value: "Frequency counting" },
-        { type: "code", value: `counts = {}
+        { type: "code", value: `pile = ["a", "b", "c", "a", "b", "d"]
+
+counts = {}
 for item in pile:
     counts[item] = counts.get(item, 0) + 1
 
 # the first thing appearing exactly once
-for item in pile:
-    if counts[item] == 1:
-        return item` },
+first_unique = next((item for item in pile if counts[item] == 1), None)
+print("first unique item:", first_unique)` },
         { type: "sub", value: "Two pointers" },
         { type: "code", value: `# from both ends, moving inward
-left, right = 0, len(pile) - 1
-while left < right:
-    if pile[left] + pile[right] == target:
-        return [left, right]
-    elif pile[left] + pile[right] < target:
-        left += 1
-    else:
-        right -= 1
+def pair_sum(pile, target):
+    left, right = 0, len(pile) - 1
+    while left < right:
+        current = pile[left] + pile[right]
+        if current == target:
+            return [left, right]
+        elif current < target:
+            left += 1
+        else:
+            right -= 1
+    return None
 
 # checking a palindrome
-left, right = 0, len(word) - 1
-while left < right:
-    if word[left] != word[right]:
-        return False
-    left += 1
-    right -= 1
-return True` },
+def is_palindrome(word):
+    left, right = 0, len(word) - 1
+    while left < right:
+        if word[left] != word[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+print("pair_sum:", pair_sum([1, 2, 3, 4, 6], 6))
+print("is_palindrome('radar'):", is_palindrome("radar"))
+print("is_palindrome('duck'):", is_palindrome("duck"))` },
         { type: "sub", value: "Sliding window" },
-        { type: "code", value: `# the best sum of k consecutive items, in one pass
+        { type: "code", value: `pile = [2, 1, 5, 1, 3, 2]
+k = 3
+
+# the best sum of k consecutive items, in one pass
 window = sum(pile[:k])
 best = window
 for i in range(k, len(pile)):
     window += pile[i] - pile[i - k]
-    best = max(best, window)` },
+    best = max(best, window)
+
+print(f"Max sum of {k} items:", best)` },
         { type: "tip", value: "The window adds the new item and removes the old one rather than re-summing. That turns an O(n·k) loop into O(n)." },
         { type: "sub", value: "Binary search" },
         { type: "code", value: `# only on a SORTED sequence
-low, high = 0, len(pile) - 1
-while low <= high:
-    mid = (low + high) // 2
-    if pile[mid] == target:
-        return mid
-    elif pile[mid] < target:
-        low = mid + 1
-    else:
-        high = mid - 1
-return -1` },
+def binary_search(pile, target):
+    low, high = 0, len(pile) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if pile[mid] == target:
+            return mid
+        elif pile[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+sorted_pile = [1, 3, 5, 7, 9, 11]
+print("Index of 7:", binary_search(sorted_pile, 7))
+print("Index of 4:", binary_search(sorted_pile, 4))` },
         { type: "sub", value: "Running totals" },
-        { type: "code", value: `# prefix sums make any range total O(1) afterwards
+        { type: "code", value: `pile = [3, 1, 4, 1, 5]
+
+# prefix sums make any range total O(1) afterwards
 prefix = [0]
 for n in pile:
     prefix.append(prefix[-1] + n)
 
-# sum of pile[a:b]
-total = prefix[b] - prefix[a]` },
+# sum of pile[1:4]
+a, b = 1, 4
+total = prefix[b] - prefix[a]
+print(f"Sum of pile[{a}:{b}]:", total)` },
         { type: "sub", value: "Tracking a best-so-far" },
-        { type: "code", value: `best = float("-inf")
+        { type: "code", value: `pile = [7, 1, 5, 3, 6, 4]
+
+best = float("-inf")
 lowest_seen = pile[0]
 for n in pile[1:]:
     best = max(best, n - lowest_seen)
-    lowest_seen = min(lowest_seen, n)` },
+    lowest_seen = min(lowest_seen, n)
+
+print("Best profit:", best)` },
         { type: "note", value: "Notice what these share: each replaces repeated backward looking with something remembered as you go. That single idea — carry the answer forward instead of recomputing it — is behind most of the difference between a slow solution and a fast one." }
       ]
     },
@@ -301,14 +335,16 @@ for n in pile[1:]:
         { type: "code", value: `import time
 
 start = time.perf_counter()
-do_work()
-print(f"{time.perf_counter() - start:.4f}s")` },
+total = sum(range(100_000))
+elapsed = time.perf_counter() - start
+print(f"Elapsed: {elapsed:.4f}s")` },
         { type: "code", value: `import timeit
 
-timeit.timeit('"".join(parts)', globals=globals(), number=10000)
-timeit.timeit("sum(range(100))", number=10000)` },
-        { type: "code", value: `import cProfile
-cProfile.run("main()")     # every function, called how often, costing what` },
+parts = ["a", "b", "c"]
+t1 = timeit.timeit('"".join(parts)', globals=globals(), number=10000)
+t2 = timeit.timeit("sum(range(100))", number=10000)
+print(f"join 10k: {t1:.4f}s")
+print(f"sum 10k: {t2:.4f}s")` },
         { type: "sub", value: "The order to do things in" },
         {
           type: "list",
@@ -382,7 +418,9 @@ looks_used += 1`,
           ]
         },
         { type: "sub", value: "The Zen of Python" },
-        { type: "code", value: `import this` },
+        { type: "code", value: `import this
+import importlib
+importlib.reload(this)` },
         { type: "text", value: "That prints a short set of principles the language was built around. The ones that matter most day to day: readability counts, explicit beats implicit, simple beats complex, and flat beats nested. Special cases are not special enough to break the rules — but practicality beats purity, so none of it is a law." },
         { type: "sub", value: "Tools that do it for you" },
         {

@@ -178,6 +178,79 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.handbook-hero-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.handbook-hero-title-row h1 {
+  margin-bottom: 0;
+}
+
+.handbook-engine-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1.5px solid;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.handbook-engine-pill .pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.handbook-engine-pill.loading {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #f59e0b;
+}
+
+.handbook-engine-pill.loading .pill-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  animation: pill-pulse 1.5s infinite;
+}
+
+.handbook-engine-pill.ready {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #22c55e;
+}
+
+.handbook-engine-pill.ready .pill-dot {
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.7);
+}
+
+.handbook-engine-pill.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #ef4444;
+}
+
+.handbook-engine-pill.error .pill-dot {
+  background: #ef4444;
+}
+
+@keyframes pill-pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
 .handbook-searchbar {
   max-width: 720px;
   margin: auto;
@@ -389,6 +462,326 @@ body {
   border-color: var(--secondary);
   color: #ffffff;
 }
+
+/* ==========================================================================
+   Interactive Notebook Cell Component
+   ========================================================================== */
+
+.handbook-notebook-cell {
+  position: relative;
+  margin: 1.35rem 0 1.65rem;
+  border-radius: 9px;
+  background: #141a23;
+  border: 1px solid #333d4d;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.handbook-notebook-cell:focus-within {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px #38bdf8, 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.handbook-notebook-cell.is-running {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 1px #f59e0b, 0 8px 24px rgba(245, 158, 11, 0.25);
+}
+
+/* Toolbar */
+.handbook-cell-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0d1219;
+  padding: 0.45rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.handbook-cell-info {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.handbook-cell-prompt {
+  color: #64748b;
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.handbook-notebook-cell.has-run .handbook-cell-prompt {
+  color: #38bdf8;
+}
+
+.handbook-notebook-cell.is-running .handbook-cell-prompt {
+  color: #f59e0b;
+  animation: pulse-prompt 1s infinite alternate;
+}
+
+@keyframes pulse-prompt {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+.handbook-cell-label-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255, 255, 255, 0.07);
+  color: #94a3b8;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.handbook-cell-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.handbook-cell-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  line-height: 1.2;
+}
+
+/* Run Button */
+.handbook-cell-run-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border-color: #22c55e;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.handbook-cell-run-btn:hover:not(:disabled) {
+  background: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(22, 163, 74, 0.4);
+}
+
+.handbook-cell-run-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.handbook-cell-run-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.handbook-notebook-cell.is-running .handbook-cell-run-btn {
+  background: #d97706;
+  border-color: #f59e0b;
+}
+
+/* Reset Button */
+.handbook-cell-reset-btn {
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.handbook-cell-reset-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Copy Button */
+.handbook-cell-copy-btn {
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.handbook-cell-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.handbook-cell-copy-btn.is-copied {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+/* Editor Container */
+.handbook-cell-editor-wrap {
+  position: relative;
+  min-height: 2.75rem;
+  background: #141a23;
+}
+
+/* Fallback static code view before CodeMirror mounts */
+.handbook-cell-pre-fallback {
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #e2e8f0;
+  background: #141a23;
+  overflow-x: auto;
+  cursor: text;
+}
+
+.handbook-cell-pre-fallback code {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre;
+}
+
+/* CodeMirror styling inside notebook cells */
+.handbook-notebook-cell .CodeMirror {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  height: auto;
+  background: #141a23;
+  color: #f8f8f2;
+  border-radius: 0;
+}
+
+.handbook-notebook-cell .CodeMirror-scroll {
+  max-height: 520px;
+}
+
+.handbook-notebook-cell .CodeMirror-gutters {
+  background: #10151c;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.handbook-notebook-cell .CodeMirror-linenumber {
+  color: #475569;
+  padding: 0 8px 0 6px;
+}
+
+.handbook-notebook-cell .CodeMirror-cursor {
+  border-left: 2px solid #38bdf8;
+}
+
+.handbook-notebook-cell .CodeMirror-focused {
+  outline: none;
+}
+
+/* Output Cell */
+.handbook-cell-output {
+  border-top: 1px solid #283344;
+  background: #090d13;
+  animation: cell-output-fade 0.2s ease-out;
+}
+
+@keyframes cell-output-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.handbook-cell-output-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.85rem;
+  background: #0d1219;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  user-select: none;
+}
+
+.handbook-output-prompt {
+  color: #d97706;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.handbook-output-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.handbook-output-duration {
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.handbook-output-clear-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+
+.handbook-output-clear-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+
+.handbook-cell-output-content {
+  padding: 0.85rem 1.1rem;
+  margin: 0;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.handbook-cell-output-content.has-error {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 3px solid #ef4444;
+}
+
+.handbook-cell-output-content .output-result {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.handbook-cell-output-empty {
+  color: #64748b;
+  font-style: italic;
+}
+
 
 
 .handbook-callout {
