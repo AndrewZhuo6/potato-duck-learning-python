@@ -839,3 +839,26 @@ def _quackbit_run_cell_isolated(code_str):
       window.addEventListener(eventType, startBgMusic, { passive: true });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburgerBtn = document.getElementById("hamburger-btn");
+  const navbar = document.querySelector(".navbar");
+
+  if (hamburgerBtn && navbar) {
+    hamburgerBtn.addEventListener("click", () => {
+      hamburgerBtn.classList.toggle("is-active");
+      navbar.classList.toggle("is-active");
+      
+      const isExpanded = hamburgerBtn.classList.contains("is-active");
+      hamburgerBtn.setAttribute("aria-expanded", isExpanded);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!navbar.contains(e.target) && !hamburgerBtn.contains(e.target) && navbar.classList.contains("is-active")) {
+        hamburgerBtn.classList.remove("is-active");
+        navbar.classList.remove("is-active");
+        hamburgerBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+});

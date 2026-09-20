@@ -1,6 +1,10 @@
 body {
   background: #1a1815 url('../assets/images/bg3.jpeg') center/cover no-repeat;
   background-attachment: scroll; 
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .handbook-main {
@@ -11,7 +15,7 @@ body {
     "search hero"
     "sidebar content";
   width: min(94%, 2100px);
-  max-height: calc(100vh - 57px - 3rem);
+  height: calc(100% - 3rem);
   min-height: 420px;
   margin: 1.5rem auto;
   background: #e7dbbe url('assets/images/parchment-texture.jpg');
@@ -27,6 +31,7 @@ body {
 /* Unbox the layout wrapper so children become direct grid items[cite: 3] */
 .handbook-layout {
   display: contents; 
+  height: 100%;
 }
 
 .handbook-sidebar {
@@ -345,7 +350,6 @@ body {
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
   height: 100%;
-  min-height: 0;
   min-width: 0;
   overflow-y: auto;
   border-radius: 7px;
@@ -353,7 +357,6 @@ body {
   border-top: 5px dashed var(--header-color-3section-brown);
 }
 
-/* Strip flat-UI box styling from sections[cite: 3] */
 .handbook-section {
   max-width: 1250px;
   margin-left: auto;
@@ -376,7 +379,6 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Handwritten body text utilizing the pre-imported Winky Rough font[cite: 1, 2] */
 .handbook-text, 
 .handbook-section-body p, 
 .handbook-list li {
@@ -574,10 +576,6 @@ body {
   color: #ffffff;
 }
 
-/* ==========================================================================
-   Interactive Notebook Cell Component
-   ========================================================================== */
-
 .handbook-notebook-cell {
   position: relative;
   margin: 1.35rem 0 1.65rem;
@@ -746,7 +744,6 @@ body {
   background: #141a23;
 }
 
-/* Fallback static code view before CodeMirror mounts */
 .handbook-cell-pre-fallback {
   margin: 0;
   padding: 0.85rem 1.1rem;
@@ -766,7 +763,6 @@ body {
   white-space: pre;
 }
 
-/* CodeMirror styling inside notebook cells */
 .handbook-notebook-cell .CodeMirror {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
@@ -1027,21 +1023,211 @@ body {
   line-height: 1.7;
 }
 
-@media (max-width: 900px) {
-  .handbook-main {
+/* --- Desktop Submenu & Child Menu Styles --- */
+.nav-item-has-children {
+    position: relative;
+}
+
+.submenu-toggle {
+    background: none;
+    border: none;
+    color: #9A9A9A;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0;
+    transition: color 0.15s ease;
+}
+
+.submenu-toggle:hover {
+    color: var(--text-main);
+}
+
+.chevron-icon {
+    font-size: 0.65rem;
+    transition: transform 0.2s ease;
+}
+
+.nav-item-has-children.is-open .chevron-icon {
+    transform: rotate(180deg);
+}
+
+.child-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 160px;
+    background: var(--main-bg);
+    border: 2px solid var(--primary-second);
+    border-radius: var(--radius-md);
+    list-style: none;
+    padding: 0.5rem 0;
+    box-shadow: var(--shadow-md);
+    z-index: 150;
+}
+
+.child-menu[hidden] {
+    display: none;
+}
+
+.child-menu li a,
+.child-menu li button {
     display: block;
-    height: auto;
+    width: 100%;
+    padding: 0.6rem 1.2rem;
+    background: none;
+    border: none;
+    color: #9A9A9A;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.child-menu li a:hover,
+.child-menu li button:hover {
+    color: var(--primary-second);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Hamburger Toggle Button (Desktop Hidden) --- */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    padding: 0;
+    z-index: 200;
+}
+
+.hamburger-bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-main);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 900px) {
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: relative; /* Required to anchor the mobile dropdown */
+  }
+
+  .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+  .handbook-main {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 3rem); /* Keeps it bound to the viewport */
     min-height: 0;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .handbook-layout {
     display: block;
+    height: 100%;
   }
 
   .handbook-nav-toggle {
     display: block;
   }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 100%;
+      max-width: 300px;
+      background-color: var(--dark-bg);
+      border-bottom-left-radius: var(--radius-md);
+      border: 2px solid var(--card-bg);
+      border-top: none;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1.2rem;
+      gap: 1.2rem;
+      
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+      box-shadow: var(--shadow-md);
+    }
+
+  .navbar.is-active {
+        max-height: 500px;
+        opacity: 1;
+        visibility: visible;
+        overflow-y: auto;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .child-menu {
+        position: static;
+        border: none;
+        background: rgba(0, 0, 0, 0.2);
+        margin-top: 0.5rem;
+        padding-left: 1rem;
+        border-radius: 6px;
+    }
+
+    .auth-buttons {
+        width: 100%;
+        justify-content: flex-start;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--card-bg);
+    }
+
+    .user-menu-dropdown {
+        right: 0;
+        left: auto;
+        transform: none;
+    }
+
+  /* Animate Hamburger into an 'X' */
+  .hamburger.is-active .hamburger-bar:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+    .hamburger.is-active .hamburger-bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.is-active .hamburger-bar:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
 
   .handbook-sidebar {
     display: none;
@@ -1057,8 +1243,8 @@ body {
   }
 
   .handbook-content {
-    height: auto;
-    overflow-y: visible;
+    flex: 1; /* Allows the content area to take remaining space and scroll */
+    overflow-y: auto;
   }
 }
 
@@ -1069,6 +1255,11 @@ body {
 
   .handbook-hero h1 {
     font-size: 1.6rem;
+  }
+
+  .handbook-content {
+    height: 100%;
+    overflow-y: auto;
   }
 
   .handbook-section {
