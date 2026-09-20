@@ -1,0 +1,96 @@
+@import "ultimate-header.css";
+
+body {
+    margin: 0;
+    background-color: var(--main-bg);
+    color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: var(--header-color-2section);
+}
+
+#bg-music {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40%;
+    flex: 1; 
+    padding-bottom: 2rem;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background-image: url("../assets/images/bg1.png");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+}
+
+.team-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 5rem;
+    max-width: 800px;
+    padding: 0 1.5rem;
+    justify-items: center;
+}
+
+.member-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    text-align: center;
+    color: var(--header-color-2section);
+    width: auto;
+    padding: 1rem 1rem;
+    background: radial-gradient(circle, var(--team-card2), var(--team-card));
+    border-radius: 7px;
+    border: 3px solid var(--header-color-2section);
+    transition: transform 0.2s;
+    box-shadow: 1px 1px 5px var(--secondary);
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 1px 1px 10px var(--primary-second);
+}
+
+.member-photo {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.member-name {
+    font-family: 'Winky Rough', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.member-role {
+    font-size: 0.9rem;
+    font-family: 'Plus Jakarta Sans';
+    color: var(--card-bg);
+    font-weight: 500;
+}
+
+.team-container::after {
+    content: "Copyrighted by Potato Duck";
+    margin-top: auto; 
+    padding-top: 5rem;
+    font-size: 0.85rem;
+    color: #b0b0b0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}

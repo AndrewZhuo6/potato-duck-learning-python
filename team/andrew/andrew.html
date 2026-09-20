@@ -6,29 +6,24 @@
   <title>Andrew | CTO</title>
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="andrew.css">
+  <link rel="icon" type="image/x-icon" href="../../assets/images/face.png">
 </head>
 <body>
   <header class="header">
     <div class="logo">
-    <a href="index.html"><img src="assets/images/logo.png" alt="Logo" class="logo-image"></a>
+      <a href="../../index.html">
+        <img src="../../assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+      </a>
     </div>
-    <nav class="navbar">
+    <nav class="navbar" id="nav-logged-out">
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="team.html">About Us</a></li>
-        <li><a href="story.html">Story</a></li> 
+        <li><a href="../../team.html">Go Back!</a></li>
       </ul>
     </nav>
-    <div class="auth-buttons">
-        <a href="login.html" class="login-text">Log In</a>
-    </div>
   </header>
+  <script>QuackbitAccount.renderHeader();</script>
 
   <main class="profile-container">
-    <div class="back-link">
-      <a href="../../team.html">&larr; Back to Team</a>
-    </div>
-
     <section class="profile-andrew">
       <img src="assets/images/andrew.png" alt="Andrew" class="profile-img">
       <div class="andrew-text">
@@ -75,6 +70,5 @@
       </div>
     </section>
   </main>
-  <script src="script/main.js"></script>
 </body>
 </html>

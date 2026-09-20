@@ -1,4 +1,4 @@
-
+@import "../../css/ultimate-header.css";
 
 body {
   margin: 0;
@@ -6,15 +6,6 @@ body {
   font-family: sans-serif;
   background-color: #0f172a00;
   background-image: url("images/background.png");
-}
-
-.header {
-    background-image: url("images/boarder.png");
-  background-color: #0369a1; 
-  padding: 20px;         
-  display: flex;             
-  justify-content: center;         
-  align-items: center;        
 }
 
 h1 {

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="script/account.js"></script>
+  <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Village 3: Our Inventory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=optional">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/story.css">
+  <link rel="stylesheet" href="css/solution-history.css">
+  <link rel="stylesheet" href="css/handbook.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/face.png">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">
+        <a href="index.html">
+          <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+        </a>
+      </div>
+      <a href="story.html" class="go-back-link">Go Back</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+  <script>QuackbitAccount.renderHeader();</script>
+
+  <main class="story-main">
+    <section id="cutscene-container">
+      <div class="cutscene-header">
+        <span class="cutscene-title-badge">Village 3 Story</span>
+        <h2 class="cutscene-heading">Our Inventory</h2>
+      </div>
+      <div class="video-wrapper">
+        <video id="story-video" controls playsinline>
+          <source src="assets/videos/v3.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <div class="video-controls">
+        <p class="cutscene-narrative">
+          Here, take this tools from me. It's a quick-swap tools, you can access any item in your inventory quickly with this, but you have to know their location in your inventory. Long ago, people used to call their inventory a list because they store everything in order from 0 up to their inventory size - 1.
+          Even a great coder can't remember every location of their item in the list, but we always know what item we need to fight against something. Hence, the great coders created a unique technology in the past called dictionary, it can store anything in pairs. With this, you can store the location and item name of each item that you pick up along the journey.
+        </p>
+        <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
+      </div>
+    </section>
+
+    <div id="workspace-container">
+      <section class="problem-panel">
+        <div class="video-scene">
+          <video id="story-video" controls playsinline preload="metadata">
+            <source src="assets/videos/v3.mp4" type="video/mp4">
+            Your browser does not support HTML video.
+          </video>
+        </div>
+        <span class="chapter-tag">Village 3 • List & Dictionary</span>
+        <h2>Our Inventory</h2>
+        <div class="story-quote">
+          Let's say you encounter various monsters during your journey and you have a dictionary of weaknesses of monsters, so you just need to swap to the right tool to fight them. How will you do this? You never know which monster will come next, so you can’t prepare the tool in advance.
+        </div>
+
+        <h3>Task</h3>
+        <p>Define a function <code>quick_look_swap(monster, weaknesses, inventory)</code> that takes a <code>monster</code> name, a dictionary of monster-to-weapon pairs <code>weaknesses</code>, and a list of items in your <code>inventory</code>.</p>
+        <p>• Use the <code>weaknesses</code> dictionary to look up the counter-weapon for the given monster.</p>
+        <p>• If the required weapon is inside your <code>inventory</code> list, return its index.</p>
+        <p>• If the weapon is not in your inventory (or the monster is not in the dictionary), return <code>-1</code>.</p>
+
+        <h3>Examples</h3>
+        <div class="code-example-box">quick_look_swap('harpy', weaknesses, inventory)    # Returns: '2'
+quick_look_swap('bandits', weaknesses, inventory)  # Returns: '5'</div>
+
+        <h3>Guidelines</h3>
+        <p>Create a dictionary with curly braces: <code>example_dictionary = {'fruit': 'banana', 'metal': 'iron', 'animal': 'dog'}</code>.</p>
+        <p>Access a dictionary value using brackets: <code>example_of_fruit = dictionary['fruit']</code>.</p>
+        <p>Get item position with <code>list_name.index(item)</code>.</p>
+      </section>
+
+      <section class="editor-panel">
+        <div class="editor-header">
+          <div class="editor-tab">
+            <span>📄</span> main.py
+          </div>
+          <div id="engine-pill" class="engine-status-pill">
+            <span>⏳</span> Loading Python Engine...
+          </div>
+        </div>
+
+        <textarea id="code-input"></textarea>
+
+        <div class="editor-footer">
+          <div class="editor-actions">
+            <div id="status-msg"></div>
+            <div class="action-buttons">
+              <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
+              <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
+              <a href="v4.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="script/solutions-db.js"></script>
+  <script src="script/solution-viewer.js"></script>
+  <script src="script/draft-autosave.js"></script>
+  <script src="script/story.js"></script>
+  <script src="script/tour.js"></script>
+  <script src="script/v3.js"></script>
+</body>
+</html>

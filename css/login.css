@@ -1,3 +1,79 @@
+@import "ultimate-header.css";
+
+/* Apply the dark background with vertical stripes to the body */
+body {
+    margin: 0;
+    background-color: var(--main-bg);
+    color: white;
+    font-family: 'Winky Rough', sans-serif;
+}
+
+.login {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 7rem;
+}
+
+.login h1 {
+    margin-bottom: 3rem;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0; 
+}
+
+.form-group label.child {
+    text-align: left;
+    font-size: 1.5rem;
+    flex: 0 0 150px;
+}
+
+.form-group input.child {
+    flex: 1;
+    padding: 12px;
+    background-color: #d1d5db; 
+    border: 3px solid #b9512c; 
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #b9512c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.3rem;
+    font-family: 'Winky Rough', sans-serif;
+    cursor: pointer;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
 .error-notice {
     display: none;
     color: #dc2626;
@@ -5,3 +81,18 @@
     font-weight: 500;
 }
 
+.login p {
+    margin-top: 1.5rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+}
+
+.login p a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login p a:hover {
+    text-decoration: underline;
+}

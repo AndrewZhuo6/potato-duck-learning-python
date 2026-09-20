@@ -54,7 +54,11 @@ form.addEventListener("submit", (e) => {
     const addRequest = store.add(newUser);
 
     addRequest.onsuccess = () => {
-        window.location.href = "login.html";
+        sessionStorage.setItem("currentUser", JSON.stringify({ email: email, id: addRequest.result, username: "" }));
+        try {
+            localStorage.setItem(`quackbit_tours_${email.trim().toLowerCase()}`, "on");
+        } catch { }
+        window.location.href = "index.html";
     };
 
     addRequest.onerror = (event) => {

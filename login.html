@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="script/account.js"></script>
+  <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Log In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=optional">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=optional" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/login.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/face.png">
 </head>
 <body>
   <header class="header">
     <div class="logo">
-      <a href="index.html">🦆 Quackbit</a>
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+      </a>
     </div>
-    <nav class="navbar">
+    <nav class="navbar" id="nav-logged-out">
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="preparation1.html">Chapters</a></li>
+        <li><a href="story.html">Courses</a></li>
+        <li class="nav-auth-only" hidden><a href="history.html">My Code</a></li>
         <li><a href="team.html">About Us</a></li>
       </ul>
+      <div class="auth-buttons">
+        <a href="login.html" class="login-text">Lock In!</a>
+      </div>
     </nav>
   </header>
+
   <main>
-    <section>
+    <section class = "login">
       <h1>Log In to Our Learning Platform</h1>
 
       <div id="error-box" class="error-notice"></div>
 
-      <form id="login-form">
+      <form class="login-form" id="login-form">
         <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
+          <label for="email" class="child">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email" class="child">
         </div>
 
         <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+          <label for="password" class="child">Password:</label>
+          <input class="child" type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
         </div>
 
         <button type="submit" class="btn">Log In</button>

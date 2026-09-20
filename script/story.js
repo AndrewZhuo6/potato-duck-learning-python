@@ -1,11 +1,45 @@
 window.initPreparationChapter = function (config) {
     const {
+        chapterId: explicitChapterId,
         chapterNumber,
         chapterTitle,
         nextChapterUrl,
         starterCode,
         testHarness
     } = config;
+
+    function resolveChapterId() {
+        if (explicitChapterId) return String(explicitChapterId).toLowerCase().trim();
+
+        // Derive from URL pathname (e.g., /v1.html -> v1, /g4.html -> g4, /boss.html -> boss)
+        try {
+            const pathParts = window.location.pathname.split("/");
+            const currentFileName = pathParts[pathParts.length - 1] || "";
+            const pageName = currentFileName.replace(/\.html$/i, "").toLowerCase();
+            if (/^(v[1-5]|g([1-9]|10)|boss)$/.test(pageName)) {
+                return pageName;
+            }
+        } catch {
+            // ignore
+        }
+
+        // Derive from QUACKBIT_STORIES catalog if loaded
+        if (Array.isArray(window.QUACKBIT_STORIES)) {
+            const found = window.QUACKBIT_STORIES.find((s) => s.level === chapterNumber);
+            if (found && found.id) return found.id.toLowerCase();
+        }
+
+        // Fallback map based on chapterNumber (1-5 -> v1-v5, 6-15 -> g1-g10, 16 -> boss)
+        if (typeof chapterNumber === "number") {
+            if (chapterNumber >= 1 && chapterNumber <= 5) return `v${chapterNumber}`;
+            if (chapterNumber >= 6 && chapterNumber <= 15) return `g${chapterNumber - 5}`;
+            if (chapterNumber === 16) return "boss";
+        }
+
+        return `v${chapterNumber || 1}`;
+    }
+
+    const chapterId = resolveChapterId();
 
     document.addEventListener("DOMContentLoaded", async () => {
         const sessionRaw = sessionStorage.getItem("currentUser") || 
@@ -25,73 +59,18 @@ window.initPreparationChapter = function (config) {
         }
 
         const authContainer = document.querySelector(".auth-buttons");
-        if (authContainer) {
-            const displayName = (currentUser.email || currentUser.username || "Duck Coder").split("@")[0];
-            authContainer.innerHTML = `
-                <span class="user-badge" title="${currentUser.email || ''}">🦆 ${displayName}</span>
-                <button id="logout-btn" class="logout-text">Log Out</button>
-            `;
-            const logoutBtn = document.getElementById("logout-btn");
-            if (logoutBtn) {
-                logoutBtn.addEventListener("click", () => {
-                    sessionStorage.removeItem("currentUser");
-                    sessionStorage.removeItem("activeUser");
-                    localStorage.removeItem("currentUser");
-                    window.location.href = "login.html";
-                });
-            }
-        }
+        window.QuackbitAccount.renderUserMenu(authContainer, currentUser);
+        window.QuackbitAccount.startFlyTimer(currentUser);
 
         const userIdentifier = (currentUser.email || currentUser.username || (currentUser.id ? `id_${currentUser.id}` : "guest")).trim().toLowerCase();
         const progressKey = `quackbit_progress_${userIdentifier}`;
         const unlockedMax = parseInt(localStorage.getItem(progressKey) || "1", 10);
 
         if (chapterNumber > unlockedMax) {
-            alert(`Chapter ${chapterNumber} is locked! You must complete Chapter ${unlockedMax} first.`);
-            window.location.href = `preparation${unlockedMax}.html`;
+            alert(`Chapter ${chapterNumber} is locked! You must complete earlier chapters first.`);
+            window.location.href = "story.html";
             return;
         }
-
-        function updateProgressPills(currentUnlockedLevel) {
-            const progressPills = document.querySelectorAll(".chapter-step-pill");
-            progressPills.forEach((pill) => {
-                const pillChapter = parseInt(pill.getAttribute("data-chapter") || "0", 10);
-                const rawText = pill.textContent.replace(/^([🔒✓⭐\s\d\.]+)/, "").trim();
-                const cleanName = rawText || `Chapter ${pillChapter}`;
-
-                pill.onclick = null;
-
-                if (pillChapter < chapterNumber) {
-                    pill.className = "chapter-step-pill completed";
-                    pill.innerHTML = `✓ ${pillChapter}. ${cleanName}`;
-                    pill.href = `preparation${pillChapter}.html`;
-                    pill.title = `Chapter ${pillChapter} (Completed - Click to review)`;
-                } else if (pillChapter === chapterNumber) {
-                    pill.className = "chapter-step-pill active";
-                    pill.innerHTML = `⭐ ${pillChapter}. ${cleanName}`;
-                    pill.href = `preparation${pillChapter}.html`;
-                    pill.title = `Chapter ${pillChapter} (Current Challenge)`;
-                } else if (pillChapter <= currentUnlockedLevel) {
-                    pill.className = "chapter-step-pill unlocked";
-                    pill.innerHTML = `${pillChapter}. ${cleanName}`;
-                    pill.href = `preparation${pillChapter}.html`;
-                    pill.title = `Chapter ${pillChapter} (Unlocked)`;
-                } else {
-                    pill.className = "chapter-step-pill locked";
-                    pill.innerHTML = `🔒 ${pillChapter}. ${cleanName}`;
-                    pill.removeAttribute("href");
-                    pill.title = `Chapter ${pillChapter} is locked. Complete Chapter ${currentUnlockedLevel} first.`;
-                    pill.onclick = (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        alert(`Chapter ${pillChapter} is locked! You must complete Chapter ${currentUnlockedLevel} first.`);
-                        return false;
-                    };
-                }
-            });
-        }
-
-        updateProgressPills(unlockedMax);
 
         const video = document.getElementById("story-video");
         const skipBtn = document.getElementById("skip-video-btn");
@@ -102,6 +81,19 @@ window.initPreparationChapter = function (config) {
         const nextBtn = document.getElementById("next-chapter-btn");
         const statusMsg = document.getElementById("status-msg");
         const enginePill = document.getElementById("engine-pill");
+
+        if (video) {
+            let source = video.querySelector("source");
+            if (!source) {
+                source = document.createElement("source");
+                source.type = "video/mp4";
+                video.appendChild(source);
+            }
+            if (!source.getAttribute("src")) {
+                source.src = `assets/videos/${chapterId}.mp4`;
+                video.load();
+            }
+        }
 
         const textarea = document.getElementById("code-input");
         if (starterCode && !textarea.value.trim()) {
@@ -121,19 +113,98 @@ window.initPreparationChapter = function (config) {
             }
         });
 
+        let resizeTimer = null;
         window.addEventListener("resize", () => {
-            if (editor) {
-                editor.refresh();
-            }
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => editor.refresh(), 150);
         });
+
+        const drafts = window.QuackbitDrafts
+            ? window.QuackbitDrafts.attach(editor, userIdentifier, chapterId, starterCode)
+            : null;
 
         if (resetBtn) {
             resetBtn.addEventListener("click", () => {
                 if (confirm("Reset code to starter template?")) {
                     editor.setValue(starterCode || "");
+                    if (drafts) drafts.clear();
                 }
             });
         }
+
+        let savedSolution = null;
+
+        function renderSavedBanner() {
+            const host = document.querySelector(".problem-panel");
+            if (!host || !window.QuackbitSolutionViewer) return;
+
+            let banner = document.getElementById("saved-solution-banner");
+
+            if (!savedSolution) {
+                if (banner) banner.remove();
+                return;
+            }
+
+            if (!banner) {
+                banner = document.createElement("div");
+                banner.id = "saved-solution-banner";
+                banner.className = "saved-solution-banner";
+                host.insertBefore(banner, host.firstChild);
+            }
+
+            banner.innerHTML = `
+                <div class="saved-banner-text">
+                    <strong>✅ Solution saved for this challenge</strong>
+                    <span>Last saved ${window.QuackbitSolutionViewer.formatDate(savedSolution.updatedAt)}</span>
+                </div>
+                <div class="saved-banner-actions">
+                    <button type="button" id="view-saved-btn" class="btn-saved-view">View Saved Code</button>
+                    <button type="button" id="load-saved-btn" class="btn-saved-load">Load into Editor</button>
+                    <a href="history.html" class="btn-saved-all">All Saved Code &rarr;</a>
+                </div>
+            `;
+
+            banner.querySelector("#view-saved-btn").addEventListener("click", () => {
+                window.QuackbitSolutionViewer.open(savedSolution);
+            });
+
+            banner.querySelector("#load-saved-btn").addEventListener("click", () => {
+                if (confirm("Replace the editor content with your saved solution?")) {
+                    editor.setValue(savedSolution.code || "");
+                    editor.focus();
+                }
+            });
+        }
+
+        async function refreshSavedSolution() {
+            if (!window.QuackbitSolutions) return null;
+            try {
+                savedSolution = await window.QuackbitSolutions.get(userIdentifier, chapterNumber);
+            } catch (err) {
+                console.warn("Could not read the solution archive:", err);
+                savedSolution = null;
+            }
+            renderSavedBanner();
+            return savedSolution;
+        }
+
+        async function archiveSolution(code, message) {
+            if (!window.QuackbitSolutions) return;
+            try {
+                savedSolution = await window.QuackbitSolutions.save({
+                    owner: userIdentifier,
+                    chapterNumber,
+                    chapterTitle: chapterTitle || `Chapter ${chapterNumber}`,
+                    code,
+                    message
+                });
+                renderSavedBanner();
+            } catch (err) {
+                console.warn("Could not save the solution to the archive:", err);
+            }
+        }
+
+        refreshSavedSolution();
 
         function transitionToChallenge() {
             if (video && !video.paused) {
@@ -141,6 +212,9 @@ window.initPreparationChapter = function (config) {
             }
             if (cutsceneContainer) cutsceneContainer.style.display = "none";
             if (workspaceContainer) workspaceContainer.style.display = "flex";
+            try {
+                sessionStorage.setItem(`quackbit_seen_cutscene_${chapterId}`, "1");
+            } catch { }
             setTimeout(() => {
                 editor.refresh();
                 editor.focus();
@@ -158,7 +232,31 @@ window.initPreparationChapter = function (config) {
             skipBtn.addEventListener("click", transitionToChallenge);
         }
 
+              try {
+            if (sessionStorage.getItem(`quackbit_seen_cutscene_${chapterId}`) === "1") {
+                transitionToChallenge();
+            }
+        } catch {  }
+        
+        if (video && cutsceneContainer && cutsceneContainer.style.display !== "none") {
+            const tryPlay = video.play();
+            if (tryPlay && tryPlay.catch) {
+                tryPlay.catch(() => {
+                    video.muted = true;
+                    video.play().catch(() => {});
+                    const unmute = () => {
+                        video.muted = false;
+                        document.removeEventListener("pointerdown", unmute);
+                        document.removeEventListener("keydown", unmute);
+                    };
+                    document.addEventListener("pointerdown", unmute);
+                    document.addEventListener("keydown", unmute);
+                });
+            }
+        }
+
         let pyodide = null;
+        if (submitBtn) submitBtn.disabled = true;
         if (submitBtn) submitBtn.disabled = true;
 
         if (enginePill) {
@@ -183,24 +281,25 @@ window.initPreparationChapter = function (config) {
                 enginePill.className = "engine-status-pill error";
                 enginePill.innerHTML = `<span>🔴</span> Python Engine Failed`;
             }
-            if (statusMsg) {
+            if (statusMsg){
                 statusMsg.style.color = "#dc2626";
                 statusMsg.textContent = "Failed to load Python environment. Please refresh the page.";
             }
         }
 
-        function showOutcomeCutscene(passed, message) {
+        function showOutcomeCutscene(passed, message){
             let outcomeContainer = document.getElementById("outcome-cutscene-container");
-            if (!outcomeContainer) {
+            if (!outcomeContainer){
                 outcomeContainer = document.createElement("section");
                 outcomeContainer.id = "outcome-cutscene-container";
-                const main = document.querySelector("main.preparation-main") || document.querySelector(".preparation-main") || document.body;
+                const main = document.querySelector("main.story-main") || document.querySelector("main.preparation-main") || document.querySelector(".preparation-main") || document.body;
                 main.appendChild(outcomeContainer);
             }
 
-            const videoSrc = `assets/videos/preparation${chapterNumber}_${passed ? "pass" : "fail"}.mp4`;
-            const nextTarget = nextChapterUrl || (nextBtn ? nextBtn.getAttribute("href") : (chapterNumber === 5 ? "index.html" : `preparation${chapterNumber + 1}.html`));
-            const nextText = nextBtn ? nextBtn.textContent.trim() : (chapterNumber === 5 ? "Complete Journey 🏆" : "Next Story &rarr;");
+            const videoFilename = `${chapterId}_${passed ? "pass" : "fail"}.mp4`;
+            const videoSrc = `assets/videos/${videoFilename}`;
+            const nextTarget = nextChapterUrl || (nextBtn ? nextBtn.getAttribute("href") : "story.html");
+            const nextText = nextBtn ? nextBtn.textContent.trim() : "Next Story &rarr;";
 
             outcomeContainer.innerHTML = `
                 <div class="outcome-header">
@@ -224,7 +323,7 @@ window.initPreparationChapter = function (config) {
                                 ? 'Great job! The cutscene animation for this milestone is currently in production.' 
                                 : 'Your code did not pass all tests yet. Review the test feedback below and try again.'}
                         </p>
-                        <span class="outcome-fallback-tag">Asset: preparation${chapterNumber}_${passed ? 'pass' : 'fail'}.mp4</span>
+                        <span class="outcome-fallback-tag">Asset: ${videoFilename}</span>
                     </div>
                 </div>
                 <div class="outcome-footer">
@@ -237,8 +336,9 @@ window.initPreparationChapter = function (config) {
                         <button type="button" id="outcome-skip-btn" class="btn-outcome-skip">Skip Cutscene ⏭</button>
                         <div id="outcome-final-actions" style="display: none; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
                             ${passed ? `
-                                <a href="${nextTarget}" class="btn-outcome-next">${nextText} &rarr;</a>
+                                <a href="${nextTarget}" class="btn-outcome-next">${nextText}</a>
                                 <button type="button" id="outcome-review-btn" class="btn-outcome-review">Review Code ↩</button>
+                                <button type="button" id="outcome-saved-btn" class="btn-outcome-saved">💾 Saved Code</button>
                             ` : `
                                 <button type="button" id="outcome-retry-btn" class="btn-outcome-retry">Back to Editor & Try Again ↩</button>
                             `}
@@ -339,6 +439,18 @@ window.initPreparationChapter = function (config) {
             if (outcomeReviewBtn) {
                 outcomeReviewBtn.addEventListener("click", returnToEditor);
             }
+
+            const outcomeSavedBtn = document.getElementById("outcome-saved-btn");
+            if (outcomeSavedBtn) {
+                outcomeSavedBtn.addEventListener("click", async () => {
+                    const record = savedSolution || (await refreshSavedSolution());
+                    if (record && window.QuackbitSolutionViewer) {
+                        window.QuackbitSolutionViewer.open(record);
+                    } else {
+                        alert("No saved solution found for this chapter yet.");
+                    }
+                });
+            }
         }
 
         if (submitBtn) {
@@ -375,7 +487,8 @@ window.initPreparationChapter = function (config) {
                         const newUnlocked = Math.max(currentUnlocked, chapterNumber + 1);
                         localStorage.setItem(progressKey, newUnlocked.toString());
 
-                        updateProgressPills(newUnlocked);
+                        // Archive the accepted code so it can be reviewed later.
+                        await archiveSolution(userCode, message);
 
                         if (nextBtn) {
                             nextBtn.style.display = "inline-flex";

@@ -1,0 +1,424 @@
+.qt-root {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    font-family: "Winky Rough", "Plus Jakarta Sans", sans-serif;
+}
+
+.qt-blocker {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+}
+
+.qt-spot {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 0 9999px rgba(10, 12, 16, 0.74);
+    pointer-events: none;
+    transition: top 0.4s cubic-bezier(0.22, 1, 0.36, 1), left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                width 0.4s cubic-bezier(0.22, 1, 0.36, 1), height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                border-radius 0.4s ease;
+    animation: qt-dim-in 0.35s ease both;
+}
+
+.qt-spot::after {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border: 2px solid #DA9B2B;
+    border-radius: inherit;
+    animation: qt-pulse 1.8s ease-out infinite;
+}
+
+.qt-spot.is-center::after {
+    display: none;
+}
+
+@keyframes qt-dim-in {
+    from { box-shadow: 0 0 0 9999px rgba(10, 12, 16, 0); }
+    to   { box-shadow: 0 0 0 9999px rgba(10, 12, 16, 0.74); }
+}
+
+@keyframes qt-pulse {
+    0%   { opacity: 0.95; transform: scale(1); }
+    70%  { opacity: 0;    transform: scale(1.07); }
+    100% { opacity: 0;    transform: scale(1.07); }
+}
+
+.qt-card {
+    position: fixed;
+    width: min(390px, calc(100vw - 32px));
+    background: linear-gradient(180deg, #2a2e36 0%, #22252c 100%);
+    color: #F3F3F3;
+    border: 2px solid #DA9B2B;
+    border-radius: 18px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    padding: 1.1rem 1.2rem 0.9rem;
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+    transition: top 0.4s cubic-bezier(0.22, 1, 0.36, 1), left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.qt-card.is-visible {
+    animation: qt-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.qt-card.is-center {
+    width: min(470px, calc(100vw - 32px));
+}
+
+@keyframes qt-pop {
+    from { opacity: 0; transform: scale(0.92) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* pointer arrow */
+.qt-card::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #282c34;
+    border: 2px solid #DA9B2B;
+    transform: rotate(45deg);
+    display: none;
+}
+
+.qt-card[data-side="bottom"]::before { display: block; top: -9px;   left: var(--qt-arrow, 50%); margin-left: -7px; border-right: none; border-bottom: none; }
+.qt-card[data-side="top"]::before    { display: block; bottom: -9px; left: var(--qt-arrow, 50%); margin-left: -7px; border-left: none; border-top: none; }
+.qt-card[data-side="right"]::before  { display: block; left: -9px;  top: var(--qt-arrow, 50%);  margin-top: -7px;  border-right: none; border-top: none; }
+.qt-card[data-side="left"]::before   { display: block; right: -9px; top: var(--qt-arrow, 50%);  margin-top: -7px;  border-left: none; border-bottom: none; }
+
+.qt-head {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.7rem;
+}
+
+.qt-guide-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #353535;
+    border: 2px solid #DA9B2B;
+    object-fit: contain;
+    padding: 3px;
+    flex-shrink: 0;
+    animation: qt-bob 2.4s ease-in-out infinite;
+}
+
+.qt-guide-avatar.is-quacking {
+    animation: qt-quack 0.5s ease, qt-bob 2.4s ease-in-out 0.5s infinite;
+}
+
+@keyframes qt-bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
+
+@keyframes qt-quack {
+    0%   { transform: rotate(0) scale(1); }
+    25%  { transform: rotate(-12deg) scale(1.1); }
+    50%  { transform: rotate(10deg) scale(1.1); }
+    75%  { transform: rotate(-6deg) scale(1.05); }
+    100% { transform: rotate(0) scale(1); }
+}
+
+.qt-guide-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #DA9B2B;
+    line-height: 1.1;
+}
+
+.qt-guide-sub {
+    font-size: 0.72rem;
+    color: rgba(243, 243, 243, 0.55);
+}
+
+.qt-count {
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(218, 155, 43, 0.15);
+    border: 1px solid rgba(218, 155, 43, 0.5);
+    color: #F5C66A;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.qt-title {
+    font-size: 1.22rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    line-height: 1.25;
+}
+
+.qt-body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(243, 243, 243, 0.86);
+}
+
+.qt-card.is-visible .qt-title,
+.qt-card.is-visible .qt-body > *,
+.qt-card.is-visible .qt-body li {
+    animation: qt-rise 0.35s ease both;
+}
+
+.qt-card.is-visible .qt-body > *:nth-child(1) { animation-delay: 0.06s; }
+.qt-card.is-visible .qt-body > *:nth-child(2) { animation-delay: 0.12s; }
+.qt-card.is-visible .qt-body > *:nth-child(3) { animation-delay: 0.18s; }
+.qt-card.is-visible .qt-body > *:nth-child(4) { animation-delay: 0.24s; }
+.qt-card.is-visible .qt-body li:nth-child(2) { animation-delay: 0.16s; }
+.qt-card.is-visible .qt-body li:nth-child(3) { animation-delay: 0.22s; }
+.qt-card.is-visible .qt-body li:nth-child(4) { animation-delay: 0.28s; }
+.qt-card.is-visible .qt-body li:nth-child(5) { animation-delay: 0.34s; }
+
+@keyframes qt-rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.qt-body p + p,
+.qt-body ul {
+    margin-top: 0.5rem;
+}
+
+.qt-body ul {
+    padding-left: 1.1rem;
+}
+
+.qt-body li + li {
+    margin-top: 0.22rem;
+}
+
+.qt-body strong {
+    color: #F3F3F3;
+}
+
+.qt-body em {
+    color: #F5C66A;
+    font-style: normal;
+}
+
+.qt-body kbd {
+    display: inline-block;
+    padding: 0 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(243, 243, 243, 0.3);
+    background: rgba(243, 243, 243, 0.08);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+}
+
+.qt-body code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.82rem;
+    color: #4ade80;
+}
+
+.qt-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 0.9rem 0 0.75rem;
+}
+
+.qt-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: rgba(243, 243, 243, 0.2);
+    cursor: pointer;
+    transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.qt-dot:hover { background: rgba(243, 243, 243, 0.45); }
+.qt-dot.is-done { background: rgba(218, 155, 43, 0.55); }
+.qt-dot.is-active { width: 22px; background: #DA9B2B; }
+
+.qt-foot {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.qt-skip {
+    background: none;
+    border: none;
+    padding: 6px 2px;
+    color: rgba(243, 243, 243, 0.55);
+    font: inherit;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.qt-skip:hover { color: #F3F3F3; }
+
+.qt-foot-right {
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.qt-btn {
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1.2;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.qt-btn-ghost {
+    background: transparent;
+    color: #F3F3F3;
+    border: 1px solid rgba(243, 243, 243, 0.3);
+}
+
+.qt-btn-ghost:hover { border-color: #F3F3F3; }
+
+.qt-btn-gold {
+    background: transparent;
+    color: #F5C66A;
+    border: 1px solid rgba(218, 155, 43, 0.7);
+}
+
+.qt-btn-gold:hover { background: rgba(218, 155, 43, 0.14); }
+
+.qt-btn-primary {
+    background: #BF512C;
+    color: #F3F3F3;
+    border: 1px solid #BF512C;
+}
+
+.qt-btn-primary:hover {
+    background: #a8461f;
+    border-color: #a8461f;
+}
+
+.qt-btn:focus-visible,
+.qt-skip:focus-visible,
+.qt-dot:focus-visible {
+    outline: 2px solid #DA9B2B;
+    outline-offset: 2px;
+}
+
+.qt-hint {
+    margin-top: 0.55rem;
+    font-size: 0.7rem;
+    color: rgba(243, 243, 243, 0.4);
+    text-align: right;
+}
+
+.qt-launch {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(218, 155, 43, 0.6);
+    background: #24272e;
+    color: #F5C66A;
+    font-family: "Winky Rough", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.15s ease, color 0.15s ease;
+    animation: qt-launch-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.qt-launch:hover {
+    background: #DA9B2B;
+    color: #24272e;
+}
+
+.qt-launch[hidden] { display: none; }
+
+@keyframes qt-launch-in {
+    from { opacity: 0; transform: translateY(12px) scale(0.9); }
+    to   { opacity: 1; transform: none; }
+}
+
+.qt-confetti {
+    position: fixed;
+    inset: 0;
+    z-index: 2100;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.qt-confetti span {
+    position: absolute;
+    top: -40px;
+    left: var(--x);
+    font-size: var(--size);
+    animation: qt-fall var(--dur) cubic-bezier(0.25, 0.6, 0.4, 1) var(--delay) forwards;
+}
+
+@keyframes qt-fall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    85%  { opacity: 1; }
+    100% { transform: translateY(105vh) rotate(var(--spin)); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+    .qt-card,
+    .qt-card.is-center {
+        left: 12px !important;
+        right: 12px;
+        top: auto !important;
+        bottom: 12px;
+        width: auto;
+    }
+
+    .qt-card::before,
+    .qt-hint {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .qt-spot,
+    .qt-card,
+    .qt-card.is-visible,
+    .qt-card.is-visible *,
+    .qt-guide-avatar,
+    .qt-launch {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .qt-card.is-visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    .qt-spot::after,
+    .qt-confetti {
+        display: none;
+    }
+}

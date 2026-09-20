@@ -5,11 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cornelius</title>
         <link rel="stylesheet" href="cornelius.css">
+        <link rel="icon" type="image/x-icon" href="../../assets/images/face.png">
     </head>
     <body>
-        <header>
-            <h1>Personal Page - Test Drive</h1>
+        <header class="header">
+            <div class="logo">
+            <a href="../../index.html">
+                <img src="../../assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+            </a>
+            </div>
+            <nav class="navbar" id="nav-logged-out">
+                <ul class="nav-links">
+                    <li><a href="../../team.html">Go Back!</a></li>
+                </ul>
+            </nav>
         </header>
+        <script>QuackbitAccount.renderHeader();</script>
         <main>
             <section>
                 <div class="profile">

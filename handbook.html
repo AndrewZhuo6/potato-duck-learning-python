@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="script/account.js"></script>
+  <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Randy's Handbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=optional" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=optional">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/handbook.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/face.png">
+</head>
+<body>
+  <audio id="bg-music" loop>
+    <source src="assets/music/bg-music-randy.mp3" type="audio/mpeg">
+  </audio>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+      </a>
+    </div>
+    <nav class="navbar" id="nav-logged-out">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="story.html">Courses</a></li>
+        <li class="nav-auth-only" hidden><a href="history.html">My Code</a></li>
+        <li><a href="team.html">About Us</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="login.html" class="login-text">Lock In!</a>
+      </div>
+    </nav>
+  </header>
+  <script>QuackbitAccount.renderHeader();</script>
+
+  <main class="handbook-main">
+
+    <section class="handbook-hero">
+      <div class="handbook-hero-title-row">
+        <h1>Randy's Handbook</h1>
+        <div id="handbook-engine-pill" class="handbook-engine-pill loading" title="Pyodide WebAssembly Python 3.11 Runtime">
+          <span class="pill-dot"></span>
+          <span class="pill-text">Loading Python...</span>
+        </div>
+      </div>
+      <a href="#" id="handbook-back-link" class="handbook-back-link" style="display: none;">
+        &larr; Back to my challenge
+      </a>
+    </section>
+
+    <div class="handbook-searchbar">
+      <div class="handbook-search-wrap">
+        <span class="handbook-search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          id="handbook-search"
+          class="handbook-search-input"
+          placeholder="Search anything"
+          autocomplete="off"
+          aria-label="Search Randy's Handbook">
+        <button type="button" id="handbook-search-clear" class="handbook-search-clear" style="display: none;" aria-label="Clear search">&times;</button>
+      </div>
+    </div>
+
+    <div class="handbook-layout">
+
+      <button type="button" id="handbook-nav-toggle" class="handbook-nav-toggle">
+        ☰ Contents
+      </button>
+
+      <aside id="handbook-sidebar" class="handbook-sidebar">
+        <nav aria-label="Handbook contents">
+          <p class="handbook-nav-heading">Contents</p>
+          <ul id="handbook-nav-list" class="handbook-nav-list"></ul>
+        </nav>
+      </aside>
+
+      <div id="handbook-content" class="handbook-content"></div>
+
+      <div id="handbook-empty" class="handbook-empty" style="display: none;">
+        <p class="handbook-empty-title">Nothing in the handbook matches that.</p>
+        <p class="handbook-empty-hint">
+          Try a plain Python word instead — <em>loop</em>, <em>list</em>,
+          <em>function</em>, <em>class</em>, <em>remainder</em>, <em>reverse</em>,
+          <em>import</em>, <em>exception</em>.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="script/handbook-01-basics.js"></script>
+  <script src="script/handbook-02-values.js"></script>
+  <script src="script/handbook-03-operators.js"></script>
+  <script src="script/handbook-04-strings.js"></script>
+  <script src="script/handbook-05-control-flow.js"></script>
+  <script src="script/handbook-06-data-structures.js"></script>
+  <script src="script/handbook-07-functions.js"></script>
+  <script src="script/handbook-08-builtins.js"></script>
+  <script src="script/handbook-09-classes.js"></script>
+  <script src="script/handbook-10-modules-errors.js"></script>
+  <script src="script/handbook-11-stdlib.js"></script>
+  <script src="script/handbook-12-efficiency.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="script/handbook.js"></script>
+  <script src="script/main.js"></script>
+  <script src="script/tour.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="script/account.js"></script>
+  <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | Village 4: Existing Spell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=optional">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/story.css">
+  <link rel="stylesheet" href="css/solution-history.css">
+  <link rel="stylesheet" href="css/handbook.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/face.png">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">
+        <a href="index.html">
+          <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+        </a>
+      </div>
+      <a href="story.html" class="go-back-link">Go Back</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="login-text">Log In</a>
+    </div>
+  </header>
+  <script>QuackbitAccount.renderHeader();</script>
+
+  <main class="story-main">
+    <section id="cutscene-container">
+      <div class="cutscene-header">
+        <span class="cutscene-title-badge">Village 4 Story</span>
+        <h2 class="cutscene-heading">Existing Spell</h2>
+      </div>
+      <div class="video-wrapper">
+        <video id="story-video" controls playsinline>
+          <source src="assets/videos/v4.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <div class="video-controls">
+        <p class="cutscene-narrative">
+          During this journey, you might encounter new ancient spells written by other coders. It's often useful to use spells written by other coders, so you can save your effort for what really matters in your case and not focus on general problems.
+          Some of the spell can be used directly, while the others need you to have some pre-requisite knowledge about it. You don't have to worry, you just need to use the import statement to get the knowledge before using the spell.
+        </p>
+        <button id="skip-video-btn" class="btn-skip">Skip Cutscene &rarr;</button>
+      </div>
+    </section>
+
+    <div id="workspace-container">
+      <section class="problem-panel">
+        <div class="video-scene">
+          <video id="story-video" controls playsinline preload="metadata">
+            <source src="assets/videos/v4.mp4" type="video/mp4">
+            Your browser does not support HTML video.
+          </video>
+        </div>
+        <span class="chapter-tag">Village 4 • Function</span>
+        <h2>Existing Spell</h2>
+        <div class="story-quote">
+          After you have a long journey, your inventory gets a bit messy, the item just spreads across the whole inventory without any grouping or section. You want to make it tidy  ordered from the highest value item to the lowest value item but you're just too lazy to do it manually. You're wondering if there is any spell that you can use to instantly sort them.
+        </div>
+
+        <h3>Task</h3>
+        <p>Define a function <code>tidy_up(inventory)</code> where <code>inventory</code> is a Python dictionary with item names as keys and integer values as the value of the item.</p>
+        <p>Your function should order the item from the highest to the lowest value and return the dictionary. If the dictionary is empty, return <code>0</code>.</p>
+
+        <h3>Examples</h3>
+        <div class="code-example-box">tidy_up({"corn": 100, "potato": 150, "berries": 50})
+# Returns: {"potato": 150, "corn": 100, "berries": 50}</div>
+
+        <h3>Guidelines</h3>
+        <p>Besides spells by other coders, you can also create your own, who knows your spell might help the future protector of this village. It's very simple, you just need to enveloped the block of code inside a <code>def function_name(parameter):</code>, then you just need to write <code>function_name(parameter)</code> to use the spell.</p>
+      </section>
+
+      <section class="editor-panel">
+        <div class="editor-header">
+          <div class="editor-tab">
+            <span>📄</span> main.py
+          </div>
+          <div id="engine-pill" class="engine-status-pill">
+            <span>⏳</span> Loading Python Engine...
+          </div>
+        </div>
+
+        <textarea id="code-input"></textarea>
+
+        <div class="editor-footer">
+          <div class="editor-actions">
+            <div id="status-msg"></div>
+            <div class="action-buttons">
+              <button type="button" id="reset-code-btn" class="btn-secondary">Reset Code</button>
+              <button type="button" id="submit-btn" class="btn-submit">Submit Code</button>
+              <a href="v5.html" id="next-chapter-btn" class="btn-next" style="display: none;">Next Story &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="script/solutions-db.js"></script>
+  <script src="script/solution-viewer.js"></script>
+  <script src="script/draft-autosave.js"></script>
+  <script src="script/story.js"></script>
+  <script src="script/tour.js"></script>
+  <script src="script/v4.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="script/account.js"></script>
+  <script>try{if(sessionStorage.getItem("currentUser")||sessionStorage.getItem("activeUser")||localStorage.getItem("currentUser"))document.documentElement.classList.add("logged-in")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quackbit | My Saved Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=optional">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/solution-history.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/face.png">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=optional" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+      </a>
+    </div>
+    <nav class="navbar" id="nav-logged-out">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="story.html">Courses</a></li>
+        <li class="nav-auth-only" hidden><a href="history.html">My Code</a></li>
+        <li><a href="team.html">About Us</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="login.html" class="login-text">Lock In!</a>
+      </div>
+    </nav>
+  </header>
+  <script>QuackbitAccount.renderHeader();</script>
+
+  <main class="history-main">
+    <section class="history-hero">
+      <div class="history-hero-badge">💾 Solution Archive</div>
+      <h1>My Saved Code</h1>
+      <p>
+        Every challenge you pass is stored here with the exact code that was accepted.
+        Come back any time to review how you solved an earlier village or guardian.
+      </p>
+      <span id="history-count" class="history-count">Loading your archive...</span>
+    </section>
+
+    <nav class="history-filter-nav" aria-label="Archive categories">
+      <button type="button" class="filter-btn active" data-category="all">🗺️ All</button>
+      <button type="button" class="filter-btn" data-category="village">🏡 Village</button>
+      <button type="button" class="filter-btn" data-category="guardian">⚔️ Guardian</button>
+      <button type="button" class="filter-btn" data-category="boss">🔥 Final Boss</button>
+      <button type="button" id="clear-all-btn" class="btn-clear-all" style="display: none;">Clear Archive</button>
+    </nav>
+
+    <section id="history-grid" class="history-grid" aria-live="polite"></section>
+    <div id="history-empty" class="history-empty" style="display: none;"></div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <script src="script/stories-data.js"></script>
+  <script src="script/solutions-db.js"></script>
+  <script src="script/solution-viewer.js"></script>
+  <script src="script/history.js"></script>
+  <script src="script/tour.js"></script>
+</body>
+</html>
