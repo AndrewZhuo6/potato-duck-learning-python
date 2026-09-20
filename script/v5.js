@@ -6,7 +6,7 @@ function addCustomCSS(cssCode) {
 
 const myCSS = `
     body {
-        background: var(--main-bg) url('../assets/images/v-preview/v5_cover.jpeg') center/cover fixed;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/images/v-preview/v5_cover.jpeg') center/cover fixed;
     }
 `;
 
