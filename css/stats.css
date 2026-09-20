@@ -7,6 +7,21 @@
     padding: 2.5rem 1.5rem 5rem;
 }
 
+.progress-fill {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.progress-duck {
+    position: absolute;
+    right: -12px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+}
+
 .stats-profile {
     display: flex;
     flex-direction: column;
@@ -25,16 +40,17 @@
     width: 132px;
     height: 132px;
     border-radius: 50%;
-    border: 3px solid var(--primary-second);
+    padding: 4px; 
     overflow: hidden;
-    background: #56607F;
-    flex-shrink: 0;
+    position: relative;
 }
 
 .stats-avatar svg {
     width: 100%;
     height: 100%;
     display: block;
+    border-radius: 50%;
+    border: 3px solid var(--main-bg);
 }
 
 .wing {
@@ -121,7 +137,16 @@
 }
 
 .stats-number {
-    padding-top: 1.75rem;
+    display: block;
+    min-height: 134px;
+    background: var(--primary-hover);
+    border: none; 
+    border-radius: 0;
+    padding: 1rem 1.5rem;
+    color: var(--text-main);
+    text-decoration: none;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    box-shadow: inset 0 0 0 2px var(--primary); 
 }
 
 .big-number {
@@ -129,17 +154,21 @@
     font-weight: 700;
     line-height: 1;
     color: var(--text-main);
+    position: relative;
+    z-index: 2;
 }
 
 .stats-card {
     display: block;
     min-height: 134px;
     background: var(--primary-hover);
-    border: 3px solid var(--primary);
-    border-radius: var(--radius-md);
+    border: none; 
+    border-radius: 0;
     padding: 1rem 1.5rem;
     color: var(--text-main);
     text-decoration: none;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    box-shadow: inset 0 0 0 2px var(--primary); 
 }
 
 .ongoing-card {
@@ -213,12 +242,19 @@
     border-radius: 50%;
     background: var(--main-bg);
     border: 2px solid var(--primary-second);
+    margin-bottom: 5px;
 }
 
 .badge-name {
     font-size: 0.75rem;
     line-height: 1.2;
     color: var(--text-main);
+}
+
+.badge-rank {
+    font-size: 0.6rem;
+    line-height: 1.2;
+    color: var(--text-muted);
 }
 
 .badge.locked {
@@ -431,3 +467,15 @@
     color: #ff7a59;
     font-size: 0.85rem;
 }
+
+/* Add to stats.css */
+.badge.Common .badge-icon { border-color: #A0A0A0; box-shadow: 0 0 8px rgba(160, 160, 160, 0.4); }
+.badge.Common .badge-rank { color: #A0A0A0; }
+.badge.Novice .badge-icon { border-color: #d3915b; box-shadow: 0 0 12px rgba(247, 167, 54, 0.6); }
+.badge.Novice .badge-rank { color: #d3915b; }
+.badge.Epic .badge-icon { border-color: #B026FF; box-shadow: 0 0 12px rgba(176, 38, 255, 0.6); }
+.badge.Epic .badge-rank { color: #B026FF; }
+.badge.Ancient .badge-icon { border-color: #ff4949; box-shadow: 0 0 12px rgba(255, 38, 38, 0.6); }
+.badge.Ancient .badge-rank { color: #ff4949; }
+.badge.Legendary .badge-icon { border-color: #FFD700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+.badge.Legendary .badge-rank { color: #FFD700; }

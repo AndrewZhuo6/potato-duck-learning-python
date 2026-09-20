@@ -335,7 +335,6 @@ def _quackbit_run_cell_isolated(code_str):
           <span class="handbook-group-icon" aria-hidden="true">${group.icon}</span>
           <div>
             <h2 class="handbook-group-title">${escapeHtml(group.title)}</h2>
-            ${group.blurb ? `<p class="handbook-group-blurb">${escapeHtml(group.blurb)}</p>` : ""}
           </div>
         </header>
         ${group.sections.map(renderSection).join("")}
@@ -824,12 +823,19 @@ def _quackbit_run_cell_isolated(code_str):
     }
   }
 
-  document.addEventListener('scroll', () => {
-    const audio = document.getElementById('bg-music');
-    if (audio && audio.paused) {
-      audio.play().catch((error) => {
-        console.log("Browser blocks it:", error);
+  function startBgMusic() {
+      const audio = document.getElementById('bg-music');
+      if (!audio) return;
+
+      audio.play().then(() => {
+          ['click', 'pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(eventType => {
+              window.removeEventListener(eventType, startBgMusic);
+          });
+      }).catch(error => {
       });
-    }
-  }, { once: true });
+  }
+
+  ['click', 'pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(eventType => {
+      window.addEventListener(eventType, startBgMusic, { passive: true });
+  });
 });

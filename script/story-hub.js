@@ -58,11 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let statusBadge = "";
             if (isCompleted) {
-                statusBadge = `<span class="card-status-badge completed">✓ Completed</span>`;
+                statusBadge = `<span class="card-status-badge completed">Completed</span>`;
             } else if (isCurrent) {
-                statusBadge = `<span class="card-status-badge current">⭐ Current</span>`;
+                statusBadge = `<span class="card-status-badge current">Current</span>`;
             } else {
-                statusBadge = `<span class="card-status-badge locked">🔒 Locked</span>`;
+                statusBadge = `<span class="card-status-badge locked">Locked</span>`;
             }
 
             let coverContent = "";
@@ -128,35 +128,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Dev / Testing Controls
-    const resetProgressBtn = document.getElementById("dev-reset-progress");
-    const unlockAllBtn = document.getElementById("dev-unlock-all");
-
-    if (resetProgressBtn) {
-        resetProgressBtn.addEventListener("click", () => {
-            localStorage.setItem(progressKey, "1");
-            updateProgressDisplay();
-            renderStories();
-        });
-    }
-
-    if (unlockAllBtn) {
-        unlockAllBtn.addEventListener("click", () => {
-            localStorage.setItem(progressKey, STORIES.length.toString());
-            updateProgressDisplay();
-            renderStories();
-        });
-    }
-
     updateProgressDisplay();
     renderStories();
     
-    document.addEventListener('scroll', () => {
+    function startBgMusic() {
         const audio = document.getElementById('bg-music');
-        if (audio && audio.paused) {
-            audio.play().catch(error => {
-                console.log("Browser blocks it:", error);
+        if (!audio) return;
+
+        audio.play().then(() => {
+            ['click', 'pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(eventType => {
+                window.removeEventListener(eventType, startBgMusic);
             });
-        }
-    }, { once: true });
+        }).catch(error => {
+        });
+    }
+
+    ['click', 'pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(eventType => {
+        window.addEventListener(eventType, startBgMusic, { passive: true });
+    });
 });

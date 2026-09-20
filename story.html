@@ -12,16 +12,16 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=optional">
   <link rel="stylesheet" href="css/story-hub.css">
-  <link rel="icon" type="image/x-icon" href="assets/images/face.png">
+  <link rel="icon" type="image/x-icon" href="./assets/images/face.png">
 </head>
 <body>
   <audio id="bg-music" loop>
-    <source src="assets/music/bg-music-courses.mp3" type="audio/mpeg">
+    <source src="./assets/music/bg-music-courses.mp3" type="audio/mpeg">
   </audio>
   <header class="header">
     <div class="logo">
       <a href="index.html">
-        <img src="assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
+        <img src="./assets/images/logo.png" alt="QuackBit Logo" class="logo-img" width="91" height="34">
       </a>
     </div>
     <nav class="navbar" id="nav-logged-out">
@@ -41,10 +41,9 @@
   <main class="story-hub-main">
     <section class="story-hub-hero">
       <div class="wood"></div>
-      <div class="story-hero-badge">🦆 The Quackbit Chronicles</div>
       <h1>Choose Your Story</h1>
       <p>
-        Follow Quackbit's journey from peaceful Village training to the 10 perilous Guardian trials and the final clash against the great serpent PyThorn!
+        The 10 perilous Guardian trials and the battle of the great serpent PyThorn!
       </p>
 
       <div class="progress-tracker-card">
@@ -77,15 +76,6 @@
 
     <section id="story-grid" class="story-grid" aria-live="polite">
     </section>
-
-    <!-- Dev / Testing control -->
-    <aside class="story-dev-controls">
-      <span class="story-dev-text">🛠️ <strong>Testing Controls:</strong> Easily switch unlock states to preview locked vs unlocked cards.</span>
-      <div class="story-dev-buttons">
-        <button type="button" id="dev-reset-progress" class="btn-dev">Reset to Story 1</button>
-        <button type="button" id="dev-unlock-all" class="btn-dev">Unlock All Stories</button>
-      </div>
-    </aside>
   </main>
 
   <script src="script/stories-data.js"></script>

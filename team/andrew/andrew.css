@@ -1,7 +1,8 @@
 @import "../../css/ultimate-header.css";
 
-.body {
-  background: #ffff;
+body {
+  background: #2b2b2b;
+  color: #f1f1f1;
 }
 
 .profile-container {
@@ -11,7 +12,7 @@
 }
 
 .back-link a {
-  color: #555;
+  color: #bbb;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
@@ -33,22 +34,23 @@
   height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #eee;
+  border: 3px solid #444;
 }
 
 .andrew-text h1 {
   margin: 0 0 0.3rem;
   font-size: 2rem;
+  color: #ffffff;
 }
 
 .role-tag {
-  color: #0066cc;
+  color: #3b82f6;
   font-weight: 600;
   margin-bottom: 0.8rem;
 }
 
 .bio {
-  color: #444;
+  color: #cccccc;
   line-height: 1.5;
   margin: 0;
 }
@@ -59,7 +61,8 @@
 
 .profile-section h2 {
   font-size: 1.3rem;
-  border-bottom: 2px solid #f0f0f0;
+  color: #ffffff;
+  border-bottom: 2px solid #444;
   padding-bottom: 0.5rem;
   margin-bottom: 1.2rem;
 }
@@ -71,7 +74,7 @@
 }
 
 .skill-card, .project-card {
-  background: #f9f9f9;
+  background: #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 6px;
   padding: 1rem 1.2rem;
@@ -84,11 +87,12 @@
 .skill-card h3, .project-card h3 {
   margin: 0 0 0.4rem;
   font-size: 1rem;
+  color: #1a1a1a;
 }
 
 .project-desc, .skill-card p {
   margin: 0;
-  color: #555;
+  color: #333333;
   font-size: 0.9rem;
   line-height: 1.4;
 }

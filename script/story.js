@@ -82,18 +82,18 @@ window.initPreparationChapter = function (config) {
         const statusMsg = document.getElementById("status-msg");
         const enginePill = document.getElementById("engine-pill");
 
-        if (video) {
-            let source = video.querySelector("source");
+        document.querySelectorAll("video").forEach(v => {
+            let source = v.querySelector("source");
             if (!source) {
                 source = document.createElement("source");
                 source.type = "video/mp4";
-                video.appendChild(source);
+                v.appendChild(source);
             }
             if (!source.getAttribute("src")) {
                 source.src = `assets/videos/${chapterId}.mp4`;
-                video.load();
+                v.load();
             }
-        }
+        });
 
         const textarea = document.getElementById("code-input");
         if (starterCode && !textarea.value.trim()) {
@@ -206,15 +206,88 @@ window.initPreparationChapter = function (config) {
 
         refreshSavedSolution();
 
-        function transitionToChallenge() {
-            if (video && !video.paused) {
-                video.pause();
+        // --- Centralized Audio/Video Synchronization ---
+        const bgMusic = document.getElementById("bg-music");
+        let userInteracted = false;
+
+        function isAnyVideoPlaying() {
+            const allVideos = document.querySelectorAll("video");
+            for (const v of allVideos) {
+                if (!v.paused && !v.ended) {
+                    const cutscene = v.closest("#cutscene-container");
+                    if (cutscene && cutscene.style.display === "none") {
+                        try { v.pause(); } catch {}
+                        continue;
+                    }
+                    const outcome = v.closest("#outcome-container");
+                    if (outcome && outcome.style.display === "none") {
+                        try { v.pause(); } catch {}
+                        continue;
+                    }
+                    return true;
+                }
             }
-            if (cutsceneContainer) cutsceneContainer.style.display = "none";
+            return false;
+        }
+
+        function updateAudioPlayback() {
+            if (!bgMusic) return;
+
+            if (isAnyVideoPlaying()) {
+                if (!bgMusic.paused) {
+                    bgMusic.pause();
+                }
+            } else {
+                if (userInteracted && bgMusic.paused) {
+                    bgMusic.play().catch(() => {});
+                }
+            }
+        }
+
+        function trackVideo(v) {
+            if (!v || v.__hasAudioTracking) return;
+            v.__hasAudioTracking = true;
+            ["play", "playing", "pause", "ended", "emptied"].forEach(ev => {
+                v.addEventListener(ev, updateAudioPlayback);
+            });
+        }
+
+        document.querySelectorAll("video").forEach(trackVideo);
+
+        const userGestures = ["click", "pointerdown", "keydown", "touchstart"];
+        function onUserGesture() {
+            userInteracted = true;
+            updateAudioPlayback();
+        }
+        userGestures.forEach(ev => {
+            window.addEventListener(ev, onUserGesture, { passive: true });
+        });
+
+        window.startBgMusic = function () {
+            userInteracted = true;
+            updateAudioPlayback();
+        };
+
+        function transitionToChallenge() {
+            if (cutsceneContainer) {
+                const cutsceneVideos = cutsceneContainer.querySelectorAll("video");
+                cutsceneVideos.forEach(v => {
+                    try {
+                        if (!v.paused) v.pause();
+                    } catch {}
+                });
+                cutsceneContainer.style.display = "none";
+            } else if (video && !video.paused) {
+                try { video.pause(); } catch {}
+            }
             if (workspaceContainer) workspaceContainer.style.display = "flex";
             try {
                 sessionStorage.setItem(`quackbit_seen_cutscene_${chapterId}`, "1");
             } catch { }
+
+            userInteracted = true;
+            updateAudioPlayback();
+
             setTimeout(() => {
                 editor.refresh();
                 editor.focus();
@@ -232,11 +305,11 @@ window.initPreparationChapter = function (config) {
             skipBtn.addEventListener("click", transitionToChallenge);
         }
 
-              try {
+        try {
             if (sessionStorage.getItem(`quackbit_seen_cutscene_${chapterId}`) === "1") {
                 transitionToChallenge();
             }
-        } catch {  }
+        } catch { }
         
         if (video && cutsceneContainer && cutsceneContainer.style.display !== "none") {
             const tryPlay = video.play();
@@ -271,7 +344,7 @@ window.initPreparationChapter = function (config) {
 
             if (enginePill) {
                 enginePill.className = "engine-status-pill ready";
-                enginePill.innerHTML = `<span>🟢</span> Python 3.11 Ready`;
+                enginePill.innerHTML = `Python 3.11 Ready`;
             }
 
             if (submitBtn) submitBtn.disabled = false;
@@ -279,7 +352,7 @@ window.initPreparationChapter = function (config) {
             console.error("Pyodide loading error:", err);
             if (enginePill) {
                 enginePill.className = "engine-status-pill error";
-                enginePill.innerHTML = `<span>🔴</span> Python Engine Failed`;
+                enginePill.innerHTML = `Python Engine Failed`;
             }
             if (statusMsg){
                 statusMsg.style.color = "#dc2626";
@@ -304,7 +377,7 @@ window.initPreparationChapter = function (config) {
             outcomeContainer.innerHTML = `
                 <div class="outcome-header">
                     <span class="outcome-title-badge ${passed ? 'badge-pass' : 'badge-fail'}">
-                        ${passed ? '🎉 Victory' : '💥 Attempt Failed'}
+                        ${passed ? 'Victory' : 'Attempt Failed'}
                     </span>
                     <h2 class="outcome-heading">
                         ${passed ? `${chapterTitle || `Chapter ${chapterNumber}`} Conquered!` : `${chapterTitle || `Chapter ${chapterNumber}`} - Try Again!`}
@@ -338,7 +411,7 @@ window.initPreparationChapter = function (config) {
                             ${passed ? `
                                 <a href="${nextTarget}" class="btn-outcome-next">${nextText}</a>
                                 <button type="button" id="outcome-review-btn" class="btn-outcome-review">Review Code ↩</button>
-                                <button type="button" id="outcome-saved-btn" class="btn-outcome-saved">💾 Saved Code</button>
+                                <button type="button" id="outcome-saved-btn" class="btn-outcome-saved">Saved Code</button>
                             ` : `
                                 <button type="button" id="outcome-retry-btn" class="btn-outcome-retry">Back to Editor & Try Again ↩</button>
                             `}
@@ -356,6 +429,11 @@ window.initPreparationChapter = function (config) {
             const outcomeFinalActions = document.getElementById("outcome-final-actions");
             const outcomeReviewBtn = document.getElementById("outcome-review-btn");
             const outcomeRetryBtn = document.getElementById("outcome-retry-btn");
+
+            if (outcomeVideo) {
+                trackVideo(outcomeVideo);
+            }
+            updateAudioPlayback();
 
             let actionsRevealed = false;
             function revealOutcomeActions() {
@@ -375,6 +453,7 @@ window.initPreparationChapter = function (config) {
                     outcomeFallback.style.display = "flex";
                 }
                 revealOutcomeActions();
+                updateAudioPlayback();
             }
 
             function returnToEditor() {
@@ -385,6 +464,8 @@ window.initPreparationChapter = function (config) {
                 if (workspaceContainer) {
                     workspaceContainer.style.display = "flex";
                 }
+                userInteracted = true;
+                updateAudioPlayback();
                 setTimeout(() => {
                     editor.refresh();
                     editor.focus();
@@ -429,6 +510,7 @@ window.initPreparationChapter = function (config) {
                         outcomeVideo.pause();
                     }
                     revealOutcomeActions();
+                    updateAudioPlayback();
                 });
             }
 
